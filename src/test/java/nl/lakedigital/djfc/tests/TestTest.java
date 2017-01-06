@@ -15,10 +15,8 @@ public class TestTest {
     public void testGoogle(){
         Configuration.reportsFolder = "target/screenshots";
 
-        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs-linux");
-
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs");
+        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs-linux");
 
 //                WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
