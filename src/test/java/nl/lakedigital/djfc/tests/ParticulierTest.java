@@ -6,7 +6,6 @@ import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -34,7 +33,6 @@ public class ParticulierTest extends AbstractTest {
     }
 
     @Test
-    @Ignore
     public void testParticulier() {
         voornamen = voornaam();
 

@@ -5,7 +5,6 @@ import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -31,7 +30,6 @@ public class ZakelijkTest extends AbstractTest{
     private String naam;
 
     @Test
-    @Ignore
     public void voeruitTestZakelijk(){
 
         inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
