@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+    <!--<context:component-scan base-package="nl.lakedigital"/>-->
+
+    <!--<context:annotation-config/>-->
+
+    <!--<bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">-->
+        <!--<property name="targetClass" value="org.springframework.util.Log4jConfigurer"/>-->
+        <!--<property name="targetMethod" value="initLogging"/>-->
+        <!--<property name="arguments">-->
+            <!--<list>-->
+                <!--<value>testapp.log4j.xml</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <bean id="dataSourceDJFC" class="org.apache.commons.dbcp2.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/djfc"/>
+        <property name="username" value="dev"/>
+        <property name="password" value="dev"/>
+    </bean>
+
+    <bean id="sessionFactoryDJFC" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSourceDJFC"/>
+        <property name="packagesToScan">
+            <list>
+                <value>nl.lakedigital.djfc</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.current_session_context_class">thread</prop>
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--<aop:aspectj-autoproxy/>-->
+    <!--<aop:config>-->
+        <!--<aop:advisor-->
+                <!--pointcut="nl.lakedigital.djfc.AAspect.allMethods()"-->
+                <!--advice-ref="tx-advice"/>-->
+    <!--</aop:config>-->
+</beans>
