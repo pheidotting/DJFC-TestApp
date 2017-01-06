@@ -48,8 +48,8 @@ public class AbstractTest {
     public ScreenshotAlsTestFaalt screenshotAlsTestFaalt = new ScreenshotAlsTestFaalt();
     protected final String todoistToggle = "TODOIST";
     protected final String telefonieToggle = "TELEFONIE";
-    boolean toggleTodoistWas = getFeatureToggle(todoistToggle);
-    boolean toggleTelefonieWas = getFeatureToggle(telefonieToggle);
+    private boolean toggleTodoistWas;
+    private boolean toggleTelefonieWas;
 
     protected Medewerker medewerker;
 
@@ -90,6 +90,16 @@ public class AbstractTest {
 
     @Before
     public void setup() {
+        basisUrl = "http://localhost:8080/djfc/";
+
+        if (!System.getProperty("os.name").equals("Mac OS X")) {
+            basisUrl = "http://192.168.91.215:8080/";
+            WebDriverRunner.setWebDriver(new PhantomJSDriver());
+        }
+        basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";
+
+        LOGGER.debug("basisUrlRest {}", basisUrlRest);
+
          toggleTodoistWas = getFeatureToggle(todoistToggle);
          toggleTelefonieWas = getFeatureToggle(telefonieToggle);
 
@@ -118,15 +128,7 @@ public class AbstractTest {
 //        WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
-        basisUrl = "http://localhost:8080/djfc/";
-
-        if (!System.getProperty("os.name").equals("Mac OS X")) {
-            basisUrl = "http://192.168.91.215:8080/";
-            WebDriverRunner.setWebDriver(new PhantomJSDriver());
-        }
-        basisUrlRest = basisUrl + "dejonge/";
-
-        LOGGER.info("Naar de inlogpagina");
+        LOGGER.info("Naar de inlogpagina {}index.html#inloggen", basisUrl);
         open(basisUrl + "index.html#inloggen");
     }
 
