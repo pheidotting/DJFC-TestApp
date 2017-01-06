@@ -1,15 +1,6 @@
 package nl.lakedigital.djfc.tests;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import nl.lakedigital.djfc.TestCaseDJFC;
-
-import static junit.framework.TestCase.assertFalse;
-import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC40;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
-
 import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
@@ -23,9 +14,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -38,6 +31,7 @@ public class ZakelijkTest extends AbstractTest{
     private String naam;
 
     @Test
+    @Ignore
     public void voeruitTestZakelijk(){
 
         inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());

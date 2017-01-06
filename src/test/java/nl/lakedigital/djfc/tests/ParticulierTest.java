@@ -3,12 +3,10 @@ package nl.lakedigital.djfc.tests;
 import com.codeborne.selenide.Condition;
 import nl.lakedigital.djfc.TestCase;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
-import nl.lakedigital.djfc.selenide.pages.ScreenshotAlsTestFaalt;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.Ignore;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -17,9 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static nl.lakedigital.djfc.TestCase.Case.Case1;
 import static org.hamcrest.core.Is.is;
@@ -37,7 +33,8 @@ public class ParticulierTest extends AbstractTest {
         super(LOGGER);
     }
 
-    @Test//@Ignore
+    @Test
+    @Ignore
     public void testParticulier() {
         voornamen = voornaam();
 
