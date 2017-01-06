@@ -18,13 +18,10 @@ import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
 import nl.lakedigital.djfc.testapp.domein.Kantoor;
 import nl.lakedigital.djfc.testapp.domein.Medewerker;
-import nl.lakedigital.djfc.testapp.repository.GebruikerRepository;
 import org.joda.time.LocalDate;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,9 +67,8 @@ public class AbstractTest {
     @Inject
     protected LijstBedrijven lijstBedrijven;
 
-    private final String basisUrl = "http://localhost:8080/";
-//    private final String basisUrl = "http://192.168.91.215:8080/";
-    private final String basisUrlRest = basisUrl+"dejonge/";
+    private String basisUrl;
+    private String basisUrlRest;
 
     protected Lorem lorem;
     private List<String> opmerkingen;
@@ -114,15 +110,24 @@ public class AbstractTest {
         medewerker.setKantoor(kantoor);
 
         Configuration.reportsFolder = "target/screenshots";
-//        System.setProperty("webdriver.gecko.driver", "src/test/resources/geckodriver");
+
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs");
+        String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
+        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
 //        WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
+        basisUrl = "http://localhost:8080/djfc/";
+
+        if (!System.getProperty("os.name").equals("Mac OS X")) {
+            basisUrl = "http://192.168.91.215:8080/";
+            WebDriverRunner.setWebDriver(new PhantomJSDriver());
+        }
+        basisUrlRest = basisUrl + "dejonge/";
+
         LOGGER.info("Naar de inlogpagina");
-        open(basisUrl +"djfc/index.html#inloggen");
+        open(basisUrl + "index.html#inloggen");
     }
 
     @After
