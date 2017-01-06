@@ -90,7 +90,17 @@ public class AbstractTest {
 
     @Before
     public void setup() {
+        LOGGER.debug("OS {}", System.getProperty("os.name"));
         basisUrl = "http://localhost:8080/djfc/";
+
+        Configuration.reportsFolder = "target/screenshots";
+
+        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
+        String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
+        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
+
+        //        WebDriverRunner.setWebDriver(new ChromeDriver());
+        WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
             basisUrl = "http://192.168.91.215:8080/";
@@ -118,15 +128,6 @@ public class AbstractTest {
         Kantoor kantoor=new Kantoor();
         kantoor.setNaam("De Jonge Financieel Consult");
         medewerker.setKantoor(kantoor);
-
-        Configuration.reportsFolder = "target/screenshots";
-
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver");
-        String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
-        System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
-
-//        WebDriverRunner.setWebDriver(new ChromeDriver());
-        WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         LOGGER.info("Naar de inlogpagina {}index.html#inloggen", basisUrl);
         open(basisUrl + "index.html#inloggen");
