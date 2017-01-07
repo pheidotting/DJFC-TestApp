@@ -16,7 +16,10 @@ public @interface TestCaseDJFC {
         DJFC42("Zijn de foutmeldingen over verplichte velden weg als ik deze vul bij het invoeren van een nieuw Bedrijf?"),
         DJFC47("Kan ik, meteen bij het invoeren van een Bedrijf, een telefoonnummer toevoegen?"),
         DJFC48("Kan ik, meteen bij het invoeren van een Bedrijf, een contactpersoon (incl hun telefoonnummer) toevoegen?"),
-        DJFC49("Kan ik, meteen bij het invoeren van een Bedrijf, een opmerking toevoegen?");
+        DJFC49("Kan ik, meteen bij het invoeren van een Bedrijf, een opmerking toevoegen?"),
+        DJFC52("Inlogscherm: Krijg ik bij het invullen van een niet bestaande gebruikersnaam een nette foutmelding?"),
+        DJFC53("Inlogscherm: Krijg ik bij het invullen van een bestaande gebruikersnaam, maar een onjuist wachtwoord een nette foutmelding?"),
+        DJFC54("Inlogscherm: Wordt ik ingelogd als ik een juiste gebruikersnaam en wachtwoord opgeef?");
 
         private String omschrijving;
         private Case(String omschrijving){this.omschrijving=omschrijving;}

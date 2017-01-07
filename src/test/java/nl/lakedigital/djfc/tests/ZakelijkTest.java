@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -36,7 +35,7 @@ public class ZakelijkTest extends AbstractTest{
 
         dashboard.klikNaarZakelijk();
 
-        naam = lorem.getWords(2);
+        naam = beginHoofdletters(lorem.getWords(2));
 
         lijstBedrijven.isZoekTermAanwezig();
         assertNull(lijstBedrijven.zoekBedrijf(naam, false));
@@ -44,7 +43,7 @@ public class ZakelijkTest extends AbstractTest{
 
         beherenBedrijf.testFoutmeldingBijNietAlleVerplichteVelden();
         beherenBedrijf.testFoutmeldingWegBijAlleVerplichteVeldenGevuld(naam);
-        beherenBedrijf.invullenAlLeVelden(null,getStringOnMillis(),"rechtsvorm",lorem.getEmail(),lorem.getUrl(),"hoedanigheid","caoverplichtingen");
+        beherenBedrijf.invullenAlLeVelden(null, getStringOnMillis(), beginHoofdletters(lorem.getWords(1)), lorem.getEmail(), lorem.getUrl(), beginHoofdletters(lorem.getWords(1)), beginHoofdletters(lorem.getWords(1)));
         beherenBedrijf.        adresToevoegen();
         beherenBedrijf.voegTelefoonnummerToe();
         beherenBedrijf.voegOpmerkingToeBijRelatie();
@@ -56,16 +55,6 @@ public class ZakelijkTest extends AbstractTest{
 
         testInvoerenNieuwePolissen();
         testInvoerenSchades();
-
-
-
-        //                beherenRelatie.getValidationMessages();//DUMMY
-//
-//        moi();
-//
-//        beherenBedrijf.blabla();
-//        beherenBedrijf.blabla2();
-//        beherenBedrijf.blabla3();
     }
 
     private void testInvoerenSchades() {
@@ -74,6 +63,7 @@ public class ZakelijkTest extends AbstractTest{
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.SCHADE_TOEVOEGEN, LOGGER, beherenSchade.getSchadeMeldingOpslaan());
 
+        assertTrue(beherenSchade.getPolisVoorSchademelding().size() > 1);
         List<String> polissen = beherenSchade.getPolisVoorSchademelding();
         List<String> statussen = beherenSchade.getStatusSchade();
 
@@ -83,7 +73,7 @@ public class ZakelijkTest extends AbstractTest{
 
                 String schadeNummerMij = getStringOnMillis();
                 String schadeNummerTP = getStringOnMillis();
-                beherenSchade.vulAlleVelden(polis, schadeNummerMij, schadeNummerTP, "gevallen", "straat", status, LocalDateTime.now(), LocalDateTime.now(), LocalDate.now(), "100", "zo ineens lag ik op straat");
+                beherenSchade.vulAlleVelden(polis, schadeNummerMij, schadeNummerTP, beginHoofdletters(lorem.getWords(2)), "straat", status, LocalDateTime.now(), LocalDateTime.now(), LocalDate.now(), "100", lorem.getWords(20));
             }
         }
         beherenSchades.klikHomeKnop(LOGGER);
@@ -94,6 +84,9 @@ public class ZakelijkTest extends AbstractTest{
         lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam,false),beherenBedrijf.getOpslaanBedrijf());
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
+
+        assertTrue(beherenPolis.getSoortVerzekering().size() > 1);
+        assertTrue(beherenPolis.getVerzekeringsMaatschappij().size() > 1);
 
         List<JsonPolis> aanwezigePolissen = new ArrayList<>();
 
@@ -106,7 +99,7 @@ public class ZakelijkTest extends AbstractTest{
         Long polisnummer = System.currentTimeMillis();
         String kenmerk = maatschappij + "-" + soortVerzekering;
 
-        JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, "dedekking", "verzzaak", "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", "omschrijving");
+        JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, beginHoofdletters(lorem.getWords(1)), beginHoofdletters(lorem.getWords(1)), "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", "omschrijving");
 
         aanwezigePolissen.add(polis);
         beherenPolis.vulVelden(polis);

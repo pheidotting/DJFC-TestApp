@@ -2,13 +2,14 @@ package nl.lakedigital.djfc.selenide.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import java.util.List;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -45,94 +46,96 @@ public class BeherenSchade extends PaginaMetMenuBalk {
         schadeMeldingOpslaan = $(By.id("schadeMeldingOpslaan"));
     }
 
-    public void vulAlleVelden( String polisVoorSchademelding, String schadeNummerMaatschappij, String schadeNummerTussenpersoon, String soortSchade, String locatieSchade, String statusSchade, LocalDateTime datumTijdSchade, LocalDateTime datumTijdMelding, LocalDate datumAfgehandeld, String eigenRisico, String omschrijving) {
-        setPolisVoorSchademelding ( polisVoorSchademelding);
-        setSchadeNummerMaatschappij ( schadeNummerMaatschappij);
-        setSchadeNummerTussenpersoon ( schadeNummerTussenpersoon);
-        setSoortSchade ( soortSchade);
-        setLocatieSchade ( locatieSchade);
-        setStatusSchade ( statusSchade);
-        setDatumTijdSchade ( datumTijdSchade);
-        setDatumTijdMelding ( datumTijdMelding);
-        setDatumAfgehandeld ( datumAfgehandeld);
-        setEigenRisico ( eigenRisico);
-        setOmschrijving ( omschrijving);
+    public void vulAlleVelden(String polisVoorSchademelding, String schadeNummerMaatschappij, String schadeNummerTussenpersoon, String soortSchade, String locatieSchade, String statusSchade, LocalDateTime datumTijdSchade, LocalDateTime datumTijdMelding, LocalDate datumAfgehandeld, String eigenRisico, String omschrijving) {
+        setPolisVoorSchademelding(polisVoorSchademelding);
+        setSchadeNummerMaatschappij(schadeNummerMaatschappij);
+        setSchadeNummerTussenpersoon(schadeNummerTussenpersoon);
+        setSoortSchade(soortSchade);
+        setLocatieSchade(locatieSchade);
+        setStatusSchade(statusSchade);
+        setDatumTijdSchade(datumTijdSchade);
+        setDatumTijdMelding(datumTijdMelding);
+        setDatumAfgehandeld(datumAfgehandeld);
+        setEigenRisico(eigenRisico);
+        setOmschrijving(omschrijving);
 
         klikOpslaan();
     }
 
-    public List<String> getPolisVoorSchademelding(){
+    public List<String> getPolisVoorSchademelding() {
         wachtFf();
-        return optionToStringList(this.polisVoorSchademelding,"Kies een polis uit de lijst..",false);
+        return optionToStringList(this.polisVoorSchademelding, "Kies een polis uit de lijst..", false);
     }
-public List<String> getStatusSchade(){
-    return optionToStringList(this.statusSchade,"Kies een status uit de lijst..",false);
-}
+
+    public List<String> getStatusSchade() {
+        return optionToStringList(this.statusSchade, "Kies een status uit de lijst..", false);
+    }
+
     public void setPolisVoorSchademelding(String polisVoorSchademelding) {
-        logInvullen(this.polisVoorSchademelding,polisVoorSchademelding,LOGGER);
+        logInvullen(this.polisVoorSchademelding, polisVoorSchademelding, LOGGER);
         this.polisVoorSchademelding.selectOption(polisVoorSchademelding);
     }
 
     public void setSchadeNummerMaatschappij(String schadeNummerMaatschappij) {
-        logInvullen(this.schadeNummerMaatschappij,schadeNummerMaatschappij,LOGGER);
-        this.schadeNummerMaatschappij.setValue( schadeNummerMaatschappij);
+        logInvullen(this.schadeNummerMaatschappij, schadeNummerMaatschappij, LOGGER);
+        this.schadeNummerMaatschappij.setValue(schadeNummerMaatschappij);
     }
 
     public void setSchadeNummerTussenpersoon(String schadeNummerTussenpersoon) {
-        logInvullen(this.schadeNummerTussenpersoon,schadeNummerTussenpersoon,LOGGER);
-        this.schadeNummerTussenpersoon .setValue( schadeNummerTussenpersoon);
+        logInvullen(this.schadeNummerTussenpersoon, schadeNummerTussenpersoon, LOGGER);
+        this.schadeNummerTussenpersoon.setValue(schadeNummerTussenpersoon);
     }
 
     public void setSoortSchade(String soortSchade) {
-        logInvullen(this.soortSchade,soortSchade,LOGGER);
-        this.soortSchade .setValue( soortSchade);
+        logInvullen(this.soortSchade, soortSchade, LOGGER);
+        this.soortSchade.setValue(soortSchade);
     }
 
     public void setLocatieSchade(String locatieSchade) {
-        logInvullen(this.locatieSchade,locatieSchade,LOGGER);
-        this.locatieSchade .setValue( locatieSchade);
+        logInvullen(this.locatieSchade, locatieSchade, LOGGER);
+        this.locatieSchade.setValue(locatieSchade);
     }
 
     public void setStatusSchade(String statusSchade) {
-        logInvullen(this.statusSchade,statusSchade,LOGGER);
-        this.statusSchade .setValue( statusSchade);
+        logInvullen(this.statusSchade, statusSchade, LOGGER);
+        this.statusSchade.setValue(statusSchade);
     }
 
     public void setDatumTijdSchade(LocalDateTime datumTijdSchade) {
-        logInvullen(this.datumTijdSchade,datumTijdSchade.toString("ddMMyyyyHHmm"),LOGGER);
-        this.datumTijdSchade.setValue( datumTijdSchade.toString("ddMMyyyyHHmm"));
+        logInvullen(this.datumTijdSchade, datumTijdSchade.toString("ddMMyyyyHHmm"), LOGGER);
+        this.datumTijdSchade.setValue(datumTijdSchade.toString("ddMMyyyyHHmm"));
         this.datumTijdSchade.sendKeys(Keys.TAB);
-        logIsGevuldMet(this.datumTijdSchade,datumTijdSchade.toString("dd-MM-yyyy HH:mm"),LOGGER);
+        logIsGevuldMet(this.datumTijdSchade, datumTijdSchade.toString("dd-MM-yyyy HH:mm"), LOGGER);
     }
 
     public void setDatumTijdMelding(LocalDateTime datumTijdMelding) {
-        logInvullen(this.datumTijdMelding,datumTijdMelding.toString("ddMMyyyyHHmm"),LOGGER);
-        this.datumTijdMelding .setValue( datumTijdMelding.toString("ddMMyyyyHHmm"));
+        logInvullen(this.datumTijdMelding, datumTijdMelding.toString("ddMMyyyyHHmm"), LOGGER);
+        this.datumTijdMelding.setValue(datumTijdMelding.toString("ddMMyyyyHHmm"));
         this.datumTijdMelding.sendKeys(Keys.TAB);
-        logIsGevuldMet(this.datumTijdMelding,datumTijdMelding.toString("dd-MM-yyyy HH:mm"),LOGGER);
+        logIsGevuldMet(this.datumTijdMelding, datumTijdMelding.toString("dd-MM-yyyy HH:mm"), LOGGER);
     }
 
     public void setDatumAfgehandeld(LocalDate datumAfgehandeld) {
-        logInvullen(this.datumAfgehandeld,datumAfgehandeld.toString("ddMMyyyy"),LOGGER);
-        this.datumAfgehandeld .setValue( datumAfgehandeld.toString("ddMMyyyy"));
+        logInvullen(this.datumAfgehandeld, datumAfgehandeld.toString("ddMMyyyy"), LOGGER);
+        this.datumAfgehandeld.setValue(datumAfgehandeld.toString("ddMMyyyy"));
         this.datumAfgehandeld.sendKeys(Keys.TAB);
-        logIsGevuldMet(this.datumAfgehandeld,datumAfgehandeld.toString("dd-MM-yyyy"),LOGGER);
+        logIsGevuldMet(this.datumAfgehandeld, datumAfgehandeld.toString("dd-MM-yyyy"), LOGGER);
     }
 
     public void setEigenRisico(String eigenRisico) {
-        logInvullen(this.eigenRisico,eigenRisico,LOGGER);
-        this.eigenRisico .setValue(eigenRisico);
+        logInvullen(this.eigenRisico, eigenRisico, LOGGER);
+        this.eigenRisico.setValue(eigenRisico);
     }
 
     public void setOmschrijving(String omschrijving) {
-        logInvullen(this.omschrijving,omschrijving,LOGGER);
-        this.omschrijving .setValue( omschrijving);
+        logInvullen(this.omschrijving, omschrijving, LOGGER);
+        this.omschrijving.setValue(omschrijving);
     }
 
-    public void klikOpslaan(){
-        logKlik(this.schadeMeldingOpslaan,LOGGER);
+    public void klikOpslaan() {
+        logKlik(this.schadeMeldingOpslaan, LOGGER);
         this.schadeMeldingOpslaan.click();
-        this.schadeMeldingOpslaan.waitUntil(Condition.disappears,2500);
+        this.schadeMeldingOpslaan.waitUntil(Condition.disappears, 2500);
     }
 
     public SelenideElement getSchadeMeldingOpslaan() {

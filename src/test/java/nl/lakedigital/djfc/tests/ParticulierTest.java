@@ -6,6 +6,7 @@ import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -18,8 +19,7 @@ import java.util.List;
 
 import static nl.lakedigital.djfc.TestCase.Case.Case1;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
@@ -33,11 +33,10 @@ public class ParticulierTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void testParticulier() {
         voornamen = voornaam();
 
-        loginPagina.testOngeldigeLogin();
-        loginPagina.testOngeldigWachtwoord("djfc.bene");
         inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
 
         dashboard.testIngelogdeGebruiker(maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
@@ -68,6 +67,8 @@ public class ParticulierTest extends AbstractTest {
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.SCHADE_TOEVOEGEN, LOGGER, beherenSchade.getSchadeMeldingOpslaan());
 
+        assertTrue(beherenSchade.getPolisVoorSchademelding().size() > 1);
+
         List<String> polissen = beherenSchade.getPolisVoorSchademelding();
         List<String> statussen = beherenSchade.getStatusSchade();
 
@@ -84,17 +85,30 @@ public class ParticulierTest extends AbstractTest {
     }
 
     private void testInvoerenNieuwePolissen() {
-        //        dashboard.klikNaarParticulier();
         lijstRelaties.selecteer(lijstRelaties.zoekGebruiker(voornamen, false), beherenRelatie.getOpslaanRelatie());
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
 
         List<JsonPolis> aanwezigePolissen = new ArrayList<>();
 
-        //        for (String soortVerzekering : beherenPolis.getSoortVerzekering()) {
-        String soortVerzekering = "Auto";
-        //            for (String maatschappij : beherenPolis.getVerzekeringsMaatschappij()) {
-        String maatschappij = "Aegon";
+        assertTrue(beherenPolis.getSoortVerzekering().size() > 1);
+        assertTrue(beherenPolis.getVerzekeringsMaatschappij().size() > 1);
+
+
+        if (opServer) {
+            for (String soortVerzekering : beherenPolis.getSoortVerzekering()) {
+                for (String maatschappij : beherenPolis.getVerzekeringsMaatschappij()) {
+                    voegPolisToeEnControleer(soortVerzekering, maatschappij, aanwezigePolissen);
+                }
+            }
+        } else {
+            voegPolisToeEnControleer("Auto", "Aegon", aanwezigePolissen);
+        }
+
+        beherenPolissen.klikHomeKnop(LOGGER);
+    }
+
+    private void voegPolisToeEnControleer(String soortVerzekering, String maatschappij, List<JsonPolis> aanwezigePolissen) {
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
 
         Long polisnummer = System.currentTimeMillis();
@@ -126,9 +140,6 @@ public class ParticulierTest extends AbstractTest {
         }
 
         assertThat(gecontroleerd.size(), is(aanwezigePolissen.size()));
-        //            }
-        //        }
-        beherenPolissen.klikHomeKnop(LOGGER);
     }
 
     private void testTabbladRelatieGegevens() {

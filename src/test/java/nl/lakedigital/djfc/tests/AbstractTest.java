@@ -13,6 +13,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
+import nl.lakedigital.djfc.TestCaseDJFC;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
@@ -37,6 +38,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.getFirst;
 import static com.google.common.collect.Lists.newArrayList;
+import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC54;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -73,6 +75,8 @@ public class AbstractTest {
     protected Lorem lorem;
     private List<String> opmerkingen;
 
+    protected boolean opServer = false;
+
     public AbstractTest(Logger LOGGER) {
         this.LOGGER = LOGGER;
 
@@ -103,6 +107,7 @@ public class AbstractTest {
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
+            opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
         }
@@ -167,6 +172,7 @@ public class AbstractTest {
         return sb.toString();
     }
 
+    @TestCaseDJFC(DJFC54)
     protected void inloggen(String identificatie, String wachtwoord, SelenideElement wachtenOp) {
         loginPagina.inloggen(identificatie, wachtwoord);
         if (wachtenOp != null) {
@@ -348,4 +354,15 @@ public class AbstractTest {
         return polis;
     }
 
+    protected String beginHoofdletters(String tekst) {
+        String[] woorden = tekst.split(" ");
+        StringBuffer sb = new StringBuffer();
+
+        for (String woord : woorden) {
+            sb.append(woord.substring(0, 1).toUpperCase() + woord.substring(1, woord.length()).toLowerCase());
+            sb.append(" ");
+        }
+
+        return sb.toString().trim();
+    }
 }

@@ -30,4 +30,14 @@ public abstract class PaginaMetMenuBalk extends AbstractPagina {
         assertThat(ingelogdeGebruiker.getText(), is(verwachteTekst));
         assertTrue(uitloggen.isDisplayed());
     }
+
+    public void wachtUitloggenAanwezig() {
+        logIsAanwezig(uitloggen, LOGGER);
+        uitloggen.waitUntil(Condition.appears, 2500);
+    }
+
+    public void klikUitloggen() {
+        logKlik(uitloggen, LOGGER);
+        uitloggen.click();
+    }
 }

@@ -2,14 +2,17 @@ package nl.lakedigital.djfc.selenide.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import nl.lakedigital.djfc.TestCaseDJFC;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import static org.hamcrest.core.Is.is;
 
 import static com.codeborne.selenide.Selenide.$;
+import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC52;
+import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC53;
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 
@@ -23,7 +26,7 @@ public class LoginPagina extends AbstractPagina {
     public LoginPagina() {
         this.identificatie = $(By.id("identificatie"));
         this.wachtwoord = $(By.id("wachtwoord"));
-        this.button = $(By.id("wachtwoord"));
+        this.button = $(By.id("inlogButton"));
     }
 
     public void setIdentificatie(String identificatie) {
@@ -34,6 +37,11 @@ public class LoginPagina extends AbstractPagina {
     public void setWachtwoord(String wachtwoord) {
         logInvullen(this.wachtwoord, wachtwoord, LOGGER);
         this.wachtwoord.setValue(wachtwoord);
+    }
+
+    public void isInlogButtonAanwezig() {
+        logIsAanwezig(button, LOGGER);
+        this.button.waitUntil(Condition.appears, 2500);
     }
 
     public void clickButton(boolean klik, boolean disappear) {
@@ -56,6 +64,7 @@ public class LoginPagina extends AbstractPagina {
 //        this.button.waitUntil(Condition.disappear, 5000);
     }
 
+    @TestCaseDJFC(DJFC52)
     public void testOngeldigeLogin() {
         setIdentificatie("bestaatniet");
         setWachtwoord("onzin");
@@ -64,6 +73,7 @@ public class LoginPagina extends AbstractPagina {
         assertThat(getAlertDanger().getText(), is("Er is een fout opgetreden : De ingevoerde gebruikersnaam werd niet gevonden"));
     }
 
+    @TestCaseDJFC(DJFC53)
     public void testOngeldigWachtwoord(String identificatie) {
         setIdentificatie(identificatie);
         setWachtwoord("ongeldigwachtwoord");
