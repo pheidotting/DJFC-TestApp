@@ -63,7 +63,7 @@ public class ZakelijkTest extends AbstractTest{
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.SCHADE_TOEVOEGEN, LOGGER, beherenSchade.getSchadeMeldingOpslaan());
 
-        assertTrue(beherenSchade.getPolisVoorSchademelding().size() > 1);
+        assertTrue(beherenSchade.getPolisVoorSchademelding().size() > 0);
         List<String> polissen = beherenSchade.getPolisVoorSchademelding();
         List<String> statussen = beherenSchade.getStatusSchade();
 

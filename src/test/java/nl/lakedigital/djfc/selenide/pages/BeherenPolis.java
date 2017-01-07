@@ -77,7 +77,7 @@ public class BeherenPolis extends PaginaMetMenuBalk {
     }
 
     public List<String> getVerzekeringsMaatschappij() {
-        return optionToStringList(verzekeringsMaatschappij, "0", false);
+        return optionToStringList(verzekeringsMaatschappij, "Kies een maatschappij...", false);
     }
 
     public List<String> getSoortVerzekering() {

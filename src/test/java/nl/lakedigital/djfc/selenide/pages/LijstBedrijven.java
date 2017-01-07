@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.google.common.base.Predicate;
-import nl.lakedigital.djfc.TestCaseDJFC;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -18,7 +17,6 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.newArrayList;
-import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC40;
 import static org.junit.Assert.assertTrue;
 
 public class LijstBedrijven extends AbstractPagina {
@@ -68,6 +66,21 @@ public class LijstBedrijven extends AbstractPagina {
     }
 
     public SelenideElement zoekBedrijf(String zoekterm, boolean recursief) {
+        //        List<SelenideElement> gevondenItems=newArrayList();
+        //
+        //        Long current = System.currentTimeMillis();
+        //
+        //        while(gevondenItems.size()==0&& System.currentTimeMillis()>(current+5000)) {
+        //            gevondenItems = newArrayList(filter(naam, new Predicate<SelenideElement>() {
+        //                @Override
+        //                public boolean apply(@Nullable SelenideElement element) {
+        //                    return element.getText().equals(zoekterm);
+        //                }
+        //            }));
+        //        }
+
+
+
         vulZoekTerm(zoekterm, true);
 
         List<SelenideElement> gevondenItems = newArrayList(filter(naam, new Predicate<SelenideElement>() {

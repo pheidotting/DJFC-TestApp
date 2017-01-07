@@ -14,14 +14,11 @@ import org.slf4j.Logger;
 
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.logging.Level;
 import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.getWebDriverLogs;
 import static com.google.common.collect.Iterables.transform;
-import static org.openqa.selenium.logging.LogType.BROWSER;
 
 public abstract class AbstractPagina {
     private SelenideElement alertSucces = $(By.id("alertSucces"));
@@ -162,7 +159,7 @@ public abstract class AbstractPagina {
     }
 
     protected List<String> optionToStringList(SelenideElement element, String initieleWaarde, boolean initieleWaardeMeenemen) {
-        element.waitUntil(Condition.value(initieleWaarde), 2500);
+        element.waitUntil(Condition.text(initieleWaarde), 2500);
 
         Select selectList = new Select(element);
         Iterable<String> ret = transform(selectList.getOptions(), new Function<WebElement, String>() {
