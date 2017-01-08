@@ -112,7 +112,7 @@ public class ParticulierTest extends AbstractTest {
         Long polisnummer = System.currentTimeMillis();
         String kenmerk = maatschappij + "-" + soortVerzekering;
 
-        JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, "dedekking", "verzzaak", "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", "omschrijving");
+        JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, lorem.getWords(3), lorem.getWords(4), "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", lorem.getWords(50));
 
         aanwezigePolissen.add(polis);
         beherenPolis.vulVelden(polis);

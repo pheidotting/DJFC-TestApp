@@ -95,7 +95,7 @@ public class AbstractTest {
     @Before
     public void setup() {
         LOGGER.debug("OS {}", System.getProperty("os.name"));
-        basisUrl = "http://localhost:8080/djfc/";
+        basisUrl = "http://localhost:8080/";
 
         Configuration.reportsFolder = "target/screenshots";
 
@@ -103,7 +103,7 @@ public class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //        WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
@@ -123,8 +123,8 @@ public class AbstractTest {
         toggles.put(telefonieToggle, toggleTelefonieWas);
         screenshotAlsTestFaalt.setAbstractTest(this);
         screenshotAlsTestFaalt.setToggles(toggles);
-        setFeatureToggle(todoistToggle, false);
-        setFeatureToggle(telefonieToggle, false);
+        setFeatureToggle(todoistToggle, true);
+        setFeatureToggle(telefonieToggle, true);
 
         medewerker = new Medewerker();
         medewerker.setVoornaam("Bene");
