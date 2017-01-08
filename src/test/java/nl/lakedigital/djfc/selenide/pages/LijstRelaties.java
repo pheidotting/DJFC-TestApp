@@ -55,7 +55,7 @@ public class LijstRelaties extends AbstractPagina {
             logKlik(this.zoeken, LOGGER);
             this.zoeken.click();
         }
-        this.gezochtMetTonen.waitUntil(Condition.appears, 1500);
+        this.gezochtMetTonen.waitUntil(Condition.appears, 5000);
         wachtFf();
     }
 
