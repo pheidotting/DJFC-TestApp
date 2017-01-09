@@ -1,6 +1,5 @@
 package nl.lakedigital.djfc.tests;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.WebDriverRunner;
@@ -13,7 +12,6 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
-import nl.lakedigital.djfc.TestCaseDJFC;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
@@ -38,7 +36,6 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.getFirst;
 import static com.google.common.collect.Lists.newArrayList;
-import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC54;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
@@ -103,7 +100,7 @@ public class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //                WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                        WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
@@ -170,14 +167,6 @@ public class AbstractTest {
         sb.append(medewerker.getAchternaam());
 
         return sb.toString();
-    }
-
-    @TestCaseDJFC(DJFC54)
-    protected void inloggen(String identificatie, String wachtwoord, SelenideElement wachtenOp) {
-        loginPagina.inloggen(identificatie, wachtwoord);
-        if (wachtenOp != null) {
-            wachtenOp.waitUntil(Condition.appears, 2500);
-        }
     }
 
     protected void testFoutmeldingBijNietsIngevuld(AbstractPagina pagina) {

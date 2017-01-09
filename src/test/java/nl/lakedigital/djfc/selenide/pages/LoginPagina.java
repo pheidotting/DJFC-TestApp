@@ -10,8 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Selenide.$;
-import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC52;
-import static nl.lakedigital.djfc.TestCaseDJFC.Case.DJFC53;
+import static nl.lakedigital.djfc.TestCaseDJFC.Case.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -56,12 +55,20 @@ public class LoginPagina extends AbstractPagina {
         }
     }
 
-    public void inloggen(String identificatie, String wachtwoord) {
+    @TestCaseDJFC(DJFC54)
+    public void inloggen(String identificatie, String wachtwoord, SelenideElement wachtenOp) {
         LOGGER.info("invullen inlog informatie");
         setIdentificatie(identificatie);
         setWachtwoord(wachtwoord);
         clickButton(false, true);
-//        this.button.waitUntil(Condition.disappear, 5000);
+        if (wachtenOp != null) {
+            wachtenOp.waitUntil(Condition.appears, 2500);
+        }
+    }
+
+    @TestCaseDJFC(DJFC54)
+    public void inloggen(String identificatie, String wachtwoord) {
+        inloggen(identificatie, wachtwoord, null);
     }
 
     @TestCaseDJFC(DJFC52)

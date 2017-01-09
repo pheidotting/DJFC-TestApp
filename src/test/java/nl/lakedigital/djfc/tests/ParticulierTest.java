@@ -13,8 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static nl.lakedigital.djfc.TestCase.Case.Case1;
 import static org.hamcrest.core.Is.is;
@@ -35,7 +34,7 @@ public class ParticulierTest extends AbstractTest {
     public void testParticulier() {
         voornamen = voornaam();
 
-        inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
+        loginPagina.inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
 
         dashboard.testIngelogdeGebruiker(maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
 
@@ -89,18 +88,38 @@ public class ParticulierTest extends AbstractTest {
 
         List<JsonPolis> aanwezigePolissen = new ArrayList<>();
 
-        assertTrue(beherenPolis.getSoortVerzekering().size() > 1);
-        assertTrue(beherenPolis.getVerzekeringsMaatschappij().size() > 1);
+        List<String> soortenVerzekering = beherenPolis.getSoortVerzekering();
+        List<String> verzekeringsmaatschappijen = beherenPolis.getVerzekeringsMaatschappij();
 
+        assertTrue(soortenVerzekering.size() > 1);
+        assertTrue(verzekeringsmaatschappijen.size() > 1);
 
-        if (opServer) {
-            for (String soortVerzekering : beherenPolis.getSoortVerzekering()) {
-                for (String maatschappij : beherenPolis.getVerzekeringsMaatschappij()) {
-                    voegPolisToeEnControleer(soortVerzekering, maatschappij, aanwezigePolissen);
-                }
+        Map<Integer, Map<String, String>> combinaties = new HashMap<>();
+        Integer teller = 0;
+
+        for (String maatschappij : verzekeringsmaatschappijen) {
+            for (String soortVerzekering : soortenVerzekering) {
+                Map<String, String> combinatie = new HashMap<>();
+                combinatie.put(maatschappij, soortVerzekering);
+
+                combinaties.put(++teller, combinatie);
             }
-        } else {
-            voegPolisToeEnControleer("Auto", "Aegon", aanwezigePolissen);
+        }
+
+        List<Integer> keys = new ArrayList<>(combinaties.keySet());
+        Collections.shuffle(keys);
+
+        Map<String, String> teTestenCombinaties = new HashMap<>();
+        for (int i = 0; i < 5; i++) {
+            Map<String, String> combi = combinaties.get(keys.get(i));
+
+            for (String maatschappij : combi.keySet()) {
+                teTestenCombinaties.put(maatschappij, combi.get(maatschappij));
+            }
+        }
+
+        for (String maatschappij : teTestenCombinaties.keySet()) {
+            voegPolisToeEnControleer(teTestenCombinaties.get(maatschappij), maatschappij, aanwezigePolissen);
         }
 
         beherenPolissen.klikHomeKnop(LOGGER);

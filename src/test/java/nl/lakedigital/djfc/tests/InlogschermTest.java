@@ -15,7 +15,7 @@ public class InlogschermTest extends AbstractTest {
     public void testHetInlogscherm() {
         loginPagina.testOngeldigeLogin();
         loginPagina.testOngeldigWachtwoord("djfc.bene");
-        inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
+        loginPagina.inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
 
         dashboard.wachtUitloggenAanwezig();
         dashboard.klikUitloggen();

@@ -12,26 +12,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
-public class ZakelijkTest extends AbstractTest{
+public class ZakelijkTest extends AbstractTest {
     private final static Logger LOGGER = LoggerFactory.getLogger(ZakelijkTest.class);
 
     public ZakelijkTest() {
         super(LOGGER);
     }
+
     private String naam;
 
     @Test
-    public void voeruitTestZakelijk(){
+    public void voeruitTestZakelijk() {
 
-        inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
+        loginPagina.inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
 
         dashboard.klikNaarZakelijk();
 
@@ -44,11 +44,11 @@ public class ZakelijkTest extends AbstractTest{
         beherenBedrijf.testFoutmeldingBijNietAlleVerplichteVelden();
         beherenBedrijf.testFoutmeldingWegBijAlleVerplichteVeldenGevuld(naam);
         beherenBedrijf.invullenAlLeVelden(null, getStringOnMillis(), beginHoofdletters(lorem.getWords(1)), lorem.getEmail(), lorem.getUrl(), beginHoofdletters(lorem.getWords(1)), beginHoofdletters(lorem.getWords(1)));
-        beherenBedrijf.        adresToevoegen();
+        beherenBedrijf.adresToevoegen();
         beherenBedrijf.voegTelefoonnummerToe();
         beherenBedrijf.voegOpmerkingToeBijRelatie();
         beherenBedrijf.voegContactpersoonToe();
-        beherenBedrijf.        klikOpslaan();
+        beherenBedrijf.klikOpslaan();
 
         lijstBedrijven.zoekEnSelecteer(naam, beherenBedrijf.getOpslaanBedrijf());
         beherenSchades.klikHomeKnop(LOGGER);
@@ -59,7 +59,7 @@ public class ZakelijkTest extends AbstractTest{
 
     private void testInvoerenSchades() {
         dashboard.klikNaarZakelijk();
-        lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam,false),beherenBedrijf.getOpslaanBedrijf());
+        lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam, false), beherenBedrijf.getOpslaanBedrijf());
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.SCHADE_TOEVOEGEN, LOGGER, beherenSchade.getSchadeMeldingOpslaan());
 
@@ -81,7 +81,7 @@ public class ZakelijkTest extends AbstractTest{
 
     private void testInvoerenNieuwePolissen() {
         dashboard.klikNaarZakelijk();
-        lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam,false),beherenBedrijf.getOpslaanBedrijf());
+        lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam, false), beherenBedrijf.getOpslaanBedrijf());
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
 
@@ -90,43 +90,70 @@ public class ZakelijkTest extends AbstractTest{
 
         List<JsonPolis> aanwezigePolissen = new ArrayList<>();
 
-        //        for (String soortVerzekering : beherenPolis.getSoortVerzekering()) {
-        String soortVerzekering = "Auto";
-        //            for (String maatschappij : beherenPolis.getVerzekeringsMaatschappij()) {
-        String maatschappij = "Aegon";
-        beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
+        List<String> soortenVerzekering = beherenPolis.getSoortVerzekering();
+        List<String> verzekeringsmaatschappijen = beherenPolis.getVerzekeringsMaatschappij();
 
-        Long polisnummer = System.currentTimeMillis();
-        String kenmerk = maatschappij + "-" + soortVerzekering;
+        assertTrue(soortenVerzekering.size() > 1);
+        assertTrue(verzekeringsmaatschappijen.size() > 1);
 
-        JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, beginHoofdletters(lorem.getWords(1)), beginHoofdletters(lorem.getWords(1)), "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", "omschrijving");
+        Map<Integer, Map<String, String>> combinaties = new HashMap<>();
+        Integer teller = 0;
 
-        aanwezigePolissen.add(polis);
-        beherenPolis.vulVelden(polis);
+        for (String maatschappij : verzekeringsmaatschappijen) {
+            for (String soortVerzekering : soortenVerzekering) {
+                Map<String, String> combinatie = new HashMap<>();
+                combinatie.put(maatschappij, soortVerzekering);
 
-        beherenPolissen.getTitel().get(0).waitUntil(Condition.appears, 2000);
-
-        LOGGER.debug("Controleren {} polissen", aanwezigePolissen.size());
-
-        assertThat(beherenPolissen.getTitelList().size(), is(aanwezigePolissen.size()));
-
-        List<JsonPolis> gecontroleerd = new ArrayList<>();
-        for (int i = 0; i < beherenPolissen.getTitelList().size(); i++) {
-            for (JsonPolis teControlerenPolis : aanwezigePolissen) {
-                String titel = beherenPolissen.getTitel().get(i).getText();
-
-                if (titel.equals(teControlerenPolis.getSoort() + " (" + teControlerenPolis.getPolisNummer() + ")")) {
-
-                    beherenPolissen.controleerPolis(i, teControlerenPolis, LOGGER);
-
-                    gecontroleerd.add(polis);
-                }
+                combinaties.put(++teller, combinatie);
             }
         }
 
-        assertThat(gecontroleerd.size(), is(aanwezigePolissen.size()));
-        //            }
-        //        }
+        List<Integer> keys = new ArrayList<>(combinaties.keySet());
+        Collections.shuffle(keys);
+
+        Map<String, String> teTestenCombinaties = new HashMap<>();
+        for (int i = 0; i < 5; i++) {
+            Map<String, String> combi = combinaties.get(keys.get(i));
+
+            for (String maatschappij : combi.keySet()) {
+                teTestenCombinaties.put(maatschappij, combi.get(maatschappij));
+            }
+        }
+
+        for (String maatschappij : teTestenCombinaties.keySet()) {
+            String soortVerzekering = teTestenCombinaties.get(maatschappij);
+            beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
+
+            Long polisnummer = System.currentTimeMillis();
+            String kenmerk = maatschappij + "-" + soortVerzekering;
+
+            JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, beginHoofdletters(lorem.getWords(1)), beginHoofdletters(lorem.getWords(1)), "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", "omschrijving");
+
+            aanwezigePolissen.add(polis);
+            beherenPolis.vulVelden(polis);
+
+            beherenPolissen.getTitel().get(0).waitUntil(Condition.appears, 2000);
+
+            LOGGER.debug("Controleren {} polissen", aanwezigePolissen.size());
+
+            assertThat(beherenPolissen.getTitelList().size(), is(aanwezigePolissen.size()));
+
+            List<JsonPolis> gecontroleerd = new ArrayList<>();
+            for (int i = 0; i < beherenPolissen.getTitelList().size(); i++) {
+                for (JsonPolis teControlerenPolis : aanwezigePolissen) {
+                    String titel = beherenPolissen.getTitel().get(i).getText();
+
+                    if (titel.equals(teControlerenPolis.getSoort() + " (" + teControlerenPolis.getPolisNummer() + ")")) {
+
+                        beherenPolissen.controleerPolis(i, teControlerenPolis, LOGGER);
+
+                        gecontroleerd.add(polis);
+                    }
+                }
+            }
+
+            assertThat(gecontroleerd.size(), is(aanwezigePolissen.size()));
+        }
         beherenPolissen.klikHomeKnop(LOGGER);
     }
 }
