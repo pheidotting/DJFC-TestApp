@@ -22,23 +22,13 @@ import static org.junit.Assert.assertTrue;
 public class LijstBedrijven extends AbstractPagina {
     private final static Logger LOGGER = LoggerFactory.getLogger(LijstBedrijven.class);
 
-    private SelenideElement zoekTerm;
-    private SelenideElement zoeken;
-    private SelenideElement toevoegenNieuwBedrijf;
+    private SelenideElement zoekTerm = $(By.id("zoekTerm"));
+    private SelenideElement zoeken = $(By.id("zoeken"));
+    private SelenideElement toevoegenNieuwBedrijf = $(By.id("toevoegenNieuwBedrijf"));
 
-    private SelenideElement gezochtMetTonen;
+    private SelenideElement gezochtMetTonen = $(By.id("gezochtMetTonen"));
 
-    private ElementsCollection naam;
-
-    public LijstBedrijven() {
-        zoekTerm = $(By.id("zoekTerm"));
-        zoeken = $(By.id("zoeken"));
-        toevoegenNieuwBedrijf = $(By.id("toevoegenNieuwBedrijf"));
-
-        gezochtMetTonen = $(By.id("gezochtMetTonen"));
-
-        naam = $$(By.name("naam"));
-    }
+    private ElementsCollection naam = $$(By.name("naam"));
 
     public void isZoekTermAanwezig() {
         zoekTerm.waitUntil(Condition.appears, 2500);
@@ -80,7 +70,6 @@ public class LijstBedrijven extends AbstractPagina {
         //        }
 
 
-
         vulZoekTerm(zoekterm, true);
 
         List<SelenideElement> gevondenItems = newArrayList(filter(naam, new Predicate<SelenideElement>() {
@@ -106,12 +95,12 @@ public class LijstBedrijven extends AbstractPagina {
         logKlik(LOGGER, regel);
         regel.click();
         this.gezochtMetTonen.waitUntil(Condition.disappears, 2500);
-        if(teVerschijnenElement!=null) {
-            teVerschijnenElement.waitUntil(Condition.appears,2500);
+        if (teVerschijnenElement != null) {
+            teVerschijnenElement.waitUntil(Condition.appears, 2500);
         }
     }
 
-    public void zoekEnSelecteer(String zoekterm, SelenideElement teVerschijnenElement){
-        selecteer(zoekBedrijf(zoekterm,false),teVerschijnenElement);
+    public void zoekEnSelecteer(String zoekterm, SelenideElement teVerschijnenElement) {
+        selecteer(zoekBedrijf(zoekterm, false), teVerschijnenElement);
     }
 }

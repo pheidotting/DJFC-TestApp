@@ -10,16 +10,9 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.$;
 
 
-public class Opmerkingen extends AbstractPagina{
-    private SelenideElement             voegOpmerkingToe;
-    private List<Opmerking> opmerkingen;
-
-
-    public Opmerkingen() {
-                voegOpmerkingToe=$(By.id("voegOpmerkingToe"));
-
-        this.opmerkingen = new ArrayList<>();
-    }
+public class Opmerkingen extends AbstractPagina {
+    private SelenideElement voegOpmerkingToe = $(By.id("voegOpmerkingToe"));
+    private List<Opmerking> opmerkingen = new ArrayList<>();
 
     public void voegOpmerkingToe(Logger LOGGER) {
         logKlik(LOGGER, this.voegOpmerkingToe);

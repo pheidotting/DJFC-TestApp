@@ -12,13 +12,8 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public abstract class PaginaMetMenuBalk extends AbstractPagina {
-    private SelenideElement ingelogdeGebruiker;
-    private SelenideElement uitloggen;
-
-    public PaginaMetMenuBalk() {
-        ingelogdeGebruiker = $(By.id("ingelogdeGebruiker"));
-        uitloggen = $(By.id("uitloggen"));
-    }
+    private SelenideElement ingelogdeGebruiker = $(By.id("ingelogdeGebruiker"));
+    private SelenideElement uitloggen = $(By.id("uitloggen"));
 
     public void testIngelogdeGebruiker(Logger LOGGER, String gebruiker, String kantoor) {
         ingelogdeGebruiker.waitUntil(Condition.appears, 2500);

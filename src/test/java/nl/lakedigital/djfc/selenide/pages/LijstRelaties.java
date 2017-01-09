@@ -18,23 +18,13 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertTrue;
 
 public class LijstRelaties extends AbstractPagina {
-    private SelenideElement zoekTerm;
-    private SelenideElement zoeken;
-    private SelenideElement toevoegenNieuweRelatie;
+    private SelenideElement zoekTerm = $(By.id("zoekTerm"));
+    private SelenideElement zoeken = $(By.id("zoeken"));
+    private SelenideElement toevoegenNieuweRelatie = $(By.id("toevoegenNieuweRelatie"));
 
-    private SelenideElement gezochtMetTonen;
+    private SelenideElement gezochtMetTonen = $(By.id("gezochtMetTonen"));
 
-    private List<SelenideElement> voornaam;
-
-    public LijstRelaties() {
-        zoekTerm = $(By.id("zoekTerm"));
-        zoeken = $(By.id("zoeken"));
-        toevoegenNieuweRelatie = $(By.id("toevoegenNieuweRelatie"));
-
-        gezochtMetTonen = $(By.id("gezochtMetTonen"));
-
-        voornaam = $$(By.name("voornaam"));
-    }
+    private List<SelenideElement> voornaam = $$(By.name("voornaam"));
 
     public void isZoekTermAanwezig(Logger LOGGER) {
         zoekTerm.waitUntil(Condition.appears, 2500);
@@ -87,8 +77,8 @@ public class LijstRelaties extends AbstractPagina {
         logKlik(LOGGER, regel);
         regel.click();
         this.gezochtMetTonen.waitUntil(Condition.disappears, 2500);
-        if(teVerschijnenElement!=null) {
-            teVerschijnenElement.waitUntil(Condition.appears,2500);
+        if (teVerschijnenElement != null) {
+            teVerschijnenElement.waitUntil(Condition.appears, 2500);
         }
     }
 }

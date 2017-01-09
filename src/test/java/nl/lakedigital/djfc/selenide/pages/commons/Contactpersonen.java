@@ -9,14 +9,9 @@ import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class Contactpersonen extends AbstractPagina{
-    private SelenideElement voegContactpersoonToe;
-    private List<Contactpersoon> contactpersonen;
-
-    public Contactpersonen() {
-        voegContactpersoonToe=$(By.id("voegContactpersoonToe"));
-        contactpersonen=new ArrayList<>();
-    }
+public class Contactpersonen extends AbstractPagina {
+    private SelenideElement voegContactpersoonToe = $(By.id("voegContactpersoonToe"));
+    private List<Contactpersoon> contactpersonen = new ArrayList<>();
 
     public List<Contactpersoon> getContactpersonen() {
         return contactpersonen;

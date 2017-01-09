@@ -13,35 +13,19 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.$;
 
 public class BeherenSchade extends PaginaMetMenuBalk {
-    private SelenideElement schadeMeldingOpslaan;
+    private SelenideElement polisVoorSchademelding = $(By.id("polisVoorSchademelding"));
+    private SelenideElement schadeNummerMaatschappij = $(By.id("schadeNummerMaatschappij"));
+    private SelenideElement schadeNummerTussenpersoon = $(By.id("schadeNummerTussenpersoon"));
+    private SelenideElement soortSchade = $(By.id("soortSchade"));
+    private SelenideElement locatieSchade = $(By.id("locatieSchade"));
+    private SelenideElement statusSchade = $(By.id("statusSchade"));
+    private SelenideElement datumTijdSchade = $(By.id("datumTijdSchade"));
+    private SelenideElement datumTijdMelding = $(By.id("datumTijdMelding"));
+    private SelenideElement datumAfgehandeld = $(By.id("datumAfgehandeld"));
+    private SelenideElement eigenRisico = $(By.id("eigenRisico"));
+    private SelenideElement omschrijving = $(By.id("omschrijving"));
 
-    private SelenideElement polisVoorSchademelding;
-    private SelenideElement schadeNummerMaatschappij;
-    private SelenideElement schadeNummerTussenpersoon;
-    private SelenideElement soortSchade;
-    private SelenideElement locatieSchade;
-    private SelenideElement statusSchade;
-    private SelenideElement datumTijdSchade;
-    private SelenideElement datumTijdMelding;
-    private SelenideElement datumAfgehandeld;
-    private SelenideElement eigenRisico;
-    private SelenideElement omschrijving;
-
-    public BeherenSchade() {
-        polisVoorSchademelding = $(By.id("polisVoorSchademelding"));
-        schadeNummerMaatschappij = $(By.id("schadeNummerMaatschappij"));
-        schadeNummerTussenpersoon = $(By.id("schadeNummerTussenpersoon"));
-        soortSchade = $(By.id("soortSchade"));
-        locatieSchade = $(By.id("locatieSchade"));
-        statusSchade = $(By.id("statusSchade"));
-        datumTijdSchade = $(By.id("datumTijdSchade"));
-        datumTijdMelding = $(By.id("datumTijdMelding"));
-        datumAfgehandeld = $(By.id("datumAfgehandeld"));
-        eigenRisico = $(By.id("eigenRisico"));
-        omschrijving = $(By.id("omschrijving"));
-
-        schadeMeldingOpslaan = $(By.id("schadeMeldingOpslaan"));
-    }
+    private SelenideElement schadeMeldingOpslaan = $(By.id("schadeMeldingOpslaan"));
 
     public void vulAlleVelden(Logger LOGGER, String polisVoorSchademelding, String schadeNummerMaatschappij, String schadeNummerTussenpersoon, String soortSchade, String locatieSchade, String statusSchade, LocalDateTime datumTijdSchade, LocalDateTime datumTijdMelding, LocalDate datumAfgehandeld, String eigenRisico, String omschrijving) {
         setPolisVoorSchademelding(LOGGER, polisVoorSchademelding);

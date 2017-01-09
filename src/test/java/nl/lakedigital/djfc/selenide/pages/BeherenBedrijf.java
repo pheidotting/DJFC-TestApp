@@ -33,12 +33,12 @@ public class BeherenBedrijf extends AbstractPagina {
     private SelenideElement annuleren = $(By.id("annuleren"));
     private ElementsCollection validationMessages = $$(By.className("validationMessage"));
 
-    private Adressen adressen=new Adressen();
-    private Telefoonnummers telefoonnummers=new Telefoonnummers(false);
-    private Opmerkingen opmerkingen=new Opmerkingen();
-    private Contactpersonen contactpersonen=new Contactpersonen();
+    private Adressen adressen = new Adressen();
+    private Telefoonnummers telefoonnummers = new Telefoonnummers(false);
+    private Opmerkingen opmerkingen = new Opmerkingen();
+    private Contactpersonen contactpersonen = new Contactpersonen();
 
-    private Lorem lorem= LoremIpsum.getInstance();
+    private Lorem lorem = LoremIpsum.getInstance();
 
     public void klikOpslaan() {
         logKlik(LOGGER, this.opslaanBedrijf);
@@ -90,14 +90,15 @@ public class BeherenBedrijf extends AbstractPagina {
             setcAoVerplichtingen(cAoVerplichtingen);
         }
     }
-@TestCaseDJFC(DJFC41)
-    public void adresToevoegen(){
-    adressen.voegAdresToe(LOGGER);
+
+    @TestCaseDJFC(DJFC41)
+    public void adresToevoegen() {
+        adressen.voegAdresToe(LOGGER);
         Adres adres = adressen.getAdressen().get(0);
-    adres.setSoortadres(LOGGER, Adres.SoortAdres.POSTADRES);
-    adres.setPostcode(LOGGER, "7891TN");
-    adres.setHuisnummer(LOGGER, "24", "7891 TN");
-    adres.checkStraatEnPlaatsnaam(LOGGER, "Boogschutter", "KLAZIENAVEEN", "7891 TN");
+        adres.setSoortadres(LOGGER, Adres.SoortAdres.POSTADRES);
+        adres.setPostcode(LOGGER, "7891TN");
+        adres.setHuisnummer(LOGGER, "24", "7891 TN");
+        adres.checkStraatEnPlaatsnaam(LOGGER, "Boogschutter", "KLAZIENAVEEN", "7891 TN");
     }
 
 
@@ -119,18 +120,18 @@ public class BeherenBedrijf extends AbstractPagina {
         Opmerking opmerking = opmerkingen.getOpmerkingen().get(0);
         String opm = lorem.getWords(50);
         opmerking.vulOpmerking(LOGGER, opm, nummer);
-//        opmerkingen.add(opm);
+        //        opmerkingen.add(opm);
     }
 
     @TestCaseDJFC(DJFC48)
     public void voegContactpersoonToe(Logger LOGGER) {
         contactpersonen.voegContactpersoonToe(LOGGER);
-        Contactpersoon contactpersoon=contactpersonen.getContactpersonen().get(0);
+        Contactpersoon contactpersoon = contactpersonen.getContactpersonen().get(0);
 
         contactpersoon.vulContactpersoon(LOGGER, lorem.getFirstNameFemale(), null, lorem.getLastName(), lorem.getEmail(), lorem.getWords(3));
 
         contactpersoon.getTelefoonnummers().voegTelefoonnummerToe(LOGGER);
-        Telefoonnummer telefoonnummer=contactpersoon.getTelefoonnummers().getTelefoonnummers().get(0);
+        Telefoonnummer telefoonnummer = contactpersoon.getTelefoonnummers().getTelefoonnummers().get(0);
         telefoonnummer.vulTelefoonnummer(LOGGER, "0621564744", "06 - 21 56 47 44", "Mobiel", lorem.getWords(15));
     }
 

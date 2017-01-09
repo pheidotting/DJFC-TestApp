@@ -8,15 +8,8 @@ import org.slf4j.Logger;
 import static com.codeborne.selenide.Selenide.$;
 
 public class Dashboard extends PaginaMetMenuBalk {
-    private SelenideElement naarParticulier;
-    private SelenideElement naarZakelijk;
-
-    public Dashboard() {
-        super();
-
-        naarParticulier = $(By.id("naarParticulier"));
-        naarZakelijk = $(By.id("naarZakelijk"));
-    }
+    private SelenideElement naarParticulier = $(By.id("naarParticulier"));
+    private SelenideElement naarZakelijk = $(By.id("naarZakelijk"));
 
     public SelenideElement getNaarParticulier() {
         return naarParticulier;

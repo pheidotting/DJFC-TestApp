@@ -11,14 +11,8 @@ import static com.codeborne.selenide.Selenide.$;
 
 
 public class Rekeningnummers extends AbstractPagina {
-    private SelenideElement voegRekeningToe;
-    private List<Rekeningnummer> rekeningnummers;
-
-    public Rekeningnummers() {
-        this.voegRekeningToe = $(By.id("voegRekeningToe"));
-
-        rekeningnummers = new ArrayList<>();
-    }
+    private SelenideElement voegRekeningToe = $(By.id("voegRekeningToe"));
+    private List<Rekeningnummer> rekeningnummers = new ArrayList<>();
 
     public List<Rekeningnummer> getRekeningnummers() {
         return rekeningnummers;

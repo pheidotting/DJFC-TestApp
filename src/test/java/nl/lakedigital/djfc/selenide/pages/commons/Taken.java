@@ -8,11 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 import static org.junit.Assert.assertFalse;
 
 public class Taken extends AbstractPagina {
-    private SelenideElement voegTaakToe;
-
-    public Taken() {
-        voegTaakToe = $(By.id("voegTaakToe"));
-    }
+    private SelenideElement voegTaakToe = $(By.id("voegTaakToe"));
 
     public void checkNietAanwezig() {
         assertFalse(voegTaakToe.is(Condition.visible));

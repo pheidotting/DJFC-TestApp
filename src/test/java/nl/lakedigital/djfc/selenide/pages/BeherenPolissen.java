@@ -16,45 +16,24 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class BeherenPolissen extends AbstractPagina {
-    private ElementsCollection titel;
+    private ElementsCollection titel = $$(By.name("polis-titel"));
 
-    private ElementsCollection tableRowPolisNummer;
-    private ElementsCollection tableRowStatus;
-    private ElementsCollection tableRowVerzekerdeZaak;
-    private ElementsCollection tableRowMaatschappij;
+    private ElementsCollection tableRowPolisNummer = $$(By.name("tableRowPolisNummer"));
+    private ElementsCollection tableRowStatus = $$(By.name("tableRowStatus"));
+    private ElementsCollection tableRowVerzekerdeZaak = $$(By.name("tableRowVerzekerdeZaak"));
+    private ElementsCollection tableRowMaatschappij = $$(By.name("tableRowMaatschappij"));
 
-    private ElementsCollection status;
-    private ElementsCollection polisNummer;
-    private ElementsCollection kenmerk;
-    private ElementsCollection ingangsDatum;
-    private ElementsCollection eindDatum;
-    private ElementsCollection wijzigingsDatum;
-    private ElementsCollection prolongatieDatum;
-    private ElementsCollection maatschappij;
-    private ElementsCollection premie;
-    private ElementsCollection betaalfrequentie;
-    private ElementsCollection omschrijvingVerzekering;
-
-    public BeherenPolissen() {
-        titel = $$(By.name("polis-titel"));
-
-        tableRowPolisNummer = $$(By.name("tableRowPolisNummer"));
-        tableRowStatus = $$(By.name("tableRowStatus"));
-        tableRowVerzekerdeZaak = $$(By.name("tableRowVerzekerdeZaak"));
-        tableRowMaatschappij = $$(By.name("tableRowMaatschappij"));
-
-        status = $$(By.name("status"));
-        polisNummer = $$(By.name("polisNummer"));
-        kenmerk = $$(By.name("kenmerk"));
-        ingangsDatum = $$(By.name("ingangsDatum"));
-        eindDatum = $$(By.name("eindDatum"));
-        wijzigingsDatum = $$(By.name("wijzigingsDatum"));
-        prolongatieDatum = $$(By.name("prolongatieDatum"));
-        maatschappij = $$(By.name("maatschappij"));
-        premie = $$(By.name("premie"));
-        betaalfrequentie = $$(By.name("betaalfrequentie"));
-        omschrijvingVerzekering = $$(By.name("omschrijvingVerzekering"));
-    }
+    private ElementsCollection status = $$(By.name("status"));
+    private ElementsCollection polisNummer = $$(By.name("polisNummer"));
+    private ElementsCollection kenmerk = $$(By.name("kenmerk"));
+    private ElementsCollection ingangsDatum = $$(By.name("ingangsDatum"));
+    private ElementsCollection eindDatum = $$(By.name("eindDatum"));
+    private ElementsCollection wijzigingsDatum = $$(By.name("wijzigingsDatum"));
+    private ElementsCollection prolongatieDatum = $$(By.name("prolongatieDatum"));
+    private ElementsCollection maatschappij = $$(By.name("maatschappij"));
+    private ElementsCollection premie = $$(By.name("premie"));
+    private ElementsCollection betaalfrequentie = $$(By.name("betaalfrequentie"));
+    private ElementsCollection omschrijvingVerzekering = $$(By.name("omschrijvingVerzekering"));
 
     public ElementsCollection getTitel() {
         return titel;

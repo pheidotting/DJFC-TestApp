@@ -11,19 +11,9 @@ import static org.junit.Assert.assertThat;
 
 
 public class Rekeningnummer extends AbstractPagina {
-    private SelenideElement
-
-            rekeningnummernummer;
-    private SelenideElement
-
-            bic;
-    private SelenideElement verwijderRekening;
-
-    public Rekeningnummer() {
-        this.rekeningnummernummer = $(By.id("rekeningnummernummer"));
-        this.bic = $(By.id("bic"));
-        this.verwijderRekening = $(By.id("verwijderRekening"));
-    }
+    private SelenideElement rekeningnummernummer = $(By.id("rekeningnummernummer"));
+    private SelenideElement bic = $(By.id("bic"));
+    private SelenideElement verwijderRekening = $(By.id("verwijderRekening"));
 
     public void vulRekeningnummer(Logger LOGGER, String nummer, String nummerLang, String bic) {
         if (nummer != null) {

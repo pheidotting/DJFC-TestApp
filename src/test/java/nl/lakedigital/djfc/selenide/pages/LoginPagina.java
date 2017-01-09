@@ -15,15 +15,9 @@ import static org.junit.Assert.assertThat;
 
 
 public class LoginPagina extends AbstractPagina {
-    private SelenideElement identificatie;
-    private SelenideElement wachtwoord;
-    private SelenideElement button;
-
-    public LoginPagina() {
-        this.identificatie = $(By.id("identificatie"));
-        this.wachtwoord = $(By.id("wachtwoord"));
-        this.button = $(By.id("inlogButton"));
-    }
+    private SelenideElement identificatie = $(By.id("identificatie"));
+    private SelenideElement wachtwoord = $(By.id("wachtwoord"));
+    private SelenideElement button = $(By.id("inlogButton"));
 
     public void setIdentificatie(Logger LOGGER, String identificatie) {
         logInvullen(LOGGER, this.identificatie, identificatie);

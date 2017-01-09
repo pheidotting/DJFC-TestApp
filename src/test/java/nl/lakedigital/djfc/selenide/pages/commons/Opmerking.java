@@ -9,17 +9,13 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
 public class Opmerking extends AbstractPagina {
-    private SelenideElement verwijder;
-    private SelenideElement verwijderNieuweOpmerking;
-    private ElementsCollection nieuweOpmerking;
-    private ElementsCollection opmerking;
+    private SelenideElement verwijder = $(By.id("verwijder"));
+    private SelenideElement verwijderNieuweOpmerking = $(By.id("verwijderNieuweOpmerking"));
+    private ElementsCollection nieuweOpmerking = $$(By.name("nieuweOpmerking"));
+    private ElementsCollection opmerking = $$(By.name("wateenrareidisdit"));
     private int i;
 
     public Opmerking(int i) {
-        verwijder = $(By.id("verwijder"));
-        verwijderNieuweOpmerking = $(By.id("verwijderNieuweOpmerking"));
-        nieuweOpmerking = $$(By.name("nieuweOpmerking"));
-        opmerking = $$(By.name("wateenrareidisdit"));
         this.i = i;
     }
 

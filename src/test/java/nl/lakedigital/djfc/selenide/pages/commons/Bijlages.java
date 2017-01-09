@@ -25,14 +25,8 @@ public class Bijlages extends AbstractPagina {
         private String bestandsNaam;
     }
 
-    private SelenideElement uploadknop;
-    private List<Bijlage> bijlages;
-
-    public Bijlages() {
-        uploadknop=$(By.id("bijlageFile"));
-
-        bijlages=new ArrayList<>();
-    }
+    private SelenideElement uploadknop = $(By.id("bijlageFile"));
+    private List<Bijlage> bijlages = new ArrayList<>();
 
     public List<Bijlage> getBijlages() {
         return bijlages;
@@ -41,7 +35,7 @@ public class Bijlages extends AbstractPagina {
     public void uploadFile(Logger LOGGER, UploadBestand uploadBestand) {
         logKlik(LOGGER, uploadknop);
         uploadknop.uploadFromClasspath(uploadBestand.getBestandsNaam());
-        uploadknop.waitUntil(Condition.empty,2500);
+        uploadknop.waitUntil(Condition.empty, 2500);
 
         bijlages.add(new Bijlage(bijlages.size()));
     }
