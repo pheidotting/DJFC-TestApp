@@ -56,20 +56,6 @@ public class LijstBedrijven extends AbstractPagina {
     }
 
     public SelenideElement zoekBedrijf(String zoekterm, boolean recursief) {
-        //        List<SelenideElement> gevondenItems=newArrayList();
-        //
-        //        Long current = System.currentTimeMillis();
-        //
-        //        while(gevondenItems.size()==0&& System.currentTimeMillis()>(current+5000)) {
-        //            gevondenItems = newArrayList(filter(naam, new Predicate<SelenideElement>() {
-        //                @Override
-        //                public boolean apply(@Nullable SelenideElement element) {
-        //                    return element.getText().equals(zoekterm);
-        //                }
-        //            }));
-        //        }
-
-
         vulZoekTerm(zoekterm, true);
 
         List<SelenideElement> gevondenItems = newArrayList(filter(naam, new Predicate<SelenideElement>() {

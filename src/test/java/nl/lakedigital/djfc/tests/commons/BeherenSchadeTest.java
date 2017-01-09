@@ -10,9 +10,14 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class BeherenSchadeTest extends AbstractPaginaTest {
-    public void testInvoerenSchades(String voornamen, Logger LOGGER) {
-        dashboard.klikNaarParticulier(LOGGER);
-        lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+    public void testInvoerenSchades(Logger LOGGER, String voornamen, String bedrijfsnaam) {
+        if (voornamen != null) {
+            dashboard.klikNaarParticulier(LOGGER);
+            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+        } else {
+            dashboard.klikNaarZakelijk(LOGGER);
+            lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(bedrijfsnaam, false), beherenBedrijf.getOpslaanBedrijf());
+        }
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.SCHADE_TOEVOEGEN, LOGGER, beherenSchade.getSchadeMeldingOpslaan());
 

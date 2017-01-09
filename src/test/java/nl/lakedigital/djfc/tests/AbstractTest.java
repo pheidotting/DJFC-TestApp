@@ -14,6 +14,7 @@ import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.testapp.domein.Kantoor;
 import nl.lakedigital.djfc.testapp.domein.Medewerker;
+import nl.lakedigital.djfc.tests.commons.BeherenBedrijfTest;
 import nl.lakedigital.djfc.tests.commons.BeherenPolisTest;
 import nl.lakedigital.djfc.tests.commons.BeherenRelatieTest;
 import nl.lakedigital.djfc.tests.commons.BeherenSchadeTest;
@@ -62,6 +63,8 @@ public abstract class AbstractTest {
     protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest();
     protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest();
     protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest();
+
+    protected BeherenBedrijfTest beherenBedrijfTest = new BeherenBedrijfTest();
 
     private String basisUrl;
     private String basisUrlRest;

@@ -34,10 +34,10 @@ public class ParticulierTest extends AbstractTest {
         beherenRelatieTest.controleerOpmerkingenBijRelatie(LOGGER, voornamen);
 
         beherenPolisTest.
-                testInvoerenNieuwePolissen(LOGGER, voornamen);
+                testInvoerenNieuwePolissen(LOGGER, voornamen, null);
 
         beherenSchadeTest.
-                testInvoerenSchades(voornamen, LOGGER);
+                testInvoerenSchades(LOGGER, voornamen, null);
         dashboard.klikNaarParticulier(LOGGER);
 
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));

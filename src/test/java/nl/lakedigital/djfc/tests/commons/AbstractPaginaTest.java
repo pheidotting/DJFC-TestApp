@@ -26,9 +26,9 @@ public abstract class AbstractPaginaTest {
     protected BeherenSchades beherenSchades;
 
     @Inject
-    protected BeherenBedrijf beherenBedrijf;
+    protected BeherenBedrijf beherenBedrijf = new BeherenBedrijf();
     @Inject
-    protected LijstBedrijven lijstBedrijven;
+    protected LijstBedrijven lijstBedrijven = new LijstBedrijven();
 
 
     private String basisUrl;

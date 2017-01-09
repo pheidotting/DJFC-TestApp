@@ -13,8 +13,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class BeherenPolisTest extends AbstractPaginaTest {
-    public void testInvoerenNieuwePolissen(Logger LOGGER, String voornamen) {
-        lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+    public void testInvoerenNieuwePolissen(Logger LOGGER, String voornamen, String bedrijfsnaam) {
+        if (voornamen != null) {
+            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+        } else {
+            dashboard.klikNaarZakelijk(LOGGER);
+            lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(bedrijfsnaam, false), beherenBedrijf.getOpslaanBedrijf());
+        }
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
 
