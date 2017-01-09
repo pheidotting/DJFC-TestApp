@@ -41,7 +41,7 @@ public class BeherenBedrijf extends AbstractPagina {
     private Lorem lorem= LoremIpsum.getInstance();
 
     public void klikOpslaan() {
-        logKlik(this.opslaanBedrijf, LOGGER);
+        logKlik(LOGGER, this.opslaanBedrijf);
         this.opslaanBedrijf.click();
     }
 
@@ -92,20 +92,20 @@ public class BeherenBedrijf extends AbstractPagina {
     }
 @TestCaseDJFC(DJFC41)
     public void adresToevoegen(){
-        adressen.voegAdresToe();
+    adressen.voegAdresToe(LOGGER);
         Adres adres = adressen.getAdressen().get(0);
-        adres.setSoortadres(Adres.SoortAdres.POSTADRES);
-        adres.setPostcode("7891TN");
-        adres.setHuisnummer("24", "7891 TN");
-        adres.checkStraatEnPlaatsnaam("Boogschutter", "KLAZIENAVEEN", "7891 TN");
+    adres.setSoortadres(LOGGER, Adres.SoortAdres.POSTADRES);
+    adres.setPostcode(LOGGER, "7891TN");
+    adres.setHuisnummer(LOGGER, "24", "7891 TN");
+    adres.checkStraatEnPlaatsnaam(LOGGER, "Boogschutter", "KLAZIENAVEEN", "7891 TN");
     }
 
 
     @TestCaseDJFC(DJFC47)
     public void voegTelefoonnummerToe() {
-        telefoonnummers.voegTelefoonnummerToe();
+        telefoonnummers.voegTelefoonnummerToe(LOGGER);
         Telefoonnummer telefoonnummer = telefoonnummers.getTelefoonnummers().get(0);
-        telefoonnummer.vulTelefoonnummer("0621564744", "06 - 21 56 47 44", "Mobiel", lorem.getWords(15));
+        telefoonnummer.vulTelefoonnummer(LOGGER, "0621564744", "06 - 21 56 47 44", "Mobiel", lorem.getWords(15));
     }
 
     @TestCaseDJFC(DJFC49)
@@ -115,57 +115,57 @@ public class BeherenBedrijf extends AbstractPagina {
 
     @TestCaseDJFC(DJFC49)
     public void voegOpmerkingToeBijRelatie(int nummer) {
-        opmerkingen.voegOpmerkingToe();
+        opmerkingen.voegOpmerkingToe(LOGGER);
         Opmerking opmerking = opmerkingen.getOpmerkingen().get(0);
         String opm = lorem.getWords(50);
-        opmerking.vulOpmerking(opm, nummer);
+        opmerking.vulOpmerking(LOGGER, opm, nummer);
 //        opmerkingen.add(opm);
     }
 
     @TestCaseDJFC(DJFC48)
-    public void voegContactpersoonToe(){
-        contactpersonen.voegContactpersoonToe();
+    public void voegContactpersoonToe(Logger LOGGER) {
+        contactpersonen.voegContactpersoonToe(LOGGER);
         Contactpersoon contactpersoon=contactpersonen.getContactpersonen().get(0);
 
-        contactpersoon.vulContactpersoon(lorem.getFirstNameFemale(),null,lorem.getLastName(),lorem.getEmail(),lorem.getWords(3));
+        contactpersoon.vulContactpersoon(LOGGER, lorem.getFirstNameFemale(), null, lorem.getLastName(), lorem.getEmail(), lorem.getWords(3));
 
-        contactpersoon.getTelefoonnummers().voegTelefoonnummerToe();
+        contactpersoon.getTelefoonnummers().voegTelefoonnummerToe(LOGGER);
         Telefoonnummer telefoonnummer=contactpersoon.getTelefoonnummers().getTelefoonnummers().get(0);
-        telefoonnummer.vulTelefoonnummer("0621564744", "06 - 21 56 47 44", "Mobiel", lorem.getWords(15));
+        telefoonnummer.vulTelefoonnummer(LOGGER, "0621564744", "06 - 21 56 47 44", "Mobiel", lorem.getWords(15));
     }
 
     public void setNaam(String naam) {
-        logInvullen(this.naam, naam, LOGGER);
+        logInvullen(LOGGER, this.naam, naam);
         this.naam.setValue(naam);
     }
 
     public void setKvk(String kvk) {
-        logInvullen(this.kvk, kvk, LOGGER);
+        logInvullen(LOGGER, this.kvk, kvk);
         this.kvk.setValue(kvk);
     }
 
     public void setRechtsvorm(String rechtsvorm) {
-        logInvullen(this.rechtsvorm, rechtsvorm, LOGGER);
+        logInvullen(LOGGER, this.rechtsvorm, rechtsvorm);
         this.rechtsvorm.setValue(rechtsvorm);
     }
 
     public void setEmail(String email) {
-        logInvullen(this.email, email, LOGGER);
+        logInvullen(LOGGER, this.email, email);
         this.email.setValue(email);
     }
 
     public void setInternetadres(String internetadres) {
-        logInvullen(this.internetadres, internetadres, LOGGER);
+        logInvullen(LOGGER, this.internetadres, internetadres);
         this.internetadres.setValue(internetadres);
     }
 
     public void setHoedanigheid(String hoedanigheid) {
-        logInvullen(this.hoedanigheid, hoedanigheid, LOGGER);
+        logInvullen(LOGGER, this.hoedanigheid, hoedanigheid);
         this.hoedanigheid.setValue(hoedanigheid);
     }
 
     public void setcAoVerplichtingen(String cAoVerplichtingen) {
-        logInvullen(this.cAoVerplichtingen, cAoVerplichtingen, LOGGER);
+        logInvullen(LOGGER, this.cAoVerplichtingen, cAoVerplichtingen);
         this.cAoVerplichtingen.setValue(cAoVerplichtingen);
     }
 

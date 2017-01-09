@@ -8,7 +8,6 @@ import org.joda.time.LocalDate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -17,8 +16,6 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class BeherenPolis extends PaginaMetMenuBalk {
-    private final static Logger LOGGER = LoggerFactory.getLogger(BeherenPolis.class);
-
     private SelenideElement verzekeringsMaatschappij;
     private SelenideElement soortVerzekering;
     private SelenideElement status;
@@ -55,25 +52,25 @@ public class BeherenPolis extends PaginaMetMenuBalk {
         opmerkingen = new Opmerkingen();
     }
 
-    public void vulVelden(String verzekeringsMaatschappij, String soortVerzekering, String status, String polisNummer, String kenmerk, String dekking, String verzekerdeZaak, String premie, LocalDate ingangsDatumString, LocalDate wijzigingsdatumString, LocalDate prolongatiedatumString, String betaalfrequentie, String omschrijvingVerzekering) {
-        this.setVerzekeringsMaatschappij(verzekeringsMaatschappij);
-        this.setSoortVerzekering(soortVerzekering);
-        this.setStatus(status);
-        this.setPolisNummer(polisNummer);
-        this.setKenmerk(kenmerk);
-        this.setDekking(dekking);
-        this.setVerzekerdeZaak(verzekerdeZaak);
-        this.setPremie(premie);
-        this.setIngangsDatumString(ingangsDatumString);
-        this.setWijzigingsdatumString(wijzigingsdatumString);
-        this.setProlongatiedatumString(prolongatiedatumString);
-        this.setBetaalfrequentie(betaalfrequentie);
-        this.setOmschrijvingVerzekering(omschrijvingVerzekering);
-        klikOpslaanPolis();
+    public void vulVelden(Logger LOGGER, String verzekeringsMaatschappij, String soortVerzekering, String status, String polisNummer, String kenmerk, String dekking, String verzekerdeZaak, String premie, LocalDate ingangsDatumString, LocalDate wijzigingsdatumString, LocalDate prolongatiedatumString, String betaalfrequentie, String omschrijvingVerzekering) {
+        this.setVerzekeringsMaatschappij(LOGGER, verzekeringsMaatschappij);
+        this.setSoortVerzekering(LOGGER, soortVerzekering);
+        this.setStatus(LOGGER, status);
+        this.setPolisNummer(LOGGER, polisNummer);
+        this.setKenmerk(LOGGER, kenmerk);
+        this.setDekking(LOGGER, dekking);
+        this.setVerzekerdeZaak(LOGGER, verzekerdeZaak);
+        this.setPremie(LOGGER, premie);
+        this.setIngangsDatumString(LOGGER, ingangsDatumString);
+        this.setWijzigingsdatumString(LOGGER, wijzigingsdatumString);
+        this.setProlongatiedatumString(LOGGER, prolongatiedatumString);
+        this.setBetaalfrequentie(LOGGER, betaalfrequentie);
+        this.setOmschrijvingVerzekering(LOGGER, omschrijvingVerzekering);
+        klikOpslaanPolis(LOGGER);
     }
 
-    public void vulVelden(JsonPolis polis) {
-        this.vulVelden(polis.getMaatschappij(), polis.getSoort(), polis.getStatus(), polis.getPolisNummer(), polis.getKenmerk(), polis.getDekking(), polis.getVerzekerdeZaak(), polis.getPremie(), new LocalDate(polis.getIngangsDatum()), new LocalDate(polis.getWijzigingsDatum()), new LocalDate(polis.getProlongatieDatum()), polis.getBetaalfrequentie(), polis.getOmschrijvingVerzekering());
+    public void vulVelden(Logger LOGGER, JsonPolis polis) {
+        this.vulVelden(LOGGER, polis.getMaatschappij(), polis.getSoort(), polis.getStatus(), polis.getPolisNummer(), polis.getKenmerk(), polis.getDekking(), polis.getVerzekerdeZaak(), polis.getPremie(), new LocalDate(polis.getIngangsDatum()), new LocalDate(polis.getWijzigingsDatum()), new LocalDate(polis.getProlongatieDatum()), polis.getBetaalfrequentie(), polis.getOmschrijvingVerzekering());
     }
 
     public List<String> getVerzekeringsMaatschappij() {
@@ -84,85 +81,85 @@ public class BeherenPolis extends PaginaMetMenuBalk {
         return optionToStringList(soortVerzekering, "Aansprakelijkheid", true);
     }
 
-    public void setVerzekeringsMaatschappij(String verzekeringsMaatschappij) {
-        this.verzekeringsMaatschappij.waitUntil(Condition.not(Condition.empty),2500);
-        logInvullen(this.verzekeringsMaatschappij, verzekeringsMaatschappij, LOGGER);
+    public void setVerzekeringsMaatschappij(Logger LOGGER, String verzekeringsMaatschappij) {
+        this.verzekeringsMaatschappij.waitUntil(Condition.not(Condition.empty), 2500);
+        logInvullen(LOGGER, this.verzekeringsMaatschappij, verzekeringsMaatschappij);
         this.verzekeringsMaatschappij.selectOption(verzekeringsMaatschappij);
     }
 
-    public void setSoortVerzekering(String soortVerzekering) {
-        logInvullen(this.soortVerzekering, soortVerzekering, LOGGER);
+    public void setSoortVerzekering(Logger LOGGER, String soortVerzekering) {
+        logInvullen(LOGGER, this.soortVerzekering, soortVerzekering);
         this.soortVerzekering.selectOption(soortVerzekering);
     }
 
-    public void setStatus(String status) {
-        logInvullen(this.status, status, LOGGER);
+    public void setStatus(Logger LOGGER, String status) {
+        logInvullen(LOGGER, this.status, status);
         this.status.selectOption(status);
     }
 
-    public void setPolisNummer(String polisNummer) {
-        logInvullen(this.polisNummer, polisNummer, LOGGER);
+    public void setPolisNummer(Logger LOGGER, String polisNummer) {
+        logInvullen(LOGGER, this.polisNummer, polisNummer);
         this.polisNummer.setValue(polisNummer);
     }
 
-    public void setKenmerk(String kenmerk) {
-        logInvullen(this.kenmerk, kenmerk, LOGGER);
+    public void setKenmerk(Logger LOGGER, String kenmerk) {
+        logInvullen(LOGGER, this.kenmerk, kenmerk);
         this.kenmerk.setValue(kenmerk);
     }
 
-    public void setDekking(String dekking) {
-        logInvullen(this.dekking, dekking, LOGGER);
+    public void setDekking(Logger LOGGER, String dekking) {
+        logInvullen(LOGGER, this.dekking, dekking);
         this.dekking.setValue(dekking);
     }
 
-    public void setVerzekerdeZaak(String verzekerdeZaak) {
-        logInvullen(this.verzekerdeZaak, verzekerdeZaak, LOGGER);
+    public void setVerzekerdeZaak(Logger LOGGER, String verzekerdeZaak) {
+        logInvullen(LOGGER, this.verzekerdeZaak, verzekerdeZaak);
         this.verzekerdeZaak.setValue(verzekerdeZaak);
     }
 
-    public void setPremie(String premie) {
-        logInvullen(this.premie, premie, LOGGER);
+    public void setPremie(Logger LOGGER, String premie) {
+        logInvullen(LOGGER, this.premie, premie);
         this.premie.setValue(premie);
     }
 
-    public void setIngangsDatumString(LocalDate ingangsDatumString) {
-        logInvullen(this.ingangsDatumString, ingangsDatumString.toString("ddMMyyyy"), LOGGER);
+    public void setIngangsDatumString(Logger LOGGER, LocalDate ingangsDatumString) {
+        logInvullen(LOGGER, this.ingangsDatumString, ingangsDatumString.toString("ddMMyyyy"));
         this.ingangsDatumString.setValue(ingangsDatumString.toString("ddMMyyyy"));
         this.ingangsDatumString.sendKeys(Keys.TAB);
-        logIsGevuldMet(this.ingangsDatumString, ingangsDatumString.toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, this.ingangsDatumString, ingangsDatumString.toString("dd-MM-yyyy"));
         assertThat(this.ingangsDatumString.getValue(), is(ingangsDatumString.toString("dd-MM-yyyy")));
-        logIsGevuldMet(this.prolongatiedatumString, ingangsDatumString.plusYears(1).toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, this.prolongatiedatumString, ingangsDatumString.plusYears(1).toString("dd-MM-yyyy"));
         assertThat(this.prolongatiedatumString.getValue(), is(ingangsDatumString.plusYears(1).toString("dd-MM-yyyy")));
     }
 
-    public void setWijzigingsdatumString(LocalDate wijzigingsdatumString) {
-        logInvullen(this.wijzigingsdatumString, wijzigingsdatumString.toString("ddMMyyyy"), LOGGER);
+    public void setWijzigingsdatumString(Logger LOGGER, LocalDate wijzigingsdatumString) {
+        logInvullen(LOGGER, this.wijzigingsdatumString, wijzigingsdatumString.toString("ddMMyyyy"));
         this.wijzigingsdatumString.setValue(wijzigingsdatumString.toString("ddMMyyyy"));
         this.wijzigingsdatumString.sendKeys(Keys.TAB);
-        logIsGevuldMet(this.wijzigingsdatumString, wijzigingsdatumString.toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, this.wijzigingsdatumString, wijzigingsdatumString.toString("dd-MM-yyyy"));
         assertThat(this.wijzigingsdatumString.getValue(), is(wijzigingsdatumString.toString("dd-MM-yyyy")));
     }
 
-    public void setProlongatiedatumString(LocalDate prolongatiedatumString) {
-        logInvullen(this.prolongatiedatumString, prolongatiedatumString.toString("ddMMyyyy"), LOGGER);
+    public void setProlongatiedatumString(Logger LOGGER, LocalDate prolongatiedatumString) {
+        logInvullen(LOGGER, this.prolongatiedatumString, prolongatiedatumString.toString("ddMMyyyy"));
         this.prolongatiedatumString.setValue(prolongatiedatumString.toString("ddMMyyyy"));
         this.prolongatiedatumString.sendKeys(Keys.TAB);
-        logIsGevuldMet(this.prolongatiedatumString, prolongatiedatumString.toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, this.prolongatiedatumString, prolongatiedatumString.toString("dd-MM-yyyy"));
         assertThat(this.prolongatiedatumString.getValue(), is(prolongatiedatumString.toString("dd-MM-yyyy")));
     }
 
-    public void setBetaalfrequentie(String betaalfrequentie) {
-        logInvullen(this.betaalfrequentie, betaalfrequentie, LOGGER);
+    public void setBetaalfrequentie(Logger LOGGER, String betaalfrequentie) {
+        logInvullen(LOGGER, this.betaalfrequentie, betaalfrequentie);
         this.betaalfrequentie.setValue(betaalfrequentie);
     }
 
-    public void setOmschrijvingVerzekering(String omschrijvingVerzekering) {
-        logInvullen(this.omschrijvingVerzekering, omschrijvingVerzekering, LOGGER);
+    public void setOmschrijvingVerzekering(Logger LOGGER, String omschrijvingVerzekering) {
+        logInvullen(LOGGER, this.omschrijvingVerzekering, omschrijvingVerzekering);
         this.omschrijvingVerzekering.setValue(omschrijvingVerzekering);
     }
 
-    public void klikOpslaanPolis() {
-        logKlik(this.opslaanPolis, LOGGER);
+    public void klikOpslaanPolis(Logger LOGGER) {
+        logKlik(LOGGER, this.opslaanPolis);
         this.opslaanPolis.click();
         this.opslaanPolis.waitUntil(Condition.disappears, 2500);
     }

@@ -2,24 +2,19 @@ package nl.lakedigital.djfc.selenide.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.WebDriverRunner;
 import com.google.common.base.Predicate;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
-import org.hamcrest.core.Is;
 import org.joda.time.LocalDate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.hamcrest.CoreMatchers.is;
@@ -27,58 +22,30 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class BeherenRelatie extends AbstractPagina {
-    private final static Logger LOGGER = LoggerFactory.getLogger(BeherenRelatie.class);
+    private SelenideElement voornaam = $(By.id("voornaam"));
+    private SelenideElement roepnaam = $(By.id("roepnaam"));
+    private SelenideElement tussenvoegsel = $(By.id("tussenvoegsel"));
+    private SelenideElement achternaam = $(By.id("achternaam"));
+    private SelenideElement bsn = $(By.id("bsn"));
+    private SelenideElement geboorteDatum = $(By.id("geboorteDatum"));
+    private SelenideElement overlijdensdatum = $(By.id("overlijdensdatum"));
+    private SelenideElement geslacht = $(By.id("geslacht"));
+    private SelenideElement burgerlijkeStaat = $(By.id("burgerlijkeStaat"));
+    private SelenideElement emailadres = $(By.id("emailadres"));
+    private SelenideElement mailtolink = $(By.id("mailtolink"));
 
-    private SelenideElement voornaam;
-    private SelenideElement roepnaam;
-    private SelenideElement tussenvoegsel;
-    private SelenideElement achternaam;
-    private SelenideElement bsn;
-    private SelenideElement geboorteDatum;
-    private SelenideElement overlijdensdatum;
-    private SelenideElement geslacht;
-    private SelenideElement burgerlijkeStaat;
-    private SelenideElement emailadres;
-    private SelenideElement mailtolink;
+    private SelenideElement opslaanRelatie = $(By.id("opslaanRelatie"));
+    private SelenideElement verwijderen = $(By.id("verwijderen"));
 
-    private SelenideElement opslaanRelatie;
-    private SelenideElement verwijderen;
+    private Adressen adressen = new Adressen();
+    private Rekeningnummers rekeningnummers = new Rekeningnummers();
+    private Telefoonnummers telefoonnummers = new Telefoonnummers(false);
+    private Opmerkingen opmerkingen = new Opmerkingen();
+    private Taken taken = new Taken();
 
-    private Adressen adressen;
-    private Rekeningnummers rekeningnummers;
-    private Telefoonnummers telefoonnummers;
-    private Opmerkingen opmerkingen;
-    private Taken taken;
-    private Bijlages bijlages
-            ;
+    private Bijlages bijlages = new Bijlages();
 
-    private Lorem lorem;
-
-    public BeherenRelatie() {
-        voornaam = $(By.id("voornaam"));
-        roepnaam = $(By.id("roepnaam"));
-        tussenvoegsel = $(By.id("tussenvoegsel"));
-        achternaam = $(By.id("achternaam"));
-        bsn = $(By.id("bsn"));
-        geboorteDatum = $(By.id("geboorteDatum"));
-        overlijdensdatum = $(By.id("overlijdensdatum"));
-        geslacht = $(By.id("geslacht"));
-        burgerlijkeStaat = $(By.id("burgerlijkeStaat"));
-        emailadres = $(By.id("emailadres"));
-        mailtolink = $(By.id("mailtolink"));
-
-        opslaanRelatie = $(By.id("opslaanRelatie"));
-        verwijderen = $(By.id("verwijderen"));
-
-
-        adressen = new Adressen();
-        rekeningnummers = new Rekeningnummers();
-        telefoonnummers = new Telefoonnummers(false);
-        opmerkingen = new Opmerkingen();
-        taken = new Taken();bijlages=new Bijlages();
-
-        lorem= LoremIpsum.getInstance();
-    }
+    private Lorem lorem = LoremIpsum.getInstance();
 
     public SelenideElement getVoornaam() {
         return voornaam;
@@ -104,130 +71,130 @@ public class BeherenRelatie extends AbstractPagina {
         return bijlages;
     }
 
-    public void setVoornaam(String voornaam) {
+    public void setVoornaam(Logger LOGGER, String voornaam) {
         if (voornaam != null) {
-            logInvullen(this.voornaam, voornaam, LOGGER);
+            logInvullen(LOGGER, this.voornaam, voornaam);
             this.voornaam.setValue(voornaam);
         }
     }
 
-    public void setRoepnaam(String roepnaam) {
+    public void setRoepnaam(Logger LOGGER, String roepnaam) {
         if (roepnaam != null) {
-            logInvullen(this.roepnaam, roepnaam, LOGGER);
+            logInvullen(LOGGER, this.roepnaam, roepnaam);
             this.roepnaam.setValue(roepnaam);
         }
     }
 
-    public void setTussenvoegsel(String tussenvoegsel) {
+    public void setTussenvoegsel(Logger LOGGER, String tussenvoegsel) {
         if (tussenvoegsel != null) {
-            logInvullen(this.tussenvoegsel, tussenvoegsel, LOGGER);
+            logInvullen(LOGGER, this.tussenvoegsel, tussenvoegsel);
             this.tussenvoegsel.setValue(tussenvoegsel);
         }
     }
 
-    public void setAchternaam(String achternaam) {
+    public void setAchternaam(Logger LOGGER, String achternaam) {
         if (achternaam != null) {
-            logInvullen(this.achternaam, achternaam, LOGGER);
+            logInvullen(LOGGER, this.achternaam, achternaam);
             this.achternaam.setValue(achternaam);
         }
     }
 
-    public void setBsn(String bsn) {
+    public void setBsn(Logger LOGGER, String bsn) {
         if (bsn != null) {
-            logInvullen(this.bsn, bsn, LOGGER);
+            logInvullen(LOGGER, this.bsn, bsn);
             this.bsn.setValue(bsn);
         }
     }
 
-    public void setGeboorteDatum(LocalDate geboorteDatum) {
+    public void setGeboorteDatum(Logger LOGGER, LocalDate geboorteDatum) {
         if (geboorteDatum != null) {
-            logInvullen(this.geboorteDatum, geboorteDatum.toString("ddMMyyyy"), LOGGER);
+            logInvullen(LOGGER, this.geboorteDatum, geboorteDatum.toString("ddMMyyyy"));
             this.geboorteDatum.setValue(geboorteDatum.toString("ddMMyyyy"));
             this.geboorteDatum.sendKeys(Keys.TAB);
-            logIsGevuldMet(this.geboorteDatum,geboorteDatum.toString("dd-MM-yyyy"),LOGGER);
+            logIsGevuldMet(LOGGER, this.geboorteDatum, geboorteDatum.toString("dd-MM-yyyy"));
             assertTrue(this.geboorteDatum.getValue().contains(geboorteDatum.toString("dd-MM-yyyy")));
         }
     }
 
-    public void setGeboorteDatum(String geboorteDatum) {
+    public void setGeboorteDatum(Logger LOGGER, String geboorteDatum) {
         if (geboorteDatum != null) {
-            logInvullen(this.geboorteDatum, geboorteDatum, LOGGER);
+            logInvullen(LOGGER, this.geboorteDatum, geboorteDatum);
             this.geboorteDatum.setValue(geboorteDatum);
         }
     }
 
-    public void setOverlijdensdatum(LocalDate overlijdensdatum) {
+    public void setOverlijdensdatum(Logger LOGGER, LocalDate overlijdensdatum) {
         if (overlijdensdatum != null) {
-            logInvullen(this.overlijdensdatum, overlijdensdatum.toString("ddMMyyyy"), LOGGER);
+            logInvullen(LOGGER, this.overlijdensdatum, overlijdensdatum.toString("ddMMyyyy"));
             this.overlijdensdatum.setValue(overlijdensdatum.toString("ddMMyyyy"));
             this.overlijdensdatum.sendKeys(Keys.TAB);
-            logIsGevuldMet(this.overlijdensdatum,overlijdensdatum.toString("dd-MM-yyyy"),LOGGER);
+            logIsGevuldMet(LOGGER, this.overlijdensdatum, overlijdensdatum.toString("dd-MM-yyyy"));
             assertTrue(this.overlijdensdatum.getValue().contains(overlijdensdatum.toString("dd-MM-yyyy")));
         }
     }
 
-    public void setGeslacht(String geslacht) {
+    public void setGeslacht(Logger LOGGER, String geslacht) {
         if (geslacht != null) {
-            logInvullen(this.geslacht, geslacht, LOGGER);
+            logInvullen(LOGGER, this.geslacht, geslacht);
             this.geslacht.selectOption(geslacht);
         }
     }
 
-    public void setBurgerlijkeStaat(String burgerlijkeStaat) {
+    public void setBurgerlijkeStaat(Logger LOGGER, String burgerlijkeStaat) {
         if (burgerlijkeStaat != null) {
-            logInvullen(this.burgerlijkeStaat, burgerlijkeStaat, LOGGER);
+            logInvullen(LOGGER, this.burgerlijkeStaat, burgerlijkeStaat);
             this.burgerlijkeStaat.selectOption(burgerlijkeStaat);
         }
     }
 
-    public void setEmailadres(String emailadres) {
+    public void setEmailadres(Logger LOGGER, String emailadres) {
         if (emailadres != null) {
-            logInvullen(this.emailadres, emailadres, LOGGER);
+            logInvullen(LOGGER, this.emailadres, emailadres);
             this.emailadres.setValue(emailadres);
             this.emailadres.sendKeys(Keys.TAB);
-            checkMailtolink(emailadres);
+            checkMailtolink(LOGGER, emailadres);
         }
     }
 
-    public void checkMailtolink(String mailtolink) {
+    public void checkMailtolink(Logger LOGGER, String mailtolink) {
         if (mailtolink != null) {
-            logIsGevuldMet(this.mailtolink, mailtolink, LOGGER);
+            logIsGevuldMet(LOGGER, this.mailtolink, mailtolink);
             assertThat(this.mailtolink.getAttribute("href"), is("mailto:" + mailtolink));
         }
     }
 
-    public void vulPagina(String voornaam, String roepnaam, String tussenvoegsel, String achternaam, String bsn, LocalDate geboorteDatum, LocalDate overlijdensdatum, String geslacht, String burgerlijkeStaat, String emailadres) {
+    public void vulPagina(Logger LOGGER, String voornaam, String roepnaam, String tussenvoegsel, String achternaam, String bsn, LocalDate geboorteDatum, LocalDate overlijdensdatum, String geslacht, String burgerlijkeStaat, String emailadres) {
         wachtFf();
-        setVoornaam(voornaam);
-        setRoepnaam(roepnaam);
-        setTussenvoegsel(tussenvoegsel);
-        setAchternaam(achternaam);
-        setBsn(bsn);
-        setGeboorteDatum(geboorteDatum);
-        setOverlijdensdatum(overlijdensdatum);
-        setGeslacht(geslacht);
-        setBurgerlijkeStaat(burgerlijkeStaat);
-        setEmailadres(emailadres);
+        setVoornaam(LOGGER, voornaam);
+        setRoepnaam(LOGGER, roepnaam);
+        setTussenvoegsel(LOGGER, tussenvoegsel);
+        setAchternaam(LOGGER, achternaam);
+        setBsn(LOGGER, bsn);
+        setGeboorteDatum(LOGGER, geboorteDatum);
+        setOverlijdensdatum(LOGGER, overlijdensdatum);
+        setGeslacht(LOGGER, geslacht);
+        setBurgerlijkeStaat(LOGGER, burgerlijkeStaat);
+        setEmailadres(LOGGER, emailadres);
     }
 
-    public void klikOpslaan(boolean wachtOpVerdwijnen) {
-        logKlik(this.opslaanRelatie, LOGGER);
+    public void klikOpslaan(Logger LOGGER, boolean wachtOpVerdwijnen) {
+        logKlik(LOGGER, this.opslaanRelatie);
         this.opslaanRelatie.click();
-        if(wachtOpVerdwijnen){
-        this.opslaanRelatie.waitUntil(Condition.disappears,2500);
-    }
+        if (wachtOpVerdwijnen) {
+            this.opslaanRelatie.waitUntil(Condition.disappears, 2500);
+        }
     }
 
-    public SelenideElement getOpslaanRelatie() {
+    public SelenideElement getOpslaanRelatie(Logger LOGGER) {
         return opslaanRelatie;
     }
 
-    public void verwijderRelatie() {
-        logKlik(this.verwijderen, LOGGER);
+    public void verwijderRelatie(Logger LOGGER) {
+        logKlik(LOGGER, this.verwijderen);
         this.verwijderen.click();
     }
 
-    public List<SelenideElement> zoekFoutmeldingOpTekst(String tekst) {
+    public List<SelenideElement> zoekFoutmeldingOpTekst(Logger LOGGER, String tekst) {
         return newArrayList(filter(getValidationMessages(), new Predicate<SelenideElement>() {
             @Override
             public boolean apply(@Nullable SelenideElement element) {
@@ -236,40 +203,9 @@ public class BeherenRelatie extends AbstractPagina {
         }));
     }
 
-    public void testTakenNietZichtbaar() {
+    public void testTakenNietZichtbaar(Logger LOGGER) {
         taken.checkNietAanwezig();
     }
 
-    public void voegBijlageToeBijRelatie(String voornamen, LijstRelaties lijstRelaties, Dashboard dashboard) {
-        if (WebDriverRunner.getAndCheckWebDriver() instanceof PhantomJSDriver) {
-            lijstRelaties.selecteer(lijstRelaties.zoekGebruiker(voornamen, false), null);
 
-            getBijlages().uploadFile(Bijlages.UploadBestand.EEN_PDF);
-
-            klikHomeKnop(LOGGER);
-            dashboard.klikNaarParticulier();
-
-            //Controleren
-            lijstRelaties.selecteer(lijstRelaties.zoekGebruiker(voornamen, false), null);
-
-            logIsGevuldMet(getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam(),"1.pdf",LOGGER);
-            assertThat(getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam().getText(), Is.is("1.pdf"));
-
-            logKlik(getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam(), LOGGER);
-            getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam().click();
-            wachtFf();
-            String nwOmschrijving = lorem.getWords(1,10);
-            logInvullen(getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaamEdit(),nwOmschrijving,LOGGER);
-            getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaamEdit().setValue(nwOmschrijving);
-            logKlik(getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam(),LOGGER);
-            getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam().click();
-            getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam().waitUntil(Condition.disappears,2500);
-
-            logIsGevuldMet(getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam(),nwOmschrijving,LOGGER);
-            assertThat(getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam().getText(), Is.is(nwOmschrijving));
-
-            klikHomeKnop(LOGGER);
-            dashboard.klikNaarParticulier();
-        }
-    }
 }

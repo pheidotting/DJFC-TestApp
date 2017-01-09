@@ -13,13 +13,18 @@ public class InlogschermTest extends AbstractTest {
 
     @Test
     public void testHetInlogscherm() {
-        loginPagina.testOngeldigeLogin();
-        loginPagina.testOngeldigWachtwoord("djfc.bene");
-        loginPagina.inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
+        loginPagina.testOngeldigeLogin(LOGGER);
+        loginPagina.testOngeldigWachtwoord(LOGGER, "djfc.bene");
+        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarParticulier());
 
-        dashboard.wachtUitloggenAanwezig();
-        dashboard.klikUitloggen();
+        dashboard.wachtUitloggenAanwezig(LOGGER);
+        dashboard.klikUitloggen(LOGGER);
 
-        loginPagina.isInlogButtonAanwezig();
+        loginPagina.isInlogButtonAanwezig(LOGGER);
+    }
+
+    @Override
+    public void inloggen() {
+        //hoeft hier niet, omdat het inloggen juist datgene is wat hier getest wordt.
     }
 }

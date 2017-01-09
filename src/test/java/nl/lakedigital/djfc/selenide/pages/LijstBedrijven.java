@@ -42,18 +42,18 @@ public class LijstBedrijven extends AbstractPagina {
 
     public void isZoekTermAanwezig() {
         zoekTerm.waitUntil(Condition.appears, 2500);
-        logIsAanwezig(zoekTerm, LOGGER);
+        logIsAanwezig(LOGGER, zoekTerm);
         assertTrue(zoekTerm.isDisplayed());
     }
 
     public void vulZoekTerm(String zoekTerm, boolean enter) {
-        logInvullen(this.zoekTerm, zoekTerm, LOGGER);
+        logInvullen(LOGGER, this.zoekTerm, zoekTerm);
         this.zoekTerm.setValue(zoekTerm);
         if (enter) {
-            logKlik(this.zoekTerm, LOGGER);
+            logKlik(LOGGER, this.zoekTerm);
             this.zoekTerm.sendKeys(Keys.ENTER);
         } else {
-            logKlik(this.zoeken, LOGGER);
+            logKlik(LOGGER, this.zoeken);
             this.zoeken.click();
         }
         this.gezochtMetTonen.waitUntil(Condition.appears, 1500);
@@ -61,7 +61,7 @@ public class LijstBedrijven extends AbstractPagina {
     }
 
     public void klikToevoegenNieuwBedrijf() {
-        logKlik(toevoegenNieuwBedrijf, LOGGER);
+        logKlik(LOGGER, toevoegenNieuwBedrijf);
         toevoegenNieuwBedrijf.click();
     }
 
@@ -103,7 +103,7 @@ public class LijstBedrijven extends AbstractPagina {
     }
 
     public void selecteer(SelenideElement regel, SelenideElement teVerschijnenElement) {
-        logKlik(regel, LOGGER);
+        logKlik(LOGGER, regel);
         regel.click();
         this.gezochtMetTonen.waitUntil(Condition.disappears, 2500);
         if(teVerschijnenElement!=null) {

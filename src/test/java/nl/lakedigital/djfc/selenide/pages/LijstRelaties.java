@@ -7,7 +7,6 @@ import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -19,8 +18,6 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertTrue;
 
 public class LijstRelaties extends AbstractPagina {
-    private final static Logger LOGGER = LoggerFactory.getLogger(LijstRelaties.class);
-
     private SelenideElement zoekTerm;
     private SelenideElement zoeken;
     private SelenideElement toevoegenNieuweRelatie;
@@ -39,33 +36,33 @@ public class LijstRelaties extends AbstractPagina {
         voornaam = $$(By.name("voornaam"));
     }
 
-    public void isZoekTermAanwezig() {
+    public void isZoekTermAanwezig(Logger LOGGER) {
         zoekTerm.waitUntil(Condition.appears, 2500);
-        logIsAanwezig(zoekTerm, LOGGER);
+        logIsAanwezig(LOGGER, zoekTerm);
         assertTrue(zoekTerm.isDisplayed());
     }
 
-    public void vulZoekTerm(String zoekTerm, boolean enter) {
-        logInvullen(this.zoekTerm, zoekTerm, LOGGER);
+    public void vulZoekTerm(Logger LOGGER, String zoekTerm, boolean enter) {
+        logInvullen(LOGGER, this.zoekTerm, zoekTerm);
         this.zoekTerm.setValue(zoekTerm);
         if (enter) {
-            logKlik(this.zoekTerm, LOGGER);
+            logKlik(LOGGER, this.zoekTerm);
             this.zoekTerm.sendKeys(Keys.ENTER);
         } else {
-            logKlik(this.zoeken, LOGGER);
+            logKlik(LOGGER, this.zoeken);
             this.zoeken.click();
         }
         this.gezochtMetTonen.waitUntil(Condition.appears, 5000);
         wachtFf();
     }
 
-    public void klikToevoegenNieuweRelatie() {
-        logKlik(toevoegenNieuweRelatie, LOGGER);
+    public void klikToevoegenNieuweRelatie(Logger LOGGER) {
+        logKlik(LOGGER, toevoegenNieuweRelatie);
         toevoegenNieuweRelatie.click();
     }
 
-    public SelenideElement zoekGebruiker(String zoekterm, boolean recursief) {
-        vulZoekTerm(zoekterm, true);
+    public SelenideElement zoekGebruiker(Logger LOGGER, String zoekterm, boolean recursief) {
+        vulZoekTerm(LOGGER, zoekterm, true);
 
         List<SelenideElement> gevondenItems = newArrayList(filter(voornaam, new Predicate<SelenideElement>() {
             @Override
@@ -81,13 +78,13 @@ public class LijstRelaties extends AbstractPagina {
                 return null;
             } else {
                 wachtFf();
-                return zoekGebruiker(zoekterm, true);
+                return zoekGebruiker(LOGGER, zoekterm, true);
             }
         }
     }
 
-    public void selecteer(SelenideElement regel, SelenideElement teVerschijnenElement) {
-        logKlik(regel, LOGGER);
+    public void selecteer(Logger LOGGER, SelenideElement regel, SelenideElement teVerschijnenElement) {
+        logKlik(LOGGER, regel);
         regel.click();
         this.gezochtMetTonen.waitUntil(Condition.disappears, 2500);
         if(teVerschijnenElement!=null) {

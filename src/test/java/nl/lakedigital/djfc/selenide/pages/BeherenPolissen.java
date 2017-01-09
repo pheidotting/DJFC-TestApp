@@ -66,43 +66,43 @@ public class BeherenPolissen extends AbstractPagina {
     }
 
     public void controleerPolis(int nummer, JsonPolis teControlerenPolis, Logger LOGGER) {
-        logIsGevuldMet(tableRowPolisNummer.get(nummer), teControlerenPolis.getPolisNummer(), LOGGER);
+        logIsGevuldMet(LOGGER, tableRowPolisNummer.get(nummer), teControlerenPolis.getPolisNummer());
         assertThat(tableRowPolisNummer.get(nummer).getText(), is(teControlerenPolis.getPolisNummer()));
-        logIsGevuldMet(tableRowMaatschappij.get(nummer), teControlerenPolis.getMaatschappij(), LOGGER);
+        logIsGevuldMet(LOGGER, tableRowMaatschappij.get(nummer), teControlerenPolis.getMaatschappij());
         assertThat(tableRowMaatschappij.get(nummer).getText(), is(teControlerenPolis.getMaatschappij()));
-        logIsGevuldMet(tableRowStatus.get(nummer), teControlerenPolis.getStatus(), LOGGER);
+        logIsGevuldMet(LOGGER, tableRowStatus.get(nummer), teControlerenPolis.getStatus());
         assertThat(tableRowStatus.get(nummer).getText(), is(teControlerenPolis.getStatus()));
-        logIsGevuldMet(tableRowVerzekerdeZaak.get(nummer), teControlerenPolis.getVerzekerdeZaak(), LOGGER);
+        logIsGevuldMet(LOGGER, tableRowVerzekerdeZaak.get(nummer), teControlerenPolis.getVerzekerdeZaak());
         assertThat(tableRowVerzekerdeZaak.get(nummer).getText(), is(teControlerenPolis.getVerzekerdeZaak()));
 
         assertThat(status.get(nummer).isDisplayed(), is(false));
 
-        logKlik(titel.get(nummer), LOGGER);
+        logKlik(LOGGER, titel.get(nummer));
         titel.get(nummer).click();
 
         status.get(nummer).waitUntil(Condition.appears, 2500);
 
-        logIsGevuldMet(status.get(nummer), teControlerenPolis.getStatus(), LOGGER);
+        logIsGevuldMet(LOGGER, status.get(nummer), teControlerenPolis.getStatus());
         assertThat(status.get(nummer).getText(), is(teControlerenPolis.getStatus()));
-        logIsGevuldMet(polisNummer.get(nummer), teControlerenPolis.getPolisNummer(), LOGGER);
+        logIsGevuldMet(LOGGER, polisNummer.get(nummer), teControlerenPolis.getPolisNummer());
         assertThat(polisNummer.get(nummer).getText(), is(teControlerenPolis.getPolisNummer()));
-        logIsGevuldMet(kenmerk.get(nummer), teControlerenPolis.getKenmerk(), LOGGER);
+        logIsGevuldMet(LOGGER, kenmerk.get(nummer), teControlerenPolis.getKenmerk());
         assertThat(kenmerk.get(nummer).getText(), is(teControlerenPolis.getKenmerk()));
-        logIsGevuldMet(ingangsDatum.get(nummer), new LocalDate(teControlerenPolis.getIngangsDatum()).toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, ingangsDatum.get(nummer), new LocalDate(teControlerenPolis.getIngangsDatum()).toString("dd-MM-yyyy"));
         assertThat(ingangsDatum.get(nummer).getText(), is(new LocalDate(teControlerenPolis.getIngangsDatum()).toString("dd-MM-yyyy")));
         //        assertThat(eindDatum.get(nummer))
         //        assertThat(eindDatum.get(nummer).getText(), is(new LocalDate(teControlerenPolis.getEindDatum()).toString("dd-MM-yyyy")));
-        logIsGevuldMet(wijzigingsDatum.get(nummer), new LocalDate(teControlerenPolis.getWijzigingsDatum()).toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, wijzigingsDatum.get(nummer), new LocalDate(teControlerenPolis.getWijzigingsDatum()).toString("dd-MM-yyyy"));
         assertThat(wijzigingsDatum.get(nummer).getText(), is(new LocalDate(teControlerenPolis.getWijzigingsDatum()).toString("dd-MM-yyyy")));
-        logIsGevuldMet(prolongatieDatum.get(nummer), new LocalDate(teControlerenPolis.getProlongatieDatum()).toString("dd-MM-yyyy"), LOGGER);
+        logIsGevuldMet(LOGGER, prolongatieDatum.get(nummer), new LocalDate(teControlerenPolis.getProlongatieDatum()).toString("dd-MM-yyyy"));
         assertThat(prolongatieDatum.get(nummer).getText(), is(new LocalDate(teControlerenPolis.getProlongatieDatum()).toString("dd-MM-yyyy")));
-        logIsGevuldMet(maatschappij.get(nummer), teControlerenPolis.getMaatschappij(), LOGGER);
+        logIsGevuldMet(LOGGER, maatschappij.get(nummer), teControlerenPolis.getMaatschappij());
         assertThat(maatschappij.get(nummer).getText(), is(teControlerenPolis.getMaatschappij()));
-        logIsGevuldMet(premie.get(nummer), "€ " + teControlerenPolis.getPremie() + ",00", LOGGER);
+        logIsGevuldMet(LOGGER, premie.get(nummer), "€ " + teControlerenPolis.getPremie() + ",00");
         assertThat(premie.get(nummer).getText(), is("€ " + teControlerenPolis.getPremie() + ",00"));
-        logIsGevuldMet(betaalfrequentie.get(nummer), teControlerenPolis.getBetaalfrequentie(), LOGGER);
+        logIsGevuldMet(LOGGER, betaalfrequentie.get(nummer), teControlerenPolis.getBetaalfrequentie());
         assertThat(betaalfrequentie.get(nummer).getText(), is(teControlerenPolis.getBetaalfrequentie()));
-        logIsGevuldMet(omschrijvingVerzekering.get(nummer), teControlerenPolis.getOmschrijvingVerzekering(), LOGGER);
+        logIsGevuldMet(LOGGER, omschrijvingVerzekering.get(nummer), teControlerenPolis.getOmschrijvingVerzekering());
         assertThat(omschrijvingVerzekering.get(nummer).getText(), is(teControlerenPolis.getOmschrijvingVerzekering()));
 
         titel.get(nummer).click();

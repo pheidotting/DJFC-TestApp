@@ -30,10 +30,7 @@ public class ZakelijkTest extends AbstractTest {
 
     @Test
     public void voeruitTestZakelijk() {
-
-        loginPagina.inloggen("djfc.bene", "bene", dashboard.getNaarParticulier());
-
-        dashboard.klikNaarZakelijk();
+        dashboard.klikNaarZakelijk(LOGGER);
 
         naam = beginHoofdletters(lorem.getWords(2));
 
@@ -47,7 +44,7 @@ public class ZakelijkTest extends AbstractTest {
         beherenBedrijf.adresToevoegen();
         beherenBedrijf.voegTelefoonnummerToe();
         beherenBedrijf.voegOpmerkingToeBijRelatie();
-        beherenBedrijf.voegContactpersoonToe();
+        beherenBedrijf.voegContactpersoonToe(LOGGER);
         beherenBedrijf.klikOpslaan();
 
         lijstBedrijven.zoekEnSelecteer(naam, beherenBedrijf.getOpslaanBedrijf());
@@ -58,7 +55,7 @@ public class ZakelijkTest extends AbstractTest {
     }
 
     private void testInvoerenSchades() {
-        dashboard.klikNaarZakelijk();
+        dashboard.klikNaarZakelijk(LOGGER);
         lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam, false), beherenBedrijf.getOpslaanBedrijf());
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.SCHADE_TOEVOEGEN, LOGGER, beherenSchade.getSchadeMeldingOpslaan());
@@ -73,14 +70,14 @@ public class ZakelijkTest extends AbstractTest {
 
                 String schadeNummerMij = getStringOnMillis();
                 String schadeNummerTP = getStringOnMillis();
-                beherenSchade.vulAlleVelden(polis, schadeNummerMij, schadeNummerTP, beginHoofdletters(lorem.getWords(2)), "straat", status, LocalDateTime.now(), LocalDateTime.now(), LocalDate.now(), "100", lorem.getWords(20));
+                beherenSchade.vulAlleVelden(LOGGER, polis, schadeNummerMij, schadeNummerTP, beginHoofdletters(lorem.getWords(2)), "straat", status, LocalDateTime.now(), LocalDateTime.now(), LocalDate.now(), "100", lorem.getWords(20));
             }
         }
         beherenSchades.klikHomeKnop(LOGGER);
     }
 
     private void testInvoerenNieuwePolissen() {
-        dashboard.klikNaarZakelijk();
+        dashboard.klikNaarZakelijk(LOGGER);
         lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(naam, false), beherenBedrijf.getOpslaanBedrijf());
 
         beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.POLIS_TOEVOEGEN, LOGGER, beherenPolis.getOpslaanPolis());
@@ -130,7 +127,7 @@ public class ZakelijkTest extends AbstractTest {
             JsonPolis polis = maakPolis(maatschappij, soortVerzekering, "Actief", polisnummer + "", kenmerk, beginHoofdletters(lorem.getWords(1)), beginHoofdletters(lorem.getWords(1)), "123", LocalDate.now(), LocalDate.now(), LocalDate.now(), "Kwartaal", "omschrijving");
 
             aanwezigePolissen.add(polis);
-            beherenPolis.vulVelden(polis);
+            beherenPolis.vulVelden(LOGGER, polis);
 
             beherenPolissen.getTitel().get(0).waitUntil(Condition.appears, 2000);
 
@@ -155,5 +152,11 @@ public class ZakelijkTest extends AbstractTest {
             assertThat(gecontroleerd.size(), is(aanwezigePolissen.size()));
         }
         beherenPolissen.klikHomeKnop(LOGGER);
+    }
+
+    @Override
+    public void inloggen() {
+        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarZakelijk());
+        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
     }
 }

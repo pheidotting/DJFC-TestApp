@@ -5,15 +5,12 @@ import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class Adres extends AbstractPagina {
-    private final static Logger LOGGER = LoggerFactory.getLogger(Adres.class);
-
     public enum SoortAdres {
         WOONADRES, POSTADRES, RISICOADRES, FACTUURADRES;
     }
@@ -36,30 +33,30 @@ public class Adres extends AbstractPagina {
         plaats = $(By.name("plaats"));
     }
 
-    public void setSoortadres(SoortAdres soortadres) {
-        logInvullen(this.soortadres, soortadres.name(), LOGGER);
+    public void setSoortadres(Logger LOGGER, SoortAdres soortadres) {
+        logInvullen(LOGGER, this.soortadres, soortadres.name());
         this.soortadres.setValue(soortadres.name());
     }
 
-    public void setPostcode(String postcodeKort) {
-        logInvullen(this.postcode, postcodeKort, LOGGER);
+    public void setPostcode(Logger LOGGER, String postcodeKort) {
+        logInvullen(LOGGER, this.postcode, postcodeKort);
         this.postcode.setValue(postcodeKort);
         this.postcode.sendKeys(Keys.TAB);
     }
 
-    public void setHuisnummer(String huisnummer, String postcodeLang) {
-        logInvullen(this.huisnummer, huisnummer, LOGGER);
+    public void setHuisnummer(Logger LOGGER, String huisnummer, String postcodeLang) {
+        logInvullen(LOGGER, this.huisnummer, huisnummer);
         this.huisnummer.setValue(huisnummer);
         this.huisnummer.sendKeys(Keys.TAB);
         this.postcode.waitUntil(Condition.value(postcodeLang), 3000);
     }
 
-    public void checkStraatEnPlaatsnaam(String straat, String plaatsnaam, String postcodeLang) {
-        logIsGevuldMet(this.postcode, postcodeLang, LOGGER);
+    public void checkStraatEnPlaatsnaam(Logger LOGGER, String straat, String plaatsnaam, String postcodeLang) {
+        logIsGevuldMet(LOGGER, this.postcode, postcodeLang);
         assertThat(this.postcode.getValue(), is(postcodeLang));
-        logIsGevuldMet(this.straat, straat, LOGGER);
+        logIsGevuldMet(LOGGER, this.straat, straat);
         assertThat(this.straat.getValue(), is(straat));
-        logIsGevuldMet(this.plaats, plaatsnaam, LOGGER);
+        logIsGevuldMet(LOGGER, this.plaats, plaatsnaam);
         assertThat(this.plaats.getValue(), is(plaatsnaam));
     }
 

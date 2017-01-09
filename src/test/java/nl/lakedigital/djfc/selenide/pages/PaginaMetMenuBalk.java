@@ -5,7 +5,6 @@ import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Selenide.$;
 import static org.hamcrest.core.Is.is;
@@ -13,8 +12,6 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public abstract class PaginaMetMenuBalk extends AbstractPagina {
-    private final static Logger LOGGER = LoggerFactory.getLogger(PaginaMetMenuBalk.class);
-
     private SelenideElement ingelogdeGebruiker;
     private SelenideElement uitloggen;
 
@@ -23,21 +20,21 @@ public abstract class PaginaMetMenuBalk extends AbstractPagina {
         uitloggen = $(By.id("uitloggen"));
     }
 
-    public void testIngelogdeGebruiker(String gebruiker, String kantoor) {
+    public void testIngelogdeGebruiker(Logger LOGGER, String gebruiker, String kantoor) {
         ingelogdeGebruiker.waitUntil(Condition.appears, 2500);
         String verwachteTekst = "Ingelogd als : " + gebruiker + ", (" + kantoor + ")";
-        logIsGevuldMet(ingelogdeGebruiker, verwachteTekst, LOGGER);
+        logIsGevuldMet(LOGGER, ingelogdeGebruiker, verwachteTekst);
         assertThat(ingelogdeGebruiker.getText(), is(verwachteTekst));
         assertTrue(uitloggen.isDisplayed());
     }
 
-    public void wachtUitloggenAanwezig() {
-        logIsAanwezig(uitloggen, LOGGER);
+    public void wachtUitloggenAanwezig(Logger LOGGER) {
+        logIsAanwezig(LOGGER, uitloggen);
         uitloggen.waitUntil(Condition.appears, 2500);
     }
 
-    public void klikUitloggen() {
-        logKlik(uitloggen, LOGGER);
+    public void klikUitloggen(Logger LOGGER) {
+        logKlik(LOGGER, uitloggen);
         uitloggen.click();
     }
 }

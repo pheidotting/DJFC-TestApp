@@ -57,7 +57,7 @@ public abstract class AbstractPagina {
     }
 
     public void klikHomeKnop(Logger LOGGER) {
-        logKlik(homeKnop, LOGGER);
+        logKlik(LOGGER,homeKnop);
         homeKnop.click();
     }
 
@@ -67,16 +67,16 @@ public abstract class AbstractPagina {
 
     public void klikMenuItem(MenuItem menuItem, Logger LOGGER, SelenideElement wachtTotDitElementZichtbaarIs) {
         if (menuItem == MenuItem.BEHEREN_RELATIE) {
-            logKlik(beherenRelatie, LOGGER);
+            logKlik(LOGGER,beherenRelatie);
             beherenRelatie.click();
         } else if (menuItem == MenuItem.POLISSEN) {
-            klikMenuItem(menuPolissenTop, polissen, LOGGER);
+            klikMenuItem(LOGGER,menuPolissenTop, polissen);
         } else if (menuItem == MenuItem.POLIS_TOEVOEGEN) {
-            klikMenuItem(menuPolissenTop, polis, LOGGER);
+            klikMenuItem(LOGGER,menuPolissenTop, polis);
         } else if (menuItem == MenuItem.SCHADES) {
-            klikMenuItem(menuSchadesTop, schades, LOGGER);
+            klikMenuItem(LOGGER,menuSchadesTop, schades);
         } else if (menuItem == MenuItem.SCHADE_TOEVOEGEN) {
-            klikMenuItem(menuSchadesTop, schade, LOGGER);
+            klikMenuItem(LOGGER,menuSchadesTop, schade);
         }
 
         if (wachtTotDitElementZichtbaarIs != null) {
@@ -90,23 +90,23 @@ public abstract class AbstractPagina {
 //        }
     }
 
-    private void klikMenuItem(SelenideElement menuElement, SelenideElement element, Logger LOGGER) {
-        logKlik(menuElement, LOGGER);
+    private void klikMenuItem(Logger LOGGER,SelenideElement menuElement, SelenideElement element) {
+        logKlik(LOGGER,menuElement);
         menuElement.click();
         element.waitUntil(Condition.appears, 2000);
 
-        logKlik(element, LOGGER);
+        logKlik(LOGGER,element);
         element.click();
         element.waitUntil(Condition.disappears, 2000);
     }
 
-    protected void logInvullen(SelenideElement element, String waarde, Logger LOGGER) {
+    public void logInvullen(Logger LOGGER,SelenideElement element, String waarde) {
         logJavascript(LOGGER);
         LOGGER.debug("invullen {} met : {}", element.getAttribute("id"), waarde);
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    protected void logKlik(SelenideElement element, Logger LOGGER) {
+    public void logKlik(Logger LOGGER,SelenideElement element) {
         logJavascript(LOGGER);
         try {
             LOGGER.debug("Klik {}", element.getAttribute("id"));
@@ -115,19 +115,19 @@ public abstract class AbstractPagina {
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    protected void logIsAanwezig(SelenideElement element, Logger LOGGER) {
+    public void logIsAanwezig(Logger LOGGER,SelenideElement element) {
         logJavascript(LOGGER);
         LOGGER.debug("Is {} aanwezig?", element.getAttribute("id"));
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    protected void logIsNietAanwezig(SelenideElement element, Logger LOGGER) {
+    public void logIsNietAanwezig(Logger LOGGER,SelenideElement element) {
         logJavascript(LOGGER);
         LOGGER.debug("Is niet aanwezig?");
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    protected void logIsGevuldMet(SelenideElement element, String verwachteWaarde, Logger LOGGER) {
+    public void logIsGevuldMet(Logger LOGGER,SelenideElement element, String verwachteWaarde) {
         logJavascript(LOGGER);
         LOGGER.debug("Is {} gevuld met {}?", element.getAttribute("id"), verwachteWaarde);
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));

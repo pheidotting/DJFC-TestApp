@@ -4,13 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static com.codeborne.selenide.Selenide.$;
 
 public class Dashboard extends PaginaMetMenuBalk {
-    private final static Logger LOGGER = LoggerFactory.getLogger(Dashboard.class);
-
     private SelenideElement naarParticulier;
     private SelenideElement naarZakelijk;
 
@@ -29,15 +26,15 @@ public class Dashboard extends PaginaMetMenuBalk {
         return naarZakelijk;
     }
 
-    public void klikNaarParticulier() {
+    public void klikNaarParticulier(Logger LOGGER) {
         this.naarParticulier.waitUntil(Condition.appears, 2500);
-        logKlik(this.naarParticulier, LOGGER);
+        logKlik(LOGGER, this.naarParticulier);
         naarParticulier.click();
     }
 
-    public void klikNaarZakelijk() {
+    public void klikNaarZakelijk(Logger LOGGER) {
         this.naarZakelijk.waitUntil(Condition.appears, 2500);
-        logKlik(this.naarZakelijk, LOGGER);
+        logKlik(LOGGER, this.naarZakelijk);
         naarZakelijk.click();
     }
 }
