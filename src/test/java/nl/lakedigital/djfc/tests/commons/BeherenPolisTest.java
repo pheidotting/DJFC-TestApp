@@ -2,6 +2,8 @@ package nl.lakedigital.djfc.tests.commons;
 
 import com.codeborne.selenide.Condition;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
+import nl.lakedigital.djfc.selenide.pages.BeherenBedrijf;
+import nl.lakedigital.djfc.selenide.pages.LijstBedrijven;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -13,6 +15,10 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 public class BeherenPolisTest extends AbstractPaginaTest {
+    public BeherenPolisTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
+        super(beherenBedrijf, lijstBedrijven);
+    }
+
     public void testInvoerenNieuwePolissen(Logger LOGGER, String voornamen, String bedrijfsnaam) {
         if (voornamen != null) {
             lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));

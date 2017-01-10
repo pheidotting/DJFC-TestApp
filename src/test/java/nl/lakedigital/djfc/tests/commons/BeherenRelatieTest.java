@@ -7,7 +7,9 @@ import com.google.common.base.Predicate;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 import nl.lakedigital.djfc.TestCase;
+import nl.lakedigital.djfc.selenide.pages.BeherenBedrijf;
 import nl.lakedigital.djfc.selenide.pages.Dashboard;
+import nl.lakedigital.djfc.selenide.pages.LijstBedrijven;
 import nl.lakedigital.djfc.selenide.pages.LijstRelaties;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
 import org.hamcrest.core.Is;
@@ -26,6 +28,10 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class BeherenRelatieTest extends AbstractPaginaTest {
+    public BeherenRelatieTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
+        super(beherenBedrijf, lijstBedrijven);
+    }
+
     private Lorem lorem = LoremIpsum.getInstance();
 
     public void voegBijlageToeBijRelatie(Logger LOGGER, String voornamen, LijstRelaties lijstRelaties, Dashboard dashboard) {

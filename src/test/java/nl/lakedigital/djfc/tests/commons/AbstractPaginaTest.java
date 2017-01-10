@@ -9,7 +9,6 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,11 +24,8 @@ public abstract class AbstractPaginaTest {
     protected BeherenSchade beherenSchade;
     protected BeherenSchades beherenSchades;
 
-    @Inject
-    protected BeherenBedrijf beherenBedrijf = new BeherenBedrijf();
-    @Inject
-    protected LijstBedrijven lijstBedrijven = new LijstBedrijven();
-
+    protected BeherenBedrijf beherenBedrijf;
+    protected LijstBedrijven lijstBedrijven;
 
     private String basisUrl;
     private String basisUrlRest;
@@ -39,7 +35,16 @@ public abstract class AbstractPaginaTest {
 
     protected boolean opServer = false;
 
-    public AbstractPaginaTest() {
+    public AbstractPaginaTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
+        this.beherenBedrijf = beherenBedrijf;
+        this.lijstBedrijven = lijstBedrijven;
+
+        if (this.beherenBedrijf == null) {
+            this.beherenBedrijf = new BeherenBedrijf();
+        }
+        if (this.lijstBedrijven == null) {
+            this.lijstBedrijven = new LijstBedrijven();
+        }
 
         loginPagina = new LoginPagina();
         dashboard = new Dashboard();

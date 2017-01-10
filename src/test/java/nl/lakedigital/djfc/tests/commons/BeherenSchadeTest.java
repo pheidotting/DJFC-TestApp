@@ -1,5 +1,7 @@
 package nl.lakedigital.djfc.tests.commons;
 
+import nl.lakedigital.djfc.selenide.pages.BeherenBedrijf;
+import nl.lakedigital.djfc.selenide.pages.LijstBedrijven;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -10,6 +12,10 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 public class BeherenSchadeTest extends AbstractPaginaTest {
+    public BeherenSchadeTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
+        super(beherenBedrijf, lijstBedrijven);
+    }
+
     public void testInvoerenSchades(Logger LOGGER, String voornamen, String bedrijfsnaam) {
         if (voornamen != null) {
             dashboard.klikNaarParticulier(LOGGER);

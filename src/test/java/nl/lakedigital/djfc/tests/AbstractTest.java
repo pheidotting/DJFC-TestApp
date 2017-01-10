@@ -10,7 +10,6 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
-import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.testapp.domein.Kantoor;
 import nl.lakedigital.djfc.testapp.domein.Medewerker;
@@ -18,7 +17,6 @@ import nl.lakedigital.djfc.tests.commons.BeherenBedrijfTest;
 import nl.lakedigital.djfc.tests.commons.BeherenPolisTest;
 import nl.lakedigital.djfc.tests.commons.BeherenRelatieTest;
 import nl.lakedigital.djfc.tests.commons.BeherenSchadeTest;
-import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -60,11 +58,10 @@ public abstract class AbstractTest {
     @Inject
     protected LijstBedrijven lijstBedrijven;
 
-    protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest();
-    protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest();
-    protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest();
-
-    protected BeherenBedrijfTest beherenBedrijfTest = new BeherenBedrijfTest();
+    protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest(beherenBedrijf, lijstBedrijven);
+    protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest(beherenBedrijf, lijstBedrijven);
+    protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest(beherenBedrijf, lijstBedrijven);
+    protected BeherenBedrijfTest beherenBedrijfTest;// = new BeherenBedrijfTest(beherenBedrijf,lijstBedrijven);
 
     private String basisUrl;
     private String basisUrlRest;
@@ -87,6 +84,9 @@ public abstract class AbstractTest {
         beherenSchades = new BeherenSchades();
         lorem = LoremIpsum.getInstance();
         opmerkingen = new ArrayList<>();
+
+        beherenBedrijfTest = new BeherenBedrijfTest(beherenBedrijf, lijstBedrijven);
+
     }
 
     public abstract void inloggen();
@@ -102,7 +102,7 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //                        WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                                WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
@@ -122,7 +122,7 @@ public abstract class AbstractTest {
         toggles.put(telefonieToggle, toggleTelefonieWas);
         screenshotAlsTestFaalt.setAbstractTest(this);
         screenshotAlsTestFaalt.setToggles(toggles);
-        setFeatureToggle(todoistToggle, true);
+        setFeatureToggle(todoistToggle, false);
         setFeatureToggle(telefonieToggle, true);
 
         medewerker = new Medewerker();
@@ -206,25 +206,6 @@ public abstract class AbstractTest {
         }
 
         return s;
-    }
-    protected JsonPolis maakPolis(String verzekeringsMaatschappij, String soortVerzekering, String status, String polisNummer, String kenmerk, String dekking, String verzekerdeZaak, String premie, LocalDate ingangsDatumString, LocalDate wijzigingsdatumString, LocalDate prolongatiedatumString, String betaalfrequentie, String omschrijvingVerzekering) {
-        JsonPolis polis = new JsonPolis();
-
-        polis.setMaatschappij(verzekeringsMaatschappij);
-        polis.setSoort(soortVerzekering);
-        polis.setStatus(status);
-        polis.setPolisNummer(polisNummer);
-        polis.setKenmerk(kenmerk);
-        polis.setDekking(dekking);
-        polis.setVerzekerdeZaak(verzekerdeZaak);
-        polis.setPremie(premie);
-        polis.setIngangsDatum(ingangsDatumString.toString("yyyy-MM-dd"));
-        polis.setWijzigingsDatum(wijzigingsdatumString.toString("yyyy-MM-dd"));
-        polis.setProlongatieDatum(prolongatiedatumString.toString("yyyy-MM-dd"));
-        polis.setBetaalfrequentie(betaalfrequentie);
-        polis.setOmschrijvingVerzekering(omschrijvingVerzekering);
-
-        return polis;
     }
 
     protected String beginHoofdletters(String tekst) {
