@@ -2,7 +2,10 @@ package nl.lakedigital.djfc.tests.commons;
 
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
+import nl.lakedigital.djfc.commons.json.JsonAdres;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
+import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
+import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.testapp.domein.Medewerker;
 import org.joda.time.LocalDate;
@@ -32,19 +35,15 @@ public abstract class AbstractPaginaTest {
 
     protected Lorem lorem;
     protected List<String> opmerkingen;
+    protected List<JsonAdres> adressen = new ArrayList<>();
+    protected List<JsonRekeningNummer> rekeningNummers = new ArrayList<>();
+    protected List<JsonTelefoonnummer> telefoonnummers = new ArrayList<>();
 
     protected boolean opServer = false;
 
     public AbstractPaginaTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
         this.beherenBedrijf = beherenBedrijf;
         this.lijstBedrijven = lijstBedrijven;
-
-        if (this.beherenBedrijf == null) {
-            this.beherenBedrijf = new BeherenBedrijf();
-        }
-        if (this.lijstBedrijven == null) {
-            this.lijstBedrijven = new LijstBedrijven();
-        }
 
         loginPagina = new LoginPagina();
         dashboard = new Dashboard();

@@ -25,6 +25,7 @@ public class ParticulierTest extends AbstractTest {
         voornamen = voornaam();
 
         beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
+        beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);
 
         beherenRelatieTest.voegBijlageToeBijRelatie(LOGGER, voornamen, lijstRelaties, dashboard);
 

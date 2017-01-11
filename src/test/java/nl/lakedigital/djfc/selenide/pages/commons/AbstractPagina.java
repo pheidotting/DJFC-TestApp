@@ -3,22 +3,21 @@ package nl.lakedigital.djfc.selenide.pages.commons;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.google.common.collect.Iterables.transform;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public abstract class AbstractPagina {
     private SelenideElement alertSucces = $(By.id("alertSucces"));
@@ -162,12 +161,7 @@ public abstract class AbstractPagina {
         element.waitUntil(Condition.text(initieleWaarde), 2500);
 
         Select selectList = new Select(element);
-        Iterable<String> ret = transform(selectList.getOptions(), new Function<WebElement, String>() {
-            @Override
-            public String apply(WebElement webElement) {
-                return webElement.getText();
-            }
-        });
+        Iterable<String> ret = transform(selectList.getOptions(), webElement -> webElement.getText());
 
         List<String> a = Lists.newArrayList();
         for (String s : ret) {
@@ -183,11 +177,15 @@ public abstract class AbstractPagina {
     }
 
     public List<SelenideElement> getValidationMessages() {
-        return validationMessages.stream().filter(new Predicate<SelenideElement>() {
-            @Override
-            public boolean test(SelenideElement element) {
-                return element.isDisplayed();
-            }
-        }).collect(Collectors.toList());
+        return validationMessages.stream().filter(element -> element.isDisplayed()).collect(Collectors.toList());
     }
+
+    protected void controleerVeld(Logger LOGGER, SelenideElement element, String verwachteWaarde) {
+        if (verwachteWaarde != null) {
+            logIsGevuldMet(LOGGER, element, verwachteWaarde);
+            assertThat(element.getValue(), is(verwachteWaarde));
+        }
+    }
+
+
 }

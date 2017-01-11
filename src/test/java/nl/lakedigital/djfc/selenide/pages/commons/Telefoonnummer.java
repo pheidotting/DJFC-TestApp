@@ -1,6 +1,7 @@
 package nl.lakedigital.djfc.selenide.pages.commons;
 
 import com.codeborne.selenide.SelenideElement;
+import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 
@@ -35,5 +36,16 @@ public class Telefoonnummer extends AbstractPagina {
 
         logIsGevuldMet(LOGGER, this.telnummer, telnummerLang);
         assertThat(this.telnummer.getValue(), is(telnummerLang));
+    }
+
+    public String getTelnummer() {
+        return telnummer.getValue();
+    }
+
+    public void controleerTelefoonnummer(Logger LOGGER, JsonTelefoonnummer telefoonnummer) {
+        controleerVeld(LOGGER, this.telnummer, telefoonnummer.getTelefoonnummer());
+        logIsGevuldMet(LOGGER, this.soorttelnummer, telefoonnummer.getSoort());
+        assertThat(this.soorttelnummer.getSelectedText(), is(telefoonnummer.getSoort()));
+        controleerVeld(LOGGER, this.telefoonomschrijving, telefoonnummer.getOmschrijving());
     }
 }

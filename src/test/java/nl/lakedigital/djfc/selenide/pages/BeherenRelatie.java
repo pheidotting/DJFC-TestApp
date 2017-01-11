@@ -5,6 +5,10 @@ import com.codeborne.selenide.SelenideElement;
 import com.google.common.base.Predicate;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
+import nl.lakedigital.djfc.commons.json.JsonAdres;
+import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
+import nl.lakedigital.djfc.commons.json.JsonRelatie;
+import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
 import org.joda.time.LocalDate;
 import org.openqa.selenium.By;
@@ -161,6 +165,39 @@ public class BeherenRelatie extends AbstractPagina {
             logIsGevuldMet(LOGGER, this.mailtolink, mailtolink);
             assertThat(this.mailtolink.getAttribute("href"), is("mailto:" + mailtolink));
         }
+    }
+
+    private LocalDate stringToLocalDate(String datum) {
+        if (datum == null) {
+            return null;
+        }
+        return LocalDate.parse(datum);
+    }
+
+    public void vulPagina(Logger LOGGER, JsonRelatie relatie) {
+        vulPagina(LOGGER, relatie.getVoornaam(), relatie.getRoepnaam(), relatie.getTussenvoegsel(), relatie.getAchternaam(), relatie.getBsn(), stringToLocalDate(relatie.getGeboorteDatum()), stringToLocalDate(relatie.getOverlijdensdatum()), relatie.getGeslacht(), relatie.getBurgerlijkeStaat(), relatie.getEmailadres());
+    }
+
+    public void controleerPagina(Logger LOGGER, JsonRelatie relatie, List<JsonAdres> adressen, List<JsonRekeningNummer> rekeningNummers, List<JsonTelefoonnummer> teControlerenTelefoonnummers) {
+        controleerVeld(LOGGER, this.voornaam, relatie.getVoornaam());
+        controleerVeld(LOGGER, this.roepnaam, relatie.getRoepnaam());
+        controleerVeld(LOGGER, this.tussenvoegsel, relatie.getTussenvoegsel());
+        controleerVeld(LOGGER, this.achternaam, relatie.getAchternaam());
+        controleerVeld(LOGGER, this.bsn, relatie.getBsn());
+        if (relatie.getGeboorteDatum() != null) {
+            controleerVeld(LOGGER, this.geboorteDatum, stringToLocalDate(relatie.getGeboorteDatum()).toString("dd-MM-YYYY"));
+        }
+        if (relatie.getOverlijdensdatum() != null) {
+            controleerVeld(LOGGER, this.overlijdensdatum, stringToLocalDate(relatie.getOverlijdensdatum()).toString("dd-MM-YYYY"));
+        }
+        controleerVeld(LOGGER, this.geslacht, relatie.getGeslacht());
+        controleerVeld(LOGGER, this.burgerlijkeStaat, relatie.getBurgerlijkeStaat());
+        controleerVeld(LOGGER, this.emailadres, relatie.getEmailadres());
+
+        //Controleer adressen
+        getAdressen().controleerAdressen(LOGGER, adressen);
+        getRekeningnummers().controleerRekeningNummers(LOGGER, rekeningNummers);
+        getTelefoonnummers().controleerTelefoonnummers(LOGGER, teControlerenTelefoonnummers);
     }
 
     public void vulPagina(Logger LOGGER, String voornaam, String roepnaam, String tussenvoegsel, String achternaam, String bsn, LocalDate geboorteDatum, LocalDate overlijdensdatum, String geslacht, String burgerlijkeStaat, String emailadres) {

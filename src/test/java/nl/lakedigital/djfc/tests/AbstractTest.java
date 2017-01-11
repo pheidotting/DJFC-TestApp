@@ -54,14 +54,14 @@ public abstract class AbstractTest {
     protected BeherenSchades beherenSchades;
 
     @Inject
-    protected BeherenBedrijf beherenBedrijf;
+    protected BeherenBedrijf beherenBedrijfPagina;
     @Inject
-    protected LijstBedrijven lijstBedrijven;
+    protected LijstBedrijven lijstBedrijvenPagina;
 
-    protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest(beherenBedrijf, lijstBedrijven);
-    protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest(beherenBedrijf, lijstBedrijven);
-    protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest(beherenBedrijf, lijstBedrijven);
-    protected BeherenBedrijfTest beherenBedrijfTest;// = new BeherenBedrijfTest(beherenBedrijf,lijstBedrijven);
+    protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest(beherenBedrijfPagina, lijstBedrijvenPagina);
+    protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest(beherenBedrijfPagina, lijstBedrijvenPagina);
+    protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest(beherenBedrijfPagina, lijstBedrijvenPagina);
+    protected BeherenBedrijfTest beherenBedrijfTest = new BeherenBedrijfTest(beherenBedrijfPagina, lijstBedrijvenPagina);
 
     private String basisUrl;
     private String basisUrlRest;
@@ -85,7 +85,7 @@ public abstract class AbstractTest {
         lorem = LoremIpsum.getInstance();
         opmerkingen = new ArrayList<>();
 
-        beherenBedrijfTest = new BeherenBedrijfTest(beherenBedrijf, lijstBedrijven);
+        //        beherenBedrijfTest = new BeherenBedrijfTest(beherenBedrijf, lijstBedrijvenPagina);
 
     }
 

@@ -7,6 +7,10 @@ import com.google.common.base.Predicate;
 import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 import nl.lakedigital.djfc.TestCase;
+import nl.lakedigital.djfc.commons.json.JsonAdres;
+import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
+import nl.lakedigital.djfc.commons.json.JsonRelatie;
+import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import nl.lakedigital.djfc.selenide.pages.BeherenBedrijf;
 import nl.lakedigital.djfc.selenide.pages.Dashboard;
 import nl.lakedigital.djfc.selenide.pages.LijstBedrijven;
@@ -33,6 +37,7 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
     }
 
     private Lorem lorem = LoremIpsum.getInstance();
+    private JsonRelatie relatie;
 
     public void voegBijlageToeBijRelatie(Logger LOGGER, String voornamen, LijstRelaties lijstRelaties, Dashboard dashboard) {
         if (WebDriverRunner.getAndCheckWebDriver() instanceof PhantomJSDriver) {
@@ -67,6 +72,18 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         }
     }
 
+    public void controleerIngevuldeRelatie(Logger LOGGER) {
+        beherenRelatie.klikHomeKnop(LOGGER);
+        dashboard.klikNaarParticulier(LOGGER);
+
+        //Controleren
+        lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, relatie.getVoornaam(), false), null);
+        beherenRelatie.controleerPagina(LOGGER, relatie, adressen, rekeningNummers, telefoonnummers);
+
+        beherenRelatie.klikHomeKnop(LOGGER);
+        dashboard.klikNaarParticulier(LOGGER);
+    }
+
     public void testTabbladRelatieGegevens(Logger LOGGER, String voornamen) {
         dashboard.klikNaarParticulier(LOGGER);
 
@@ -82,7 +99,9 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         testFoutmeldingBijOnjuistMailAdres(LOGGER);
         testFoutmeldingBijOnjuisteGeboorteDatum(LOGGER);
 
-        beherenRelatie.vulPagina(LOGGER, voornamen, naam(), "van", achternaam(), "103127586", new LocalDate(1979, 9, 6), LocalDate.now(), "Man", "Samenwonend", lorem.getEmail());
+        relatie = maakRelatie(voornamen);
+        beherenRelatie.vulPagina(LOGGER, relatie);
+        beherenRelatie.controleerPagina(LOGGER, relatie, adressen, rekeningNummers, telefoonnummers);
 
         voegAdresToe(LOGGER);
         voegRekeningnummerToe(LOGGER);
@@ -90,6 +109,25 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         voegOpmerkingToeBijRelatie(LOGGER);
 
         beherenRelatie.klikOpslaan(LOGGER, true);
+    }
+
+    private JsonRelatie maakRelatie(String voornamen) {
+        JsonRelatie relatie = new JsonRelatie();
+
+        relatie.setVoornaam(voornamen);
+        relatie.setRoepnaam(naam());
+        relatie.setTussenvoegsel("van");
+        relatie.setAchternaam(achternaam());
+        relatie.setBsn("103127586");
+        relatie.setGeboorteDatum(new LocalDate(1979, 9, 6).toString("YYYY-MM-dd"));
+        System.out.println("asdfowejiojsjnvnvnnnnnnnnnnnnnnnnnnnn");
+        System.out.println(relatie.getGeboorteDatum());
+        relatie.setOverlijdensdatum(LocalDate.now().toString("YYYY-MM-dd"));
+        relatie.setGeslacht("Man");
+        relatie.setBurgerlijkeStaat("Samenwonend");
+        relatie.setEmailadres(lorem.getEmail());
+
+        return relatie;
     }
 
     @TestCase(testcase = Case1)
@@ -133,18 +171,40 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         adres.setPostcode(LOGGER, "7891TN");
         adres.setHuisnummer(LOGGER, "24", "7891 TN");
         adres.checkStraatEnPlaatsnaam(LOGGER, "Boogschutter", "KLAZIENAVEEN", "7891 TN");
+
+        JsonAdres jsonAdres = new JsonAdres();
+        jsonAdres.setSoortAdres(Adres.SoortAdres.POSTADRES.name());
+        jsonAdres.setPostcode("7891 TN");
+        jsonAdres.setHuisnummer(24L);
+        jsonAdres.setStraat("Boogschutter");
+        jsonAdres.setPlaats("KLAZIENAVEEN");
+
+        adressen.add(jsonAdres);
     }
 
     protected void voegRekeningnummerToe(Logger LOGGER) {
         beherenRelatie.getRekeningnummers().voegRekeningToe(LOGGER);
         Rekeningnummer rekeningnummer = beherenRelatie.getRekeningnummers().getRekeningnummers().get(0);
         rekeningnummer.vulRekeningnummer(LOGGER, "nl96snsb0907007406", "NL96 SNSB 0907 0074 06", null);
+
+        JsonRekeningNummer jsonRekeningNummer = new JsonRekeningNummer();
+        jsonRekeningNummer.setRekeningnummer("NL96 SNSB 0907 0074 06");
+
+        rekeningNummers.add(jsonRekeningNummer);
     }
 
     protected void voegTelefoonnummerToe(Logger LOGGER) {
+        String omschrijving = lorem.getWords(15);
         beherenRelatie.getTelefoonnummers().voegTelefoonnummerToe(LOGGER);
         Telefoonnummer telefoonnummer = beherenRelatie.getTelefoonnummers().getTelefoonnummers().get(0);
-        telefoonnummer.vulTelefoonnummer(LOGGER, "0621564744", "06 - 21 56 47 44", "Mobiel", "blabladiebla");
+        telefoonnummer.vulTelefoonnummer(LOGGER, "0621564744", "06 - 21 56 47 44", "Mobiel", omschrijving);
+
+        JsonTelefoonnummer jsonTelefoonnummer = new JsonTelefoonnummer();
+        jsonTelefoonnummer.setTelefoonnummer("06 - 21 56 47 44");
+        jsonTelefoonnummer.setOmschrijving(omschrijving);
+        jsonTelefoonnummer.setSoort("Mobiel");
+
+        telefoonnummers.add(jsonTelefoonnummer);
     }
 
     protected void voegOpmerkingToeBijRelatie(Logger LOGGER) {
@@ -161,11 +221,13 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
 
     public void controleerOpmerkingenBijRelatie(Logger LOGGER, String voornamen) {
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), null);
-        try {
-            Thread.sleep(2500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        beherenRelatie.getOpslaanRelatie(LOGGER).waitUntil(Condition.appears, 2500);
+        //        try {
+        //            Thread.sleep(2500);
+        //        } catch (InterruptedException e) {
+        //            e.printStackTrace();
+        //        }
 
         List<String> teControlerenOpmerkingen = opmerkingen;
 
