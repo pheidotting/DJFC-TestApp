@@ -54,9 +54,9 @@ public abstract class AbstractTest {
     protected BeherenSchades beherenSchades;
 
     @Inject
-    protected BeherenBedrijf beherenBedrijfPagina;
+    protected BeherenBedrijf beherenBedrijfPagina = new BeherenBedrijf();
     @Inject
-    protected LijstBedrijven lijstBedrijvenPagina;
+    protected LijstBedrijven lijstBedrijvenPagina = new LijstBedrijven();
 
     protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest(beherenBedrijfPagina, lijstBedrijvenPagina);
     protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest(beherenBedrijfPagina, lijstBedrijvenPagina);

@@ -9,6 +9,7 @@ import static org.junit.Assert.assertNull;
 public class BeherenBedrijfTest extends AbstractPaginaTest {
     public BeherenBedrijfTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
         super(beherenBedrijf, lijstBedrijven);
+
     }
 
     public void testBedrijfsgegevensTabblad(Logger LOGGER, String naam) {

@@ -24,7 +24,7 @@ public class ZakelijkTest extends AbstractTest {
 
         beherenBedrijfTest.testBedrijfsgegevensTabblad(LOGGER, naam);
 
-        lijstBedrijven.zoekEnSelecteer(naam, beherenBedrijf.getOpslaanBedrijf());
+        lijstBedrijvenPagina.zoekEnSelecteer(naam, beherenBedrijfPagina.getOpslaanBedrijf());
         beherenSchades.klikHomeKnop(LOGGER);
 
         beherenPolisTest.
@@ -36,6 +36,6 @@ public class ZakelijkTest extends AbstractTest {
     @Override
     public void inloggen() {
         loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarZakelijk());
-        //        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
+        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
     }
 }
