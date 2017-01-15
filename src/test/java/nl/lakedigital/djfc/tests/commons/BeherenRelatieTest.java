@@ -100,6 +100,7 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         testFoutmeldingBijOnjuisteGeboorteDatum(LOGGER);
 
         relatie = maakRelatie(voornamen);
+
         beherenRelatie.vulPagina(LOGGER, relatie);
         beherenRelatie.controleerPagina(LOGGER, relatie, adressen, rekeningNummers, telefoonnummers);
 
@@ -120,8 +121,6 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         relatie.setAchternaam(achternaam());
         relatie.setBsn("103127586");
         relatie.setGeboorteDatum(new LocalDate(1979, 9, 6).toString("YYYY-MM-dd"));
-        System.out.println("asdfowejiojsjnvnvnnnnnnnnnnnnnnnnnnnn");
-        System.out.println(relatie.getGeboorteDatum());
         relatie.setOverlijdensdatum(LocalDate.now().toString("YYYY-MM-dd"));
         relatie.setGeslacht("Man");
         relatie.setBurgerlijkeStaat("Samenwonend");

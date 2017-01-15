@@ -13,10 +13,7 @@ import com.thedeanda.lorem.LoremIpsum;
 import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.testapp.domein.Kantoor;
 import nl.lakedigital.djfc.testapp.domein.Medewerker;
-import nl.lakedigital.djfc.tests.commons.BeherenBedrijfTest;
-import nl.lakedigital.djfc.tests.commons.BeherenPolisTest;
-import nl.lakedigital.djfc.tests.commons.BeherenRelatieTest;
-import nl.lakedigital.djfc.tests.commons.BeherenSchadeTest;
+import nl.lakedigital.djfc.tests.commons.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -62,6 +59,7 @@ public abstract class AbstractTest {
     protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest(beherenBedrijfPagina, lijstBedrijvenPagina);
     protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest(beherenBedrijfPagina, lijstBedrijvenPagina);
     protected BeherenBedrijfTest beherenBedrijfTest = new BeherenBedrijfTest(beherenBedrijfPagina, lijstBedrijvenPagina);
+    protected BeherenHypotheekTest beherenHypotheekTest = new BeherenHypotheekTest(beherenBedrijfPagina, lijstBedrijvenPagina);
 
     private String basisUrl;
     private String basisUrlRest;
@@ -102,7 +100,7 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //                                WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                                        WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {

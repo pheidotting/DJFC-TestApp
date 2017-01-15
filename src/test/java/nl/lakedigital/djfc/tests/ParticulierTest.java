@@ -1,5 +1,6 @@
 package nl.lakedigital.djfc.tests;
 
+import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -41,6 +42,12 @@ public class ParticulierTest extends AbstractTest {
                 testInvoerenSchades(LOGGER, voornamen, null);
         dashboard.klikNaarParticulier(LOGGER);
 
+        lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+        beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.HYPOTHEEK, LOGGER);
+        beherenHypotheekTest.invullenGegevens(LOGGER);
+
+        beherenRelatie.klikHomeKnop(LOGGER, dashboard.getNaarParticulier());
+        dashboard.klikNaarParticulier(LOGGER);
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
         beherenRelatie.verwijderRelatie(LOGGER);
 

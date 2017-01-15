@@ -30,6 +30,8 @@ public abstract class AbstractPaginaTest {
     protected BeherenBedrijf beherenBedrijf;
     protected LijstBedrijven lijstBedrijven;
 
+    protected Hypotheek hypotheek = new Hypotheek();
+
     private String basisUrl;
     private String basisUrlRest;
 

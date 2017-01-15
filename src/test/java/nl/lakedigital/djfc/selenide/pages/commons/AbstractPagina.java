@@ -40,7 +40,7 @@ public abstract class AbstractPagina {
     private SelenideElement aangiftes = $(By.id("menuAangiftes"));
     private SelenideElement aangifte = $(By.id("menuAangifte"));
 
-    private List<SelenideElement>     validationMessages = $$(By.className("validationMessage"));
+    private List<SelenideElement> validationMessages = $$(By.className("validationMessage"));
 
 
     public enum MenuItem {
@@ -55,9 +55,16 @@ public abstract class AbstractPagina {
         return alertDanger;
     }
 
-    public void klikHomeKnop(Logger LOGGER) {
-        logKlik(LOGGER,homeKnop);
+    public void klikHomeKnop(Logger LOGGER, SelenideElement wachtenOp) {
+        logKlik(LOGGER, homeKnop);
         homeKnop.click();
+        if (wachtenOp != null) {
+            wachtenOp.waitUntil(Condition.appears, 2500);
+        }
+    }
+
+    public void klikHomeKnop(Logger LOGGER) {
+        klikHomeKnop(LOGGER, null);
     }
 
     public void klikMenuItem(MenuItem menuItem, Logger LOGGER) {
@@ -66,16 +73,20 @@ public abstract class AbstractPagina {
 
     public void klikMenuItem(MenuItem menuItem, Logger LOGGER, SelenideElement wachtTotDitElementZichtbaarIs) {
         if (menuItem == MenuItem.BEHEREN_RELATIE) {
-            logKlik(LOGGER,beherenRelatie);
+            logKlik(LOGGER, beherenRelatie);
             beherenRelatie.click();
         } else if (menuItem == MenuItem.POLISSEN) {
-            klikMenuItem(LOGGER,menuPolissenTop, polissen);
+            klikMenuItem(LOGGER, menuPolissenTop, polissen);
         } else if (menuItem == MenuItem.POLIS_TOEVOEGEN) {
-            klikMenuItem(LOGGER,menuPolissenTop, polis);
+            klikMenuItem(LOGGER, menuPolissenTop, polis);
         } else if (menuItem == MenuItem.SCHADES) {
-            klikMenuItem(LOGGER,menuSchadesTop, schades);
+            klikMenuItem(LOGGER, menuSchadesTop, schades);
         } else if (menuItem == MenuItem.SCHADE_TOEVOEGEN) {
-            klikMenuItem(LOGGER,menuSchadesTop, schade);
+            klikMenuItem(LOGGER, menuSchadesTop, schade);
+        } else if (menuItem == MenuItem.HYPOTHEKEN) {
+            klikMenuItem(LOGGER, menuHypothekenTop, hypotheken);
+        } else if (menuItem == MenuItem.HYPOTHEEK) {
+            klikMenuItem(LOGGER, menuHypothekenTop, hypotheek);
         }
 
         if (wachtTotDitElementZichtbaarIs != null) {
@@ -84,28 +95,28 @@ public abstract class AbstractPagina {
     }
 
     private void logJavascript(Logger LOGGER) {
-//        for (String s : getWebDriverLogs(BROWSER, Level.ALL)) {
-//            LOGGER.debug(s.replace("(:)", "").trim());
-//        }
+        //        for (String s : getWebDriverLogs(BROWSER, Level.ALL)) {
+        //            LOGGER.debug(s.replace("(:)", "").trim());
+        //        }
     }
 
-    private void klikMenuItem(Logger LOGGER,SelenideElement menuElement, SelenideElement element) {
-        logKlik(LOGGER,menuElement);
+    private void klikMenuItem(Logger LOGGER, SelenideElement menuElement, SelenideElement element) {
+        logKlik(LOGGER, menuElement);
         menuElement.click();
         element.waitUntil(Condition.appears, 2000);
 
-        logKlik(LOGGER,element);
+        logKlik(LOGGER, element);
         element.click();
         element.waitUntil(Condition.disappears, 2000);
     }
 
-    public void logInvullen(Logger LOGGER,SelenideElement element, String waarde) {
+    public void logInvullen(Logger LOGGER, SelenideElement element, String waarde) {
         logJavascript(LOGGER);
         LOGGER.debug("invullen {} met : {}", element.getAttribute("id"), waarde);
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    public void logKlik(Logger LOGGER,SelenideElement element) {
+    public void logKlik(Logger LOGGER, SelenideElement element) {
         logJavascript(LOGGER);
         try {
             LOGGER.debug("Klik {}", element.getAttribute("id"));
@@ -114,19 +125,19 @@ public abstract class AbstractPagina {
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    public void logIsAanwezig(Logger LOGGER,SelenideElement element) {
+    public void logIsAanwezig(Logger LOGGER, SelenideElement element) {
         logJavascript(LOGGER);
         LOGGER.debug("Is {} aanwezig?", element.getAttribute("id"));
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    public void logIsNietAanwezig(Logger LOGGER,SelenideElement element) {
+    public void logIsNietAanwezig(Logger LOGGER, SelenideElement element) {
         logJavascript(LOGGER);
         LOGGER.debug("Is niet aanwezig?");
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));
     }
 
-    public void logIsGevuldMet(Logger LOGGER,SelenideElement element, String verwachteWaarde) {
+    public void logIsGevuldMet(Logger LOGGER, SelenideElement element, String verwachteWaarde) {
         logJavascript(LOGGER);
         LOGGER.debug("Is {} gevuld met {}?", element.getAttribute("id"), verwachteWaarde);
         Selenide.screenshot(bepaalBestandsNaam(LOGGER, element));

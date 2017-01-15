@@ -22,7 +22,8 @@
         <webdriver.driver>chrome</webdriver.driver>
     </properties>
 
-    <dependencies><dependency>
+    <dependencies>
+        <dependency>
         <groupId>com.codeborne</groupId>
         <artifactId>selenide</artifactId>
         <version>4.0</version>
