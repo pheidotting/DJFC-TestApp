@@ -1,5 +1,6 @@
 package nl.lakedigital.djfc.tests;
 
+import com.codeborne.selenide.Condition;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +41,9 @@ public class ParticulierTest extends AbstractTest {
 
         beherenSchadeTest.
                 testInvoerenSchades(LOGGER, voornamen, null);
+
+        //MIJN GEGEVENS, NIET BESCHIKBAAR
+        dashboard.getNaarBeheer().waitUntil(Condition.disappears, 2500);
         dashboard.klikNaarParticulier(LOGGER);
 
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));

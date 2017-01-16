@@ -14,6 +14,7 @@ import nl.lakedigital.djfc.selenide.pages.*;
 import nl.lakedigital.djfc.testapp.domein.Kantoor;
 import nl.lakedigital.djfc.testapp.domein.Medewerker;
 import nl.lakedigital.djfc.tests.commons.*;
+import nl.lakedigital.djfc.tests.commons.MijnGegevensTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -52,6 +53,8 @@ public abstract class AbstractTest {
     protected BeherenSchade beherenSchade;
     protected BeherenSchades beherenSchades;
 
+    protected MijnGegevens mijnGegevens = new MijnGegevens();
+
     @Inject
     protected BeherenBedrijf beherenBedrijfPagina = new BeherenBedrijf();
     @Inject
@@ -62,6 +65,7 @@ public abstract class AbstractTest {
     protected BeherenSchadeTest beherenSchadeTest = new BeherenSchadeTest(beherenBedrijfPagina, lijstBedrijvenPagina);
     protected BeherenBedrijfTest beherenBedrijfTest = new BeherenBedrijfTest(beherenBedrijfPagina, lijstBedrijvenPagina);
     protected BeherenHypotheekTest beherenHypotheekTest = new BeherenHypotheekTest(beherenBedrijfPagina, lijstBedrijvenPagina);
+    protected MijnGegevensTest mijnGegevensTest = new MijnGegevensTest(beherenBedrijfPagina, lijstBedrijvenPagina);
 
     private String basisUrl;
     private String basisUrlRest;

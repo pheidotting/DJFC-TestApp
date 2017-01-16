@@ -1,6 +1,6 @@
 package nl.lakedigital.djfc.tests;
 
-import org.junit.Ignore;
+import com.codeborne.selenide.Condition;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,16 +13,20 @@ public class MijnGegevensTest extends AbstractTest {
     }
 
     @Test
-    @Ignore
     public void testMijnGegevens() {
-
         dashboard.klikNaarBeheer(LOGGER);
+
+        mijnGegevens.getOpslaan().waitUntil(Condition.appears, 2500);
+
+        mijnGegevensTest.vulGegevens(LOGGER, "Hendrik", "", "Haverkamp", "info@hendrikhaverkamp.nl", "a", "b", true);
 
     }
 
     @Override
     public void inloggen() {
         setFeatureToggle(beheerToggle, true);
+
+        LOGGER.debug("beheerToggle {}", getFeatureToggle(beheerToggle));
 
         loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarBeheer());
         dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
