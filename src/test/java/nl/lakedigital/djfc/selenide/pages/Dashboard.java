@@ -10,6 +10,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class Dashboard extends PaginaMetMenuBalk {
     private SelenideElement naarParticulier = $(By.id("naarParticulier"));
     private SelenideElement naarZakelijk = $(By.id("naarZakelijk"));
+    private SelenideElement naarBeheer = $(By.id("naarBeheer"));
 
     public SelenideElement getNaarParticulier() {
         return naarParticulier;
@@ -17,6 +18,10 @@ public class Dashboard extends PaginaMetMenuBalk {
 
     public SelenideElement getNaarZakelijk() {
         return naarZakelijk;
+    }
+
+    public SelenideElement getNaarBeheer() {
+        return naarBeheer;
     }
 
     public void klikNaarParticulier(Logger LOGGER) {
@@ -29,5 +34,11 @@ public class Dashboard extends PaginaMetMenuBalk {
         this.naarZakelijk.waitUntil(Condition.appears, 2500);
         logKlik(LOGGER, this.naarZakelijk);
         naarZakelijk.click();
+    }
+
+    public void klikNaarBeheer(Logger LOGGER) {
+        this.naarBeheer.waitUntil(Condition.appears, 2500);
+        logKlik(LOGGER, this.naarBeheer);
+        naarBeheer.click();
     }
 }

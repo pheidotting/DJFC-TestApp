@@ -36,8 +36,10 @@ public abstract class AbstractTest {
     public ScreenshotAlsTestFaalt screenshotAlsTestFaalt = new ScreenshotAlsTestFaalt();
     protected final String todoistToggle = "TODOIST";
     protected final String telefonieToggle = "TELEFONIE";
+    protected final String beheerToggle = "BEHEERPAGINA";
     private boolean toggleTodoistWas;
     private boolean toggleTelefonieWas;
+    private boolean toggleBeheerWas;
 
     protected Medewerker medewerker;
 
@@ -100,7 +102,7 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //                                        WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                                                WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
@@ -114,6 +116,7 @@ public abstract class AbstractTest {
 
          toggleTodoistWas = getFeatureToggle(todoistToggle);
          toggleTelefonieWas = getFeatureToggle(telefonieToggle);
+        toggleBeheerWas = getFeatureToggle(beheerToggle);
 
         Map<String, Boolean> toggles = new HashMap<>();
         toggles.put(todoistToggle, toggleTodoistWas);
@@ -122,6 +125,7 @@ public abstract class AbstractTest {
         screenshotAlsTestFaalt.setToggles(toggles);
         setFeatureToggle(todoistToggle, false);
         setFeatureToggle(telefonieToggle, true);
+        setFeatureToggle(beheerToggle, false);
 
         medewerker = new Medewerker();
         medewerker.setVoornaam("Bene");
@@ -144,6 +148,7 @@ public abstract class AbstractTest {
 
         setFeatureToggle(todoistToggle, toggleTodoistWas);
         setFeatureToggle(telefonieToggle, toggleTelefonieWas);
+        setFeatureToggle(beheerToggle, toggleBeheerWas);
     }
 
 
