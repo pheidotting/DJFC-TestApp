@@ -106,7 +106,7 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //                                                WebDriverRunner.setWebDriver(new ChromeDriver());
+        //        WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
@@ -180,7 +180,7 @@ public abstract class AbstractTest {
         clientConfig.getFeatures().put(JSONConfiguration.FEATURE_POJO_MAPPING, Boolean.TRUE);
         Client client = Client.create(clientConfig);
         WebResource webResource = client.resource(basisUrlRest + adres);
-        ClientResponse response = webResource.accept("application/json").type("application/json").header("username", "admin").get(ClientResponse.class);
+        ClientResponse response = webResource.accept("application/json").type("application/json").get(ClientResponse.class);
         if (response.getStatus() != 200) {
             throw new RuntimeException("Failed : HTTP error code : " + response.getStatus());
         }

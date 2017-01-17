@@ -18,7 +18,9 @@ public class MijnGegevensTest extends AbstractTest {
 
         mijnGegevens.getOpslaan().waitUntil(Condition.appears, 2500);
 
-        mijnGegevensTest.vulGegevens(LOGGER, "Hendrik", "", "Haverkamp", "info@hendrikhaverkamp.nl", "a", "b", true);
+        mijnGegevensTest.testWachtwoord(LOGGER);
+
+        mijnGegevensTest.vulGegevens(LOGGER, "Hendrik", "", "Haverkamp", "info@hendrikhaverkamp.nl", "a", "a", true);
 
     }
 
