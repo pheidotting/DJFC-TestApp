@@ -52,7 +52,7 @@ public class LijstBedrijven extends AbstractPagina {
 
     public void klikToevoegenNieuwBedrijf() {
         logKlik(LOGGER, toevoegenNieuwBedrijf);
-        toevoegenNieuwBedrijf.waitUntil(Condition.appears, 2500);
+        toevoegenNieuwBedrijf.waitUntil(Condition.appears, 25000);
         toevoegenNieuwBedrijf.click();
     }
 
