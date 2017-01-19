@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.joda.time.LocalDate;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
@@ -59,7 +60,7 @@ public class BeherenPolissen extends AbstractPagina {
         logKlik(LOGGER, titel.get(nummer));
         titel.get(nummer).click();
 
-        status.get(nummer).waitUntil(Condition.appears, 2500);
+        status.get(nummer).waitUntil(Condition.appears, AbstractTest.timeOut);
 
         logIsGevuldMet(LOGGER, status.get(nummer), teControlerenPolis.getStatus());
         assertThat(status.get(nummer).getText(), is(teControlerenPolis.getStatus()));
@@ -86,7 +87,7 @@ public class BeherenPolissen extends AbstractPagina {
 
         titel.get(nummer).click();
 
-        //        status.get(nummer).waitUntil(Condition.disappears, 2500);
+        //        status.get(nummer).waitUntil(Condition.disappears, timeOut);
     }
 
 }

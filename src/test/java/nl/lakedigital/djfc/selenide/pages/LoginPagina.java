@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.TestCaseDJFC;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class LoginPagina extends AbstractPagina {
 
     public void isInlogButtonAanwezig(Logger LOGGER) {
         logIsAanwezig(LOGGER, button);
-        this.button.waitUntil(Condition.appears, 2500);
+        this.button.waitUntil(Condition.appears, AbstractTest.timeOut);
     }
 
     public void clickButton(Logger LOGGER, boolean klik, boolean disappear) {
@@ -53,7 +54,7 @@ public class LoginPagina extends AbstractPagina {
         setWachtwoord(LOGGER, wachtwoord);
         clickButton(LOGGER, false, true);
         if (wachtenOp != null) {
-            wachtenOp.waitUntil(Condition.appears, 2500);
+            wachtenOp.waitUntil(Condition.appears, AbstractTest.timeOut);
         }
     }
 

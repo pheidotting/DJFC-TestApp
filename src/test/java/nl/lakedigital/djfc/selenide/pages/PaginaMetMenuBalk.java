@@ -3,6 +3,7 @@ package nl.lakedigital.djfc.selenide.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 
@@ -16,7 +17,7 @@ public abstract class PaginaMetMenuBalk extends AbstractPagina {
     private SelenideElement uitloggen = $(By.id("uitloggen"));
 
     public void testIngelogdeGebruiker(Logger LOGGER, String gebruiker, String kantoor) {
-        ingelogdeGebruiker.waitUntil(Condition.appears, 2500);
+        ingelogdeGebruiker.waitUntil(Condition.appears, AbstractTest.timeOut);
         String verwachteTekst = "Ingelogd als : " + gebruiker + ", (" + kantoor + ")";
         logIsGevuldMet(LOGGER, ingelogdeGebruiker, verwachteTekst);
         assertThat(ingelogdeGebruiker.getText(), is(verwachteTekst));
@@ -25,7 +26,7 @@ public abstract class PaginaMetMenuBalk extends AbstractPagina {
 
     public void wachtUitloggenAanwezig(Logger LOGGER) {
         logIsAanwezig(LOGGER, uitloggen);
-        uitloggen.waitUntil(Condition.appears, 2500);
+        uitloggen.waitUntil(Condition.appears, AbstractTest.timeOut);
     }
 
     public void klikUitloggen(Logger LOGGER) {

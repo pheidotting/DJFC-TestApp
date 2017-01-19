@@ -10,6 +10,7 @@ import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
 import nl.lakedigital.djfc.commons.json.JsonRelatie;
 import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.joda.time.LocalDate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -218,7 +219,7 @@ public class BeherenRelatie extends AbstractPagina {
         logKlik(LOGGER, this.opslaanRelatie);
         this.opslaanRelatie.click();
         if (wachtOpVerdwijnen) {
-            this.opslaanRelatie.waitUntil(Condition.disappears, 2500);
+            this.opslaanRelatie.waitUntil(Condition.disappears, AbstractTest.timeOut);
         }
     }
 

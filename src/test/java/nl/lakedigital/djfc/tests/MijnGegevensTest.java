@@ -16,7 +16,7 @@ public class MijnGegevensTest extends AbstractTest {
     public void testMijnGegevens() {
         dashboard.klikNaarBeheer(LOGGER);
 
-        mijnGegevens.getOpslaan().waitUntil(Condition.appears, 2500);
+        mijnGegevens.getOpslaan().waitUntil(Condition.appears, timeOut);
 
         mijnGegevensTest.testWachtwoord(LOGGER);
 

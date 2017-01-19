@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.google.common.base.Predicate;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class LijstBedrijven extends AbstractPagina {
     private ElementsCollection naam = $$(By.name("naam"));
 
     public void isZoekTermAanwezig() {
-        zoekTerm.waitUntil(Condition.appears, 2500);
+        zoekTerm.waitUntil(Condition.appears, AbstractTest.timeOut);
         logIsAanwezig(LOGGER, zoekTerm);
         assertTrue(zoekTerm.isDisplayed());
     }
@@ -52,7 +53,7 @@ public class LijstBedrijven extends AbstractPagina {
 
     public void klikToevoegenNieuwBedrijf() {
         logKlik(LOGGER, toevoegenNieuwBedrijf);
-        toevoegenNieuwBedrijf.waitUntil(Condition.appears, 25000);
+        toevoegenNieuwBedrijf.waitUntil(Condition.appears, AbstractTest.timeOut);
         toevoegenNieuwBedrijf.click();
     }
 
@@ -81,9 +82,9 @@ public class LijstBedrijven extends AbstractPagina {
     public void selecteer(SelenideElement regel, SelenideElement teVerschijnenElement) {
         logKlik(LOGGER, regel);
         regel.click();
-        this.gezochtMetTonen.waitUntil(Condition.disappears, 2500);
+        this.gezochtMetTonen.waitUntil(Condition.disappears, AbstractTest.timeOut);
         if (teVerschijnenElement != null) {
-            teVerschijnenElement.waitUntil(Condition.appears, 2500);
+            teVerschijnenElement.waitUntil(Condition.appears, AbstractTest.timeOut);
         }
     }
 

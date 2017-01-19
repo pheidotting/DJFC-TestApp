@@ -43,7 +43,7 @@ public class ParticulierTest extends AbstractTest {
                 testInvoerenSchades(LOGGER, voornamen, null);
 
         //MIJN GEGEVENS, NIET BESCHIKBAAR
-        dashboard.getNaarBeheer().waitUntil(Condition.disappears, 2500);
+        dashboard.getNaarBeheer().waitUntil(Condition.disappears, timeOut);
         dashboard.klikNaarParticulier(LOGGER);
 
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));

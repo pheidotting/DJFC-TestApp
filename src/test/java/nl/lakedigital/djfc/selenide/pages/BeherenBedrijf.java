@@ -7,6 +7,7 @@ import com.thedeanda.lorem.Lorem;
 import com.thedeanda.lorem.LoremIpsum;
 import nl.lakedigital.djfc.TestCaseDJFC;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -49,7 +50,7 @@ public class BeherenBedrijf extends AbstractPagina {
     public void testFoutmeldingBijNietAlleVerplichteVelden() {
         klikOpslaan();
 
-        getValidationMessages().get(0).waitUntil(Condition.appears, 2500);
+        getValidationMessages().get(0).waitUntil(Condition.appears, AbstractTest.timeOut);
 
         assertThat(getValidationMessages().size(), is(1));
     }

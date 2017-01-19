@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import com.google.common.base.Predicate;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -27,7 +28,7 @@ public class LijstRelaties extends AbstractPagina {
     private List<SelenideElement> voornaam = $$(By.name("voornaam"));
 
     public void isZoekTermAanwezig(Logger LOGGER) {
-        zoekTerm.waitUntil(Condition.appears, 2500);
+        zoekTerm.waitUntil(Condition.appears, AbstractTest.timeOut);
         logIsAanwezig(LOGGER, zoekTerm);
         assertTrue(zoekTerm.isDisplayed());
     }
@@ -76,9 +77,9 @@ public class LijstRelaties extends AbstractPagina {
     public void selecteer(Logger LOGGER, SelenideElement regel, SelenideElement teVerschijnenElement) {
         logKlik(LOGGER, regel);
         regel.click();
-        this.gezochtMetTonen.waitUntil(Condition.disappears, 2500);
+        this.gezochtMetTonen.waitUntil(Condition.disappears, AbstractTest.timeOut);
         if (teVerschijnenElement != null) {
-            teVerschijnenElement.waitUntil(Condition.appears, 2500);
+            teVerschijnenElement.waitUntil(Condition.appears, AbstractTest.timeOut);
         }
     }
 }

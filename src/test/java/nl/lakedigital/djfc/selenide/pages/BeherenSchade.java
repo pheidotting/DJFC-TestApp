@@ -2,6 +2,7 @@ package nl.lakedigital.djfc.selenide.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.By;
@@ -116,7 +117,7 @@ public class BeherenSchade extends PaginaMetMenuBalk {
     public void klikOpslaan(Logger LOGGER) {
         logKlik(LOGGER, this.schadeMeldingOpslaan);
         this.schadeMeldingOpslaan.click();
-        this.schadeMeldingOpslaan.waitUntil(Condition.disappears, 2500);
+        this.schadeMeldingOpslaan.waitUntil(Condition.disappears, AbstractTest.timeOut);
     }
 
     public SelenideElement getSchadeMeldingOpslaan() {

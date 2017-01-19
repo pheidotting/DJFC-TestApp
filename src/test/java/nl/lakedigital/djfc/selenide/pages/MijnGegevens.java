@@ -3,6 +3,7 @@ package nl.lakedigital.djfc.selenide.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -54,7 +55,7 @@ public class MijnGegevens extends AbstractPagina {
 
     public String getMeldingWachtwoordSterkte() {
         try {
-            this.wachtwoordSterkteMelding.waitUntil(Condition.appears, 2500);
+            this.wachtwoordSterkteMelding.waitUntil(Condition.appears, AbstractTest.timeOut);
             return this.wachtwoordSterkteMelding.getText();
         } catch (Exception e) {
             return null;
@@ -79,22 +80,22 @@ public class MijnGegevens extends AbstractPagina {
 
     public void assertWachtwoordenKomNietOvereenMeldingZichtbaar(Logger LOGGER) {
         logIsAanwezig(LOGGER, this.wachtwoordenKomNietOvereenMelding);
-        this.wachtwoordenKomNietOvereenMelding.waitUntil(Condition.appears, 2500);
+        this.wachtwoordenKomNietOvereenMelding.waitUntil(Condition.appears, AbstractTest.timeOut);
     }
 
     public void assertWachtwoordenKomNietOvereenMeldingOnzichtbaar(Logger LOGGER) {
         logIsNietAanwezig(LOGGER, this.wachtwoordenKomNietOvereenMelding);
-        this.wachtwoordenKomNietOvereenMelding.waitUntil(Condition.disappears, 2500);
+        this.wachtwoordenKomNietOvereenMelding.waitUntil(Condition.disappears, AbstractTest.timeOut);
     }
 
     public void assertOpslaanKnopEnabled(Logger LOGGER) {
         logIsAanwezig(LOGGER, this.opslaan);
-        this.opslaan.waitUntil(Condition.enabled, 2500);
+        this.opslaan.waitUntil(Condition.enabled, AbstractTest.timeOut);
     }
 
     public void assertOpslaanKnopDIsabled(Logger LOGGER) {
         logIsNietAanwezig(LOGGER, this.opslaan);
-        this.opslaan.waitUntil(Condition.disabled, 2500);
+        this.opslaan.waitUntil(Condition.disabled, AbstractTest.timeOut);
     }
 
 }

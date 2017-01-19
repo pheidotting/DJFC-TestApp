@@ -33,6 +33,7 @@ import static com.codeborne.selenide.Selenide.*;
 public abstract class AbstractTest {
     private static Logger LOGGER = LoggerFactory.getLogger(AbstractTest.class);
 
+    public static Long timeOut = 2500L;
     @Rule
     public ScreenshotAlsTestFaalt screenshotAlsTestFaalt = new ScreenshotAlsTestFaalt();
     protected final String todoistToggle = "TODOIST";
@@ -113,6 +114,7 @@ public abstract class AbstractTest {
             opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
+            timeOut = 25000L;
         }
         basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";
 

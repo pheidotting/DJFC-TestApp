@@ -2,6 +2,7 @@ package nl.lakedigital.djfc.selenide.pages;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 
@@ -25,19 +26,19 @@ public class Dashboard extends PaginaMetMenuBalk {
     }
 
     public void klikNaarParticulier(Logger LOGGER) {
-        this.naarParticulier.waitUntil(Condition.appears, 2500);
+        this.naarParticulier.waitUntil(Condition.appears, AbstractTest.timeOut);
         logKlik(LOGGER, this.naarParticulier);
         naarParticulier.click();
     }
 
     public void klikNaarZakelijk(Logger LOGGER) {
-        this.naarZakelijk.waitUntil(Condition.appears, 2500);
+        this.naarZakelijk.waitUntil(Condition.appears, AbstractTest.timeOut);
         logKlik(LOGGER, this.naarZakelijk);
         naarZakelijk.click();
     }
 
     public void klikNaarBeheer(Logger LOGGER) {
-        this.naarBeheer.waitUntil(Condition.appears, 2500);
+        this.naarBeheer.waitUntil(Condition.appears, AbstractTest.timeOut);
         logKlik(LOGGER, this.naarBeheer);
         naarBeheer.click();
     }

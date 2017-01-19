@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.commons.json.JsonPolis;
 import nl.lakedigital.djfc.selenide.pages.commons.Opmerkingen;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.joda.time.LocalDate;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -82,7 +83,7 @@ public class BeherenPolis extends PaginaMetMenuBalk {
     }
 
     public void setVerzekeringsMaatschappij(Logger LOGGER, String verzekeringsMaatschappij) {
-        this.verzekeringsMaatschappij.waitUntil(Condition.not(Condition.empty), 2500);
+        this.verzekeringsMaatschappij.waitUntil(Condition.not(Condition.empty), AbstractTest.timeOut);
         logInvullen(LOGGER, this.verzekeringsMaatschappij, verzekeringsMaatschappij);
         this.verzekeringsMaatschappij.selectOption(verzekeringsMaatschappij);
     }
@@ -161,7 +162,7 @@ public class BeherenPolis extends PaginaMetMenuBalk {
     public void klikOpslaanPolis(Logger LOGGER) {
         logKlik(LOGGER, this.opslaanPolis);
         this.opslaanPolis.click();
-        this.opslaanPolis.waitUntil(Condition.disappears, 2500);
+        this.opslaanPolis.waitUntil(Condition.disappears, AbstractTest.timeOut);
     }
 
     public SelenideElement getOpslaanPolis() {

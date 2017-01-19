@@ -2,6 +2,7 @@ package nl.lakedigital.djfc.selenide.pages.commons;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 
@@ -35,7 +36,7 @@ public class Bijlages extends AbstractPagina {
     public void uploadFile(Logger LOGGER, UploadBestand uploadBestand) {
         logKlik(LOGGER, uploadknop);
         uploadknop.uploadFromClasspath(uploadBestand.getBestandsNaam());
-        uploadknop.waitUntil(Condition.empty, 2500);
+        uploadknop.waitUntil(Condition.empty, AbstractTest.timeOut);
 
         bijlages.add(new Bijlage(bijlages.size()));
     }

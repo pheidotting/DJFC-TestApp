@@ -16,6 +16,7 @@ import nl.lakedigital.djfc.selenide.pages.Dashboard;
 import nl.lakedigital.djfc.selenide.pages.LijstBedrijven;
 import nl.lakedigital.djfc.selenide.pages.LijstRelaties;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.hamcrest.core.Is;
 import org.joda.time.LocalDate;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
@@ -62,7 +63,7 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
             beherenRelatie.getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaamEdit().setValue(nwOmschrijving);
             beherenRelatie.logKlik(LOGGER, beherenRelatie.getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam());
             beherenRelatie.getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam().click();
-            beherenRelatie.getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam().waitUntil(Condition.disappears, 2500);
+            beherenRelatie.getBijlages().getBijlages().get(0).getOpslaanOmschrijvingOfBestandsNaam().waitUntil(Condition.disappears, AbstractTest.timeOut);
 
             beherenRelatie.logIsGevuldMet(LOGGER, beherenRelatie.getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam(), nwOmschrijving);
             assertThat(beherenRelatie.getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam().getText(), Is.is(nwOmschrijving));
@@ -221,9 +222,9 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
     public void controleerOpmerkingenBijRelatie(Logger LOGGER, String voornamen) {
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), null);
 
-        beherenRelatie.getOpslaanRelatie(LOGGER).waitUntil(Condition.appears, 2500);
+        beherenRelatie.getOpslaanRelatie(LOGGER).waitUntil(Condition.appears, AbstractTest.timeOut);
         //        try {
-        //            Thread.sleep(2500);
+        //            Thread.sleep(timeOut);
         //        } catch (InterruptedException e) {
         //            e.printStackTrace();
         //        }
@@ -262,7 +263,7 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
     public void checkValidationMessages(int verwachtAantal, AbstractPagina pagina, String... verwachteMelding) {
         List<SelenideElement> validationMessages = pagina.getValidationMessages();
 
-        //        beherenRelatie.getValidationMessages().get(0).waitUntil(Condition.appears, 2500);
+        //        beherenRelatie.getValidationMessages().get(0).waitUntil(Condition.appears, timeOut);
         List<SelenideElement> messagesInBeeld = newArrayList(filter(validationMessages, new Predicate<SelenideElement>() {
             @Override
             public boolean apply(@Nullable SelenideElement element) {

@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.google.common.collect.Lists;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.joda.time.LocalDateTime;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -59,7 +60,7 @@ public abstract class AbstractPagina {
         logKlik(LOGGER, homeKnop);
         homeKnop.click();
         if (wachtenOp != null) {
-            wachtenOp.waitUntil(Condition.appears, 2500);
+            wachtenOp.waitUntil(Condition.appears, AbstractTest.timeOut);
         }
     }
 
@@ -169,7 +170,7 @@ public abstract class AbstractPagina {
     }
 
     protected List<String> optionToStringList(SelenideElement element, String initieleWaarde, boolean initieleWaardeMeenemen) {
-        element.waitUntil(Condition.text(initieleWaarde), 2500);
+        element.waitUntil(Condition.text(initieleWaarde), AbstractTest.timeOut);
 
         Select selectList = new Select(element);
         Iterable<String> ret = transform(selectList.getOptions(), webElement -> webElement.getText());
