@@ -71,7 +71,7 @@ public class LijstBedrijven extends AbstractPagina {
             return gevondenItems.get(0);
         } else {
             if (recursief) {
-                return null;
+                return gevondenItems.get(0);
             } else {
                 wachtFf();
                 return zoekBedrijf(zoekterm, true);
