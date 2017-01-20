@@ -21,6 +21,7 @@ public class MijnGegevensTest extends AbstractPaginaTest {
         dashboard.testIngelogdeGebruiker(LOGGER, "Hendrik Haverkamp", "De Jonge Financieel Consult");
 
         vulGegevens(LOGGER, "Bene", "de", "Jonge", emailadres, null, null, true);
+        dashboard.testIngelogdeGebruiker(LOGGER, "Bene de Jonge", "De Jonge Financieel Consult");
     }
 
     public void vulGegevens(Logger LOGGER, String voornaam, String tussenvoegsel, String achternaam, String emailadres, String wachtwoord, String wachtwoordNogmaals, boolean klik) {

@@ -20,6 +20,7 @@ public abstract class PaginaMetMenuBalk extends AbstractPagina {
         ingelogdeGebruiker.waitUntil(Condition.appears, AbstractTest.timeOut);
         String verwachteTekst = "Ingelogd als : " + gebruiker + ", (" + kantoor + ")";
         logIsGevuldMet(LOGGER, ingelogdeGebruiker, verwachteTekst);
+        ingelogdeGebruiker.waitUntil(Condition.exactText(verwachteTekst), AbstractTest.timeOut);
         assertThat(ingelogdeGebruiker.getText(), is(verwachteTekst));
         assertTrue(uitloggen.isDisplayed());
     }
