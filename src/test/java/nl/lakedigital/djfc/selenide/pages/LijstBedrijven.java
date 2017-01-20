@@ -80,6 +80,7 @@ public class LijstBedrijven extends AbstractPagina {
     }
 
     public void selecteer(SelenideElement regel, SelenideElement teVerschijnenElement) {
+        regel.waitUntil(Condition.appears, AbstractTest.timeOut);
         logKlik(LOGGER, regel);
         regel.click();
         this.gezochtMetTonen.waitUntil(Condition.disappears, AbstractTest.timeOut);
