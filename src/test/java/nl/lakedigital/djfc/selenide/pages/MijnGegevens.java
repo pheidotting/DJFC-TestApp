@@ -53,6 +53,11 @@ public class MijnGegevens extends AbstractPagina {
         }
     }
 
+    public String getMelding() {
+        this.getAlertSucces().waitUntil(Condition.appears, AbstractTest.timeOut);
+        return getAlertSucces().getText();
+    }
+
     public String getMeldingWachtwoordSterkte() {
         try {
             this.wachtwoordSterkteMelding.waitUntil(Condition.appears, AbstractTest.timeOut);

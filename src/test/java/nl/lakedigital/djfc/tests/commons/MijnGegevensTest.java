@@ -14,6 +14,15 @@ public class MijnGegevensTest extends AbstractPaginaTest {
         super(new BeherenBedrijf(), new LijstBedrijven());
     }
 
+    public void testInvullenNieuweGegevens(Logger LOGGER, String voornaam, String tussenvoegsel, String achternaam, String emailadres) {
+        vulGegevens(LOGGER, voornaam, tussenvoegsel, achternaam, emailadres, null, null, true);
+
+        assertThat(mijnGegevens.getMelding(), is("De gegevens zijn opgeslagen"));
+        dashboard.testIngelogdeGebruiker(LOGGER, "Hendrik Haverkamp", "De Jonge Financieel Consult");
+
+        vulGegevens(LOGGER, "Bene", "de", "Jonge", emailadres, null, null, true);
+    }
+
     public void vulGegevens(Logger LOGGER, String voornaam, String tussenvoegsel, String achternaam, String emailadres, String wachtwoord, String wachtwoordNogmaals, boolean klik) {
         mijnGegevens.vulGegevens(LOGGER, voornaam, tussenvoegsel, achternaam, emailadres, wachtwoord, wachtwoordNogmaals, klik);
     }
