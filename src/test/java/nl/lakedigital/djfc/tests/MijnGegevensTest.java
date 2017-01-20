@@ -1,6 +1,7 @@
 package nl.lakedigital.djfc.tests;
 
 import com.codeborne.selenide.Condition;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +14,7 @@ public class MijnGegevensTest extends AbstractTest {
     }
 
     @Test
+    @Ignore
     public void testMijnGegevens() {
         dashboard.klikNaarBeheer(LOGGER);
 
