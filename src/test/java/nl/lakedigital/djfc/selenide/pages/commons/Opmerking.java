@@ -1,7 +1,9 @@
 package nl.lakedigital.djfc.selenide.pages.commons;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.slf4j.Logger;
 
@@ -29,6 +31,7 @@ public class Opmerking extends AbstractPagina {
     }
 
     public SelenideElement getOpmerking() {
+        opmerking.get(i).waitUntil(Condition.appears, AbstractTest.timeOut);
         return opmerking.get(i);
     }
 
