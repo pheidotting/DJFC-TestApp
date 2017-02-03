@@ -163,13 +163,14 @@ public abstract class AbstractPagina {
 
     protected void wachtFf() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(AbstractTest.timeOut);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     protected List<String> optionToStringList(SelenideElement element, String initieleWaarde, boolean initieleWaardeMeenemen) {
+        wachtFf();
         element.waitUntil(Condition.text(initieleWaarde), AbstractTest.timeOut);
 
         Select selectList = new Select(element);
@@ -189,6 +190,7 @@ public abstract class AbstractPagina {
     }
 
     public List<SelenideElement> getValidationMessages() {
+        wachtFf();
         return validationMessages.stream().filter(element -> element.isDisplayed()).collect(Collectors.toList());
     }
 

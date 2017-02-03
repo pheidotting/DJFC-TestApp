@@ -43,7 +43,7 @@ public class LoginPagina extends AbstractPagina {
             this.button.sendKeys(Keys.ENTER);
         }
         if (disappear && this.button.isDisplayed()) {
-            this.button.waitUntil(Condition.disappears, 1500);
+            this.button.waitUntil(Condition.disappears, AbstractTest.timeOut);
         }
     }
 

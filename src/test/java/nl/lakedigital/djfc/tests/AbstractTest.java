@@ -107,7 +107,7 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //        WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {

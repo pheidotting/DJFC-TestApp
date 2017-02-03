@@ -79,7 +79,7 @@ public class BeherenPolis extends PaginaMetMenuBalk {
     }
 
     public List<String> getSoortVerzekering() {
-        return optionToStringList(soortVerzekering, "Aansprakelijkheid", true);
+        return optionToStringList(soortVerzekering, "Kies een soort polis...", true);
     }
 
     public void setVerzekeringsMaatschappij(Logger LOGGER, String verzekeringsMaatschappij) {

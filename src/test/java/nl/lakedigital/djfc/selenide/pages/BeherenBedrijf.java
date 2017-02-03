@@ -20,7 +20,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class BeherenBedrijf extends AbstractPagina {
-    private final static Logger LOGGER = LoggerFactory.getLogger(BeherenRelatie.class);
+    private final static Logger LOGGER = LoggerFactory.getLogger(BeherenBedrijf.class);
 
     private SelenideElement naam = $(By.id("naam"));
     private SelenideElement kvk = $(By.id("kvk"));

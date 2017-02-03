@@ -1,9 +1,11 @@
 package nl.lakedigital.djfc.tests;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Ignore
 public class InlogschermTest extends AbstractTest {
     private final static Logger LOGGER = LoggerFactory.getLogger(InlogschermTest.class);
 
