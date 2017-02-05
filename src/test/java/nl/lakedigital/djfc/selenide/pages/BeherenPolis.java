@@ -162,7 +162,7 @@ public class BeherenPolis extends PaginaMetMenuBalk {
     public void klikOpslaanPolis(Logger LOGGER) {
         logKlik(LOGGER, this.opslaanPolis);
         this.opslaanPolis.click();
-        this.opslaanPolis.waitUntil(Condition.disappears, AbstractTest.timeOut);
+        this.opslaanPolis.waitUntil(Condition.disappears, AbstractTest.timeOut * 2);
     }
 
     public SelenideElement getOpslaanPolis() {

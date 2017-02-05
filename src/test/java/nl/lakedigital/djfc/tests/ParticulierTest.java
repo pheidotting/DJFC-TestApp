@@ -38,7 +38,7 @@ public class ParticulierTest extends AbstractTest {
         beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
         beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);
 
-        beherenRelatieTest.voegBijlageToeBijRelatie(LOGGER, voornamen, lijstRelaties, dashboard);
+            //        beherenRelatieTest.voegBijlageToeBijRelatie(LOGGER, voornamen, lijstRelaties, dashboard);
 
         beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 1);
         beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 5);

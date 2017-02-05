@@ -32,6 +32,7 @@ public class BeherenPolisTest extends AbstractPaginaTest {
         List<JsonPolis> aanwezigePolissen = new ArrayList<>();
 
         List<String> soortenVerzekering = beherenPolis.getSoortVerzekering();
+        soortenVerzekering.remove("Kies een soort polis...");
         List<String> verzekeringsmaatschappijen = beherenPolis.getVerzekeringsMaatschappij();
 
         assertTrue(soortenVerzekering.size() > 1);
