@@ -7,6 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class ZakelijkTest extends AbstractTest {
@@ -18,8 +22,14 @@ public class ZakelijkTest extends AbstractTest {
 
     private String naam;
 
+    @Override
+    public List<String> tags() {
+        return newArrayList("zakelijk");
+    }
+
     @Test
     public void voeruitTestZakelijk() {
+        if (uitvoeren) {
         naam = beginHoofdletters(lorem.getWords(2));
 
         beherenBedrijfTest.testBedrijfsgegevensTabblad(LOGGER, naam);
@@ -31,6 +41,7 @@ public class ZakelijkTest extends AbstractTest {
                 testInvoerenNieuwePolissen(LOGGER, null, naam);
         beherenSchadeTest.
                 testInvoerenSchades(LOGGER, null, naam);
+    }
     }
 
     @Override

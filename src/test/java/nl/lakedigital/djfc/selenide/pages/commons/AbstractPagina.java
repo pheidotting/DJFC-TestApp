@@ -17,8 +17,6 @@ import java.util.stream.Collectors;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.google.common.collect.Iterables.transform;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 
 public abstract class AbstractPagina {
     private SelenideElement alertSucces = $(By.id("alertSucces"));
@@ -197,7 +195,7 @@ public abstract class AbstractPagina {
     protected void controleerVeld(Logger LOGGER, SelenideElement element, String verwachteWaarde) {
         if (verwachteWaarde != null) {
             logIsGevuldMet(LOGGER, element, verwachteWaarde);
-            assertThat(element.getValue(), is(verwachteWaarde));
+            element.waitUntil(Condition.value(verwachteWaarde), AbstractTest.timeOut);
         }
     }
 

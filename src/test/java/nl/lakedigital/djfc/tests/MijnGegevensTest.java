@@ -1,10 +1,13 @@
 package nl.lakedigital.djfc.tests;
 
 import com.codeborne.selenide.Condition;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 public class MijnGegevensTest extends AbstractTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(MijnGegevensTest.class);
@@ -13,9 +16,14 @@ public class MijnGegevensTest extends AbstractTest {
         super(LOGGER);
     }
 
+    @Override
+    public List<String> tags() {
+        return newArrayList("mijngegevens");
+    }
+
     @Test
-    @Ignore
     public void testMijnGegevens() {
+        if (uitvoeren) {
         dashboard.klikNaarBeheer(LOGGER);
 
         mijnGegevens.getOpslaan().waitUntil(Condition.appears, timeOut);
@@ -23,7 +31,7 @@ public class MijnGegevensTest extends AbstractTest {
         mijnGegevensTest.testWachtwoord(LOGGER);
 
         mijnGegevensTest.testInvullenNieuweGegevens(LOGGER, "Hendrik", "", "Haverkamp", "info@hendrikhaverkamp.nl");
-
+    }
     }
 
     @Override

@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.google.common.collect.Lists.newArrayList;
 
 public abstract class AbstractTest {
     private static Logger LOGGER = LoggerFactory.getLogger(AbstractTest.class);
@@ -75,6 +76,7 @@ public abstract class AbstractTest {
     private List<String> opmerkingen;
 
     protected boolean opServer = false;
+    protected boolean uitvoeren = false;
 
     public AbstractTest(Logger LOGGER) {
         this.LOGGER = LOGGER;
@@ -96,6 +98,8 @@ public abstract class AbstractTest {
 
     public abstract void inloggen();
 
+    public abstract List<String> tags();
+
     @Before
     public void setup() {
         LOGGER.debug("OS {}", System.getProperty("os.name"));
@@ -107,15 +111,28 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //                WebDriverRunner.setWebDriver(new ChromeDriver());
+        //                        WebDriverRunner.setWebDriver(new ChromeDriver());
         WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
+        List<String> teRunnenTags = newArrayList("particulier");
+        if (teRunnenTags.isEmpty()) {
+            uitvoeren = true;
+        } else {
+            for (String tag : teRunnenTags) {
+                if (tags().contains(tag)) {
+                    uitvoeren = true;
+                }
+            }
+        }
+
         if (!System.getProperty("os.name").equals("Mac OS X")) {
+            uitvoeren = true;
             opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
-            timeOut = 60000L;
+            timeOut = 30000L;
         }
+        if (uitvoeren) {
         basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";
 
         LOGGER.debug("basisUrlRest {}", basisUrlRest);
@@ -146,15 +163,18 @@ public abstract class AbstractTest {
 
         inloggen();
     }
+    }
 
     @After
     public  void afsluiten() {
+        if (uitvoeren) {
         assertNoJavascriptErrors();
         close();
 
         setFeatureToggle(todoistToggle, toggleTodoistWas);
         setFeatureToggle(telefonieToggle, toggleTelefonieWas);
         setFeatureToggle(beheerToggle, toggleBeheerWas);
+    }
     }
 
 

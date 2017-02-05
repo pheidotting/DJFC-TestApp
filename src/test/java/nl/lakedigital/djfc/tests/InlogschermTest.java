@@ -4,6 +4,10 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+
 public class InlogschermTest extends AbstractTest {
     private final static Logger LOGGER = LoggerFactory.getLogger(InlogschermTest.class);
 
@@ -11,8 +15,14 @@ public class InlogschermTest extends AbstractTest {
         super(LOGGER);
     }
 
+    @Override
+    public List<String> tags() {
+        return newArrayList("inlogscherm");
+    }
+
     @Test
     public void testHetInlogscherm() {
+        if (uitvoeren) {
         loginPagina.testOngeldigeLogin(LOGGER);
         loginPagina.testOngeldigWachtwoord(LOGGER, "djfc.bene");
         loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarParticulier());
@@ -21,6 +31,7 @@ public class InlogschermTest extends AbstractTest {
         dashboard.klikUitloggen(LOGGER);
 
         loginPagina.isInlogButtonAanwezig(LOGGER);
+    }
     }
 
     @Override

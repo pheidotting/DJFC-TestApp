@@ -9,6 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,8 +25,14 @@ public class ParticulierTest extends AbstractTest {
         super(LOGGER);
     }
 
+    @Override
+    public List<String> tags() {
+        return newArrayList("particulier");
+    }
+
     @Test
     public void testParticulier() {
+        if (uitvoeren) {
         voornamen = voornaam();
 
         beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
@@ -56,6 +65,7 @@ public class ParticulierTest extends AbstractTest {
         beherenRelatie.verwijderRelatie(LOGGER);
 
         assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
+    }
     }
 
     private String voornaam() {
