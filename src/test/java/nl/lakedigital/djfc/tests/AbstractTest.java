@@ -18,6 +18,7 @@ import nl.lakedigital.djfc.tests.commons.MijnGegevensTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -130,6 +131,7 @@ public abstract class AbstractTest {
             opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
+            WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
         }
         if (uitvoeren) {
