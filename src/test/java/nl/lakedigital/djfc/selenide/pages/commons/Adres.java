@@ -3,6 +3,7 @@ package nl.lakedigital.djfc.selenide.pages.commons;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import nl.lakedigital.djfc.commons.json.JsonAdres;
+import nl.lakedigital.djfc.tests.AbstractTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class Adres extends AbstractPagina {
         logInvullen(LOGGER, this.huisnummer, huisnummer);
         this.huisnummer.setValue(huisnummer);
         this.huisnummer.sendKeys(Keys.TAB);
-        this.postcode.waitUntil(Condition.value(postcodeLang), 3000);
+        this.postcode.waitUntil(Condition.value(postcodeLang), AbstractTest.timeOut);
     }
 
     public void checkStraatEnPlaatsnaam(Logger LOGGER, String straat, String plaatsnaam, String postcodeLang) {
