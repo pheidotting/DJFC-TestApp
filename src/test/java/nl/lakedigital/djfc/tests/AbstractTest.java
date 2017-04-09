@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,10 +113,10 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //        WebDriverRunner.setWebDriver(new ChromeDriver());
-        WebDriverRunner.setWebDriver(new PhantomJSDriver());
+        WebDriverRunner.setWebDriver(new ChromeDriver());
+        //        WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
-        List<String> teRunnenTags = newArrayList("particulier");
+        List<String> teRunnenTags = newArrayList("inlogscherm");
         if (teRunnenTags.isEmpty()) {
             uitvoeren = true;
         } else {
@@ -161,7 +162,7 @@ public abstract class AbstractTest {
         medewerker.setKantoor(kantoor);
 
         LOGGER.info("Naar de inlogpagina {}index.html#inloggen", basisUrl);
-        open(basisUrl + "index.html#inloggen");
+            open(basisUrl + "inloggen.html");
 
         inloggen();
     }

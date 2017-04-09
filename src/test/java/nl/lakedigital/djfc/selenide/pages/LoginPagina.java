@@ -11,14 +11,14 @@ import org.slf4j.Logger;
 
 import static com.codeborne.selenide.Selenide.$;
 import static nl.lakedigital.djfc.TestCaseDJFC.Case.*;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 
 public class LoginPagina extends AbstractPagina {
     private SelenideElement identificatie = $(By.id("identificatie"));
     private SelenideElement wachtwoord = $(By.id("wachtwoord"));
     private SelenideElement button = $(By.id("inlogButton"));
+    private SelenideElement foutmeldingOnjuisteGebruikersnaam = $(By.id("foutmeldingOnjuisteGebruikersnaam"));
+    private SelenideElement foutmeldingOnjuistWachtwoord = $(By.id("foutmeldingOnjuistWachtwoord"));
 
     public void setIdentificatie(Logger LOGGER, String identificatie) {
         logInvullen(LOGGER, this.identificatie, identificatie);
@@ -68,8 +68,7 @@ public class LoginPagina extends AbstractPagina {
         setIdentificatie(LOGGER, "bestaatniet");
         setWachtwoord(LOGGER, "onzin");
         clickButton(LOGGER, false, false);
-        getAlertDanger().waitUntil(Condition.appears, 5000);
-        assertThat(getAlertDanger().getText(), is("Er is een fout opgetreden : De ingevoerde gebruikersnaam werd niet gevonden"));
+        foutmeldingOnjuisteGebruikersnaam.waitUntil(Condition.appears, 5000);
     }
 
     @TestCaseDJFC(DJFC53)
@@ -77,8 +76,7 @@ public class LoginPagina extends AbstractPagina {
         setIdentificatie(LOGGER, identificatie);
         setWachtwoord(LOGGER, "ongeldigwachtwoord");
         clickButton(LOGGER, false, false);
-        getAlertDanger().waitUntil(Condition.appears, 5000);
-        assertThat(getAlertDanger().getText(), is("Er is een fout opgetreden : Het ingevoerde wachtwoord is onjuist"));
+        foutmeldingOnjuistWachtwoord.waitUntil(Condition.appears, 5000);
     }
 
 }
