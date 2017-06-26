@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -112,8 +113,6 @@ public abstract class AbstractTest {
         String os = System.getProperty("os.name").equals("Mac OS X") ? "" : "-linux";
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
-        //        WebDriverRunner.setWebDriver(new ChromeDriver());
-        //        WebDriverRunner.setWebDriver(new PhantomJSDriver());
 
         List<String> teRunnenTags = newArrayList("inlogscherm");
         if (teRunnenTags.isEmpty()) {
@@ -126,17 +125,19 @@ public abstract class AbstractTest {
             }
         }
 
-        //        if (!System.getProperty("os.name").equals("Mac OS X")) {
-            LOGGER.debug("Ik draai op de server, dus PhantomJS it is!!");
+        if (!System.getProperty("os.name").equals("Mac OS X")) {
             uitvoeren = true;
             opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
             WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
-            //        } else {
-            //            basisUrl = "http://192.168.91.215:8080/";
-        //        }
+        } else {
+            WebDriverRunner.setWebDriver(new ChromeDriver());
+            //        WebDriverRunner.setWebDriver(new PhantomJSDriver());
+            //                    WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+            basisUrl = "http://192.168.91.215:8080/";
+        }
         if (uitvoeren) {
             basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";
 
