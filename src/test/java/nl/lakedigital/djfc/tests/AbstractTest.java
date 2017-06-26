@@ -134,52 +134,52 @@ public abstract class AbstractTest {
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
             WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
-        } else {
-            basisUrl = "http://192.168.91.215:8080/";
+            //        } else {
+            //            basisUrl = "http://192.168.91.215:8080/";
         }
         if (uitvoeren) {
-        basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";
+            basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";
 
-        LOGGER.debug("basisUrlRest {}", basisUrlRest);
+            LOGGER.debug("basisUrlRest {}", basisUrlRest);
 
-         toggleTodoistWas = getFeatureToggle(todoistToggle);
-         toggleTelefonieWas = getFeatureToggle(telefonieToggle);
-        toggleBeheerWas = getFeatureToggle(beheerToggle);
+            toggleTodoistWas = getFeatureToggle(todoistToggle);
+            toggleTelefonieWas = getFeatureToggle(telefonieToggle);
+            toggleBeheerWas = getFeatureToggle(beheerToggle);
 
-        Map<String, Boolean> toggles = new HashMap<>();
-        toggles.put(todoistToggle, toggleTodoistWas);
-        toggles.put(telefonieToggle, toggleTelefonieWas);
-        screenshotAlsTestFaalt.setAbstractTest(this);
-        screenshotAlsTestFaalt.setToggles(toggles);
-        setFeatureToggle(todoistToggle, false);
-        setFeatureToggle(telefonieToggle, true);
-        setFeatureToggle(beheerToggle, false);
+            Map<String, Boolean> toggles = new HashMap<>();
+            toggles.put(todoistToggle, toggleTodoistWas);
+            toggles.put(telefonieToggle, toggleTelefonieWas);
+            screenshotAlsTestFaalt.setAbstractTest(this);
+            screenshotAlsTestFaalt.setToggles(toggles);
+            setFeatureToggle(todoistToggle, false);
+            setFeatureToggle(telefonieToggle, true);
+            setFeatureToggle(beheerToggle, false);
 
-        medewerker = new Medewerker();
-        medewerker.setVoornaam("Bene");
-        medewerker.setTussenvoegsel("de");
-        medewerker.setAchternaam("Jonge");
-        Kantoor kantoor=new Kantoor();
-        kantoor.setNaam("De Jonge Financieel Consult");
-        medewerker.setKantoor(kantoor);
+            medewerker = new Medewerker();
+            medewerker.setVoornaam("Bene");
+            medewerker.setTussenvoegsel("de");
+            medewerker.setAchternaam("Jonge");
+            Kantoor kantoor = new Kantoor();
+            kantoor.setNaam("De Jonge Financieel Consult");
+            medewerker.setKantoor(kantoor);
 
-        LOGGER.info("Naar de inlogpagina {}index.html#inloggen", basisUrl);
+            LOGGER.info("Naar de inlogpagina {}index.html#inloggen", basisUrl);
             open(basisUrl + "inloggen.html");
 
-        inloggen();
-    }
+            inloggen();
+        }
     }
 
     @After
-    public  void afsluiten() {
+    public void afsluiten() {
         if (uitvoeren) {
-        assertNoJavascriptErrors();
-        close();
+            assertNoJavascriptErrors();
+            close();
 
-        setFeatureToggle(todoistToggle, toggleTodoistWas);
-        setFeatureToggle(telefonieToggle, toggleTelefonieWas);
-        setFeatureToggle(beheerToggle, toggleBeheerWas);
-    }
+            setFeatureToggle(todoistToggle, toggleTodoistWas);
+            setFeatureToggle(telefonieToggle, toggleTelefonieWas);
+            setFeatureToggle(beheerToggle, toggleBeheerWas);
+        }
     }
 
 
@@ -195,7 +195,6 @@ public abstract class AbstractTest {
 
         return sb.toString();
     }
-
 
 
     public boolean getFeatureToggle(String toggleNaam) {
