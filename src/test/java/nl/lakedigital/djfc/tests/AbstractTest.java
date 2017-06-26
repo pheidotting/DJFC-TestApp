@@ -128,6 +128,7 @@ public abstract class AbstractTest {
         }
 
         if (!System.getProperty("os.name").equals("Mac OS X")) {
+            LOGGER.debug("Ik draai op de server, dus PhantomJS it is!!");
             uitvoeren = true;
             opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
