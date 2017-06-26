@@ -2,6 +2,7 @@ package nl.lakedigital.djfc.tests;
 
 import com.codeborne.selenide.Condition;
 import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -14,6 +15,7 @@ import java.util.List;
 import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.Assert.assertNull;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class ParticulierTest extends AbstractTest {
@@ -33,39 +35,39 @@ public class ParticulierTest extends AbstractTest {
     @Test
     public void testParticulier() {
         if (uitvoeren) {
-        voornamen = voornaam();
+            voornamen = voornaam();
 
-        beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
-        beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);
+            beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
+            beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);
 
             //        beherenRelatieTest.voegBijlageToeBijRelatie(LOGGER, voornamen, lijstRelaties, dashboard);
 
-        beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 1);
-        beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 5);
+            beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 1);
+            beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 5);
 
-        beherenRelatieTest.controleerOpmerkingenBijRelatie(LOGGER, voornamen);
+            beherenRelatieTest.controleerOpmerkingenBijRelatie(LOGGER, voornamen);
 
-        beherenPolisTest.
-                testInvoerenNieuwePolissen(LOGGER, voornamen, null);
+            beherenPolisTest.
+                    testInvoerenNieuwePolissen(LOGGER, voornamen, null);
 
-        beherenSchadeTest.
-                testInvoerenSchades(LOGGER, voornamen, null);
+            beherenSchadeTest.
+                    testInvoerenSchades(LOGGER, voornamen, null);
 
-        //MIJN GEGEVENS, NIET BESCHIKBAAR
-        dashboard.getNaarBeheer().waitUntil(Condition.disappears, timeOut);
-        dashboard.klikNaarParticulier(LOGGER);
+            //MIJN GEGEVENS, NIET BESCHIKBAAR
+            dashboard.getNaarBeheer().waitUntil(Condition.disappears, timeOut);
+            dashboard.klikNaarParticulier(LOGGER);
 
-        lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
-        beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.HYPOTHEEK, LOGGER);
-        beherenHypotheekTest.invullenGegevens(LOGGER);
+            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+            beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.HYPOTHEEK, LOGGER);
+            beherenHypotheekTest.invullenGegevens(LOGGER);
 
-        beherenRelatie.klikHomeKnop(LOGGER, dashboard.getNaarParticulier());
-        dashboard.klikNaarParticulier(LOGGER);
-        lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
-        beherenRelatie.verwijderRelatie(LOGGER);
+            beherenRelatie.klikHomeKnop(LOGGER, dashboard.getNaarParticulier());
+            dashboard.klikNaarParticulier(LOGGER);
+            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+            beherenRelatie.verwijderRelatie(LOGGER);
 
-        assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
-    }
+            assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
+        }
     }
 
     private String voornaam() {

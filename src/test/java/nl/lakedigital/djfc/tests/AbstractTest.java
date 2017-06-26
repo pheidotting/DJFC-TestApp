@@ -134,6 +134,8 @@ public abstract class AbstractTest {
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
             WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
+        } else {
+            basisUrl = "http://192.168.91.215:8080/";
         }
         if (uitvoeren) {
         basisUrlRest = basisUrl.replace("djfc/", "") + "dejonge/";

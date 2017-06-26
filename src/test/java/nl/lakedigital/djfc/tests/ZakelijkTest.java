@@ -1,5 +1,6 @@
 package nl.lakedigital.djfc.tests;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
+@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class ZakelijkTest extends AbstractTest {
@@ -30,18 +32,18 @@ public class ZakelijkTest extends AbstractTest {
     @Test
     public void voeruitTestZakelijk() {
         if (uitvoeren) {
-        naam = beginHoofdletters(lorem.getWords(2));
+            naam = beginHoofdletters(lorem.getWords(2));
 
-        beherenBedrijfTest.testBedrijfsgegevensTabblad(LOGGER, naam);
+            beherenBedrijfTest.testBedrijfsgegevensTabblad(LOGGER, naam);
 
-        lijstBedrijvenPagina.zoekEnSelecteer(naam, beherenBedrijfPagina.getOpslaanBedrijf());
-        beherenSchades.klikHomeKnop(LOGGER);
+            lijstBedrijvenPagina.zoekEnSelecteer(naam, beherenBedrijfPagina.getOpslaanBedrijf());
+            beherenSchades.klikHomeKnop(LOGGER);
 
-        beherenPolisTest.
-                testInvoerenNieuwePolissen(LOGGER, null, naam);
-        beherenSchadeTest.
-                testInvoerenSchades(LOGGER, null, naam);
-    }
+            beherenPolisTest.
+                    testInvoerenNieuwePolissen(LOGGER, null, naam);
+            beherenSchadeTest.
+                    testInvoerenSchades(LOGGER, null, naam);
+        }
     }
 
     @Override

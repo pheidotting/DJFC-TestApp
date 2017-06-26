@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 
 import static com.codeborne.selenide.Selenide.$;
 import static nl.lakedigital.djfc.TestCaseDJFC.Case.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 
 public class LoginPagina extends AbstractPagina {
@@ -52,6 +54,11 @@ public class LoginPagina extends AbstractPagina {
         LOGGER.info("invullen inlog informatie");
         setIdentificatie(LOGGER, identificatie);
         setWachtwoord(LOGGER, wachtwoord);
+
+        //checken of identificatie gevuld is..
+        logIsGevuldMet(LOGGER, this.identificatie, identificatie);
+        assertThat(this.identificatie.getValue(), is(identificatie));
+
         clickButton(LOGGER, false, true);
         if (wachtenOp != null) {
             wachtenOp.waitUntil(Condition.appears, AbstractTest.timeOut);
