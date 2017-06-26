@@ -104,7 +104,7 @@ public abstract class AbstractTest {
 
     @Before
     public void setup() {
-        LOGGER.debug("OS {}", System.getProperty("os.name"));
+        LOGGER.debug("OS waar we op draaien : {}", System.getProperty("os.name"));
         basisUrl = "http://localhost:8080/";
 
         Configuration.reportsFolder = "target/screenshots";
