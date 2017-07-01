@@ -1,7 +1,5 @@
 package nl.lakedigital.djfc.tests;
 
-import com.codeborne.selenide.Condition;
-import nl.lakedigital.djfc.selenide.pages.commons.AbstractPagina;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static org.junit.Assert.assertNull;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -54,19 +51,19 @@ public class ParticulierTest extends AbstractTest {
                     testInvoerenSchades(LOGGER, voornamen, null);
 
             //MIJN GEGEVENS, NIET BESCHIKBAAR
-            dashboard.getNaarBeheer().waitUntil(Condition.disappears, timeOut);
-            dashboard.klikNaarParticulier(LOGGER);
-
-            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
-            beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.HYPOTHEEK, LOGGER);
-            beherenHypotheekTest.invullenGegevens(LOGGER);
-
-            beherenRelatie.klikHomeKnop(LOGGER, dashboard.getNaarParticulier());
-            dashboard.klikNaarParticulier(LOGGER);
-            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
-            beherenRelatie.verwijderRelatie(LOGGER);
-
-            assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
+            //            dashboard.getNaarBeheer().waitUntil(Condition.disappears, timeOut);
+            //            dashboard.klikNaarParticulier(LOGGER);
+            //
+            //            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+            //            beherenRelatie.klikMenuItem(AbstractPagina.MenuItem.HYPOTHEEK, LOGGER);
+            //            beherenHypotheekTest.invullenGegevens(LOGGER);
+            //
+            //            beherenRelatie.klikHomeKnop(LOGGER, dashboard.getNaarParticulier());
+            //            dashboard.klikNaarParticulier(LOGGER);
+            //            lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
+            //            beherenRelatie.verwijderRelatie(LOGGER);
+            //
+            //            assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
         }
     }
 
@@ -76,7 +73,7 @@ public class ParticulierTest extends AbstractTest {
 
     @Override
     public void inloggen() {
-        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarParticulier());
-        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
+        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", null);//dashboard.getNaarParticulier());
+        //        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
     }
 }

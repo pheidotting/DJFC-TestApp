@@ -24,12 +24,12 @@ public class LoginPagina extends AbstractPagina {
 
     public void setIdentificatie(Logger LOGGER, String identificatie) {
         logInvullen(LOGGER, this.identificatie, identificatie);
-        this.identificatie.setValue(identificatie);
+        setVeld(this.identificatie, identificatie);
     }
 
     public void setWachtwoord(Logger LOGGER, String wachtwoord) {
         logInvullen(LOGGER, this.wachtwoord, wachtwoord);
-        this.wachtwoord.setValue(wachtwoord);
+        setVeld(this.wachtwoord, wachtwoord);
     }
 
     public void isInlogButtonAanwezig(Logger LOGGER) {

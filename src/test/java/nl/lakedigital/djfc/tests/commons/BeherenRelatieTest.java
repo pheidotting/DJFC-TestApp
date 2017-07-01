@@ -12,7 +12,6 @@ import nl.lakedigital.djfc.commons.json.JsonRekeningNummer;
 import nl.lakedigital.djfc.commons.json.JsonRelatie;
 import nl.lakedigital.djfc.commons.json.JsonTelefoonnummer;
 import nl.lakedigital.djfc.selenide.pages.BeherenBedrijf;
-import nl.lakedigital.djfc.selenide.pages.Dashboard;
 import nl.lakedigital.djfc.selenide.pages.LijstBedrijven;
 import nl.lakedigital.djfc.selenide.pages.LijstRelaties;
 import nl.lakedigital.djfc.selenide.pages.commons.*;
@@ -40,14 +39,14 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
     private Lorem lorem = LoremIpsum.getInstance();
     private JsonRelatie relatie;
 
-    public void voegBijlageToeBijRelatie(Logger LOGGER, String voornamen, LijstRelaties lijstRelaties, Dashboard dashboard) {
+    public void voegBijlageToeBijRelatie(Logger LOGGER, String voornamen, LijstRelaties lijstRelaties) {
         if (WebDriverRunner.getAndCheckWebDriver() instanceof PhantomJSDriver) {
             lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), null);
 
             beherenRelatie.getBijlages().uploadFile(LOGGER, Bijlages.UploadBestand.EEN_PDF);
 
             beherenRelatie.klikHomeKnop(LOGGER);
-            dashboard.klikNaarParticulier(LOGGER);
+            //            dashboard.klikNaarParticulier(LOGGER);
 
             //Controleren
             lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), null);
@@ -69,24 +68,24 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
             assertThat(beherenRelatie.getBijlages().getBijlages().get(0).getOmschrijvingOfBestandsNaam().getText(), Is.is(nwOmschrijving));
 
             beherenRelatie.klikHomeKnop(LOGGER);
-            dashboard.klikNaarParticulier(LOGGER);
+            //            dashboard.klikNaarParticulier(LOGGER);
         }
     }
 
     public void controleerIngevuldeRelatie(Logger LOGGER) {
         beherenRelatie.klikHomeKnop(LOGGER);
-        dashboard.klikNaarParticulier(LOGGER);
+        //        dashboard.klikNaarParticulier(LOGGER);
 
         //Controleren
         lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, relatie.getVoornaam(), false), null);
         beherenRelatie.controleerPagina(LOGGER, relatie, adressen, rekeningNummers, telefoonnummers);
 
         beherenRelatie.klikHomeKnop(LOGGER);
-        dashboard.klikNaarParticulier(LOGGER);
+        //        dashboard.klikNaarParticulier(LOGGER);
     }
 
     public void testTabbladRelatieGegevens(Logger LOGGER, String voornamen) {
-        dashboard.klikNaarParticulier(LOGGER);
+        //        dashboard.klikNaarParticulier(LOGGER);
 
         lijstRelaties.isZoekTermAanwezig(LOGGER);
         assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
@@ -247,7 +246,7 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
         assertThat(teControlerenOpmerkingen.size(), is(0));
 
         beherenRelatie.klikHomeKnop(LOGGER);
-        dashboard.klikNaarParticulier(LOGGER);
+        //        dashboard.klikNaarParticulier(LOGGER);
     }
 
     public void voegExtraOpmerkingToeBijRelatie(Logger LOGGER, String voornamen, int aantal) {

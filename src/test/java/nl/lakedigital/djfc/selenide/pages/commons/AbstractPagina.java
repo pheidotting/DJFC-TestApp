@@ -199,5 +199,13 @@ public abstract class AbstractPagina {
         }
     }
 
+    protected void setVeld(SelenideElement element, String waarde) {
+        if (!element.is(Condition.visible)) {
+            wachtFf();
+            element.waitUntil(Condition.visible, AbstractTest.timeOut);
+            element.setValue(waarde);
+        }
+    }
+
 
 }

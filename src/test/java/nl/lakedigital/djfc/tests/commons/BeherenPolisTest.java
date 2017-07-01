@@ -23,7 +23,7 @@ public class BeherenPolisTest extends AbstractPaginaTest {
         if (voornamen != null) {
             lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
         } else {
-            dashboard.klikNaarZakelijk(LOGGER);
+            //            dashboard.klikNaarZakelijk(LOGGER);
             lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(bedrijfsnaam, false), beherenBedrijf.getOpslaanBedrijf());
         }
 

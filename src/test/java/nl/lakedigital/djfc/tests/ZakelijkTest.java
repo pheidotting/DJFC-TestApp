@@ -48,7 +48,7 @@ public class ZakelijkTest extends AbstractTest {
 
     @Override
     public void inloggen() {
-        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarZakelijk());
-        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
+        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", null);//dashboard.getNaarZakelijk());
+        //        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
     }
 }

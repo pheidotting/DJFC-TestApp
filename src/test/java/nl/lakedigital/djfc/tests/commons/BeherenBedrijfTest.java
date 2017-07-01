@@ -13,7 +13,7 @@ public class BeherenBedrijfTest extends AbstractPaginaTest {
     }
 
     public void testBedrijfsgegevensTabblad(Logger LOGGER, String naam) {
-        dashboard.klikNaarZakelijk(LOGGER);
+        //        dashboard.klikNaarZakelijk(LOGGER);
 
         lijstBedrijven.isZoekTermAanwezig();
         assertNull(lijstBedrijven.zoekBedrijf(naam, false));

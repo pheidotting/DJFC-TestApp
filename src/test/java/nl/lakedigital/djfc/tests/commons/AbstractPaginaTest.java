@@ -19,7 +19,6 @@ public abstract class AbstractPaginaTest {
     private static Logger LOGGER = LoggerFactory.getLogger(AbstractPaginaTest.class);
 
     protected LoginPagina loginPagina;
-    protected Dashboard dashboard;
     protected LijstRelaties lijstRelaties;
     protected BeherenRelatie beherenRelatie;
     protected BeherenPolis beherenPolis;
@@ -50,7 +49,6 @@ public abstract class AbstractPaginaTest {
         this.lijstBedrijven = lijstBedrijven;
 
         loginPagina = new LoginPagina();
-        dashboard = new Dashboard();
         lijstRelaties = new LijstRelaties();
         beherenRelatie = new BeherenRelatie();
         beherenPolis = new BeherenPolis();

@@ -18,10 +18,10 @@ public class BeherenSchadeTest extends AbstractPaginaTest {
 
     public void testInvoerenSchades(Logger LOGGER, String voornamen, String bedrijfsnaam) {
         if (voornamen != null) {
-            dashboard.klikNaarParticulier(LOGGER);
+            //            dashboard.klikNaarParticulier(LOGGER);
             lijstRelaties.selecteer(LOGGER, lijstRelaties.zoekGebruiker(LOGGER, voornamen, false), beherenRelatie.getOpslaanRelatie(LOGGER));
         } else {
-            dashboard.klikNaarZakelijk(LOGGER);
+            //            dashboard.klikNaarZakelijk(LOGGER);
             lijstBedrijven.selecteer(lijstBedrijven.zoekBedrijf(bedrijfsnaam, false), beherenBedrijf.getOpslaanBedrijf());
         }
 

@@ -19,7 +19,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +48,6 @@ public abstract class AbstractTest {
     protected Medewerker medewerker;
 
     protected LoginPagina loginPagina;
-    protected Dashboard dashboard;
     protected LijstRelaties lijstRelaties;
     protected BeherenRelatie beherenRelatie;
     protected BeherenPolis beherenPolis;
@@ -84,7 +82,6 @@ public abstract class AbstractTest {
         this.LOGGER = LOGGER;
 
         loginPagina = new LoginPagina();
-        dashboard = new Dashboard();
         lijstRelaties = new LijstRelaties();
         beherenRelatie = new BeherenRelatie();
         beherenPolis = new BeherenPolis();
@@ -114,7 +111,7 @@ public abstract class AbstractTest {
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
 
-        List<String> teRunnenTags = newArrayList("inlogscherm");
+        List<String> teRunnenTags = newArrayList();//"inlogscherm");
         if (teRunnenTags.isEmpty()) {
             uitvoeren = true;
         } else {
@@ -133,9 +130,9 @@ public abstract class AbstractTest {
             WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
         } else {
-            WebDriverRunner.setWebDriver(new ChromeDriver());
-            //        WebDriverRunner.setWebDriver(new PhantomJSDriver());
-            //                    WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+            //            WebDriverRunner.setWebDriver(new ChromeDriver());
+            WebDriverRunner.setWebDriver(new PhantomJSDriver());
+            WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             basisUrl = "http://192.168.91.215:8080/";
         }
         if (uitvoeren) {

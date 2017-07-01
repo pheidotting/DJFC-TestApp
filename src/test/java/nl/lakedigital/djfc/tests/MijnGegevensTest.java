@@ -26,7 +26,7 @@ public class MijnGegevensTest extends AbstractTest {
     @Test
     public void testMijnGegevens() {
         if (uitvoeren) {
-            dashboard.klikNaarBeheer(LOGGER);
+            //            dashboard.klikNaarBeheer(LOGGER);
 
             mijnGegevens.getOpslaan().waitUntil(Condition.appears, timeOut);
 
@@ -42,7 +42,7 @@ public class MijnGegevensTest extends AbstractTest {
 
         LOGGER.debug("beheerToggle {}", getFeatureToggle(beheerToggle));
 
-        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", dashboard.getNaarBeheer());
-        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
+        loginPagina.inloggen(LOGGER, "djfc.bene", "bene", null);//dashboard.getNaarBeheer());
+        //        dashboard.testIngelogdeGebruiker(LOGGER, maakNaamMedewerker(medewerker), medewerker.getKantoor().getNaam());
     }
 }
