@@ -203,8 +203,8 @@ public abstract class AbstractPagina {
         if (!element.is(Condition.visible)) {
             wachtFf();
             element.waitUntil(Condition.visible, AbstractTest.timeOut);
-            element.setValue(waarde);
         }
+        element.setValue(waarde);
     }
 
 

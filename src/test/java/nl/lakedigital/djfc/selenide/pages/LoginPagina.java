@@ -23,7 +23,9 @@ public class LoginPagina extends AbstractPagina {
     private SelenideElement foutmeldingOnjuistWachtwoord = $(By.id("foutmeldingOnjuistWachtwoord"));
 
     public void setIdentificatie(Logger LOGGER, String identificatie) {
+        LOGGER.debug("A");
         logInvullen(LOGGER, this.identificatie, identificatie);
+        LOGGER.debug("B");
         setVeld(this.identificatie, identificatie);
     }
 
@@ -75,7 +77,7 @@ public class LoginPagina extends AbstractPagina {
         setIdentificatie(LOGGER, "bestaatniet");
         setWachtwoord(LOGGER, "onzin");
         clickButton(LOGGER, false, false);
-        foutmeldingOnjuisteGebruikersnaam.waitUntil(Condition.appears, 5000);
+        foutmeldingOnjuisteGebruikersnaam.waitUntil(Condition.appears, AbstractTest.timeOut);
     }
 
     @TestCaseDJFC(DJFC53)
@@ -83,7 +85,7 @@ public class LoginPagina extends AbstractPagina {
         setIdentificatie(LOGGER, identificatie);
         setWachtwoord(LOGGER, "ongeldigwachtwoord");
         clickButton(LOGGER, false, false);
-        foutmeldingOnjuistWachtwoord.waitUntil(Condition.appears, 5000);
+        foutmeldingOnjuistWachtwoord.waitUntil(Condition.appears, AbstractTest.timeOut);
     }
 
 }
