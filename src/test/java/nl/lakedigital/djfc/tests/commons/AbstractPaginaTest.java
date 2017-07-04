@@ -25,6 +25,7 @@ public abstract class AbstractPaginaTest {
     protected BeherenPolissen beherenPolissen;
     protected BeherenSchade beherenSchade;
     protected BeherenSchades beherenSchades;
+    protected ZoekScherm zoekScherm = new ZoekScherm();
 
     protected BeherenBedrijf beherenBedrijf;
     protected LijstBedrijven lijstBedrijven;

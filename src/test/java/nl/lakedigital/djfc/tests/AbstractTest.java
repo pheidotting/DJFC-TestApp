@@ -19,6 +19,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +62,7 @@ public abstract class AbstractTest {
     protected BeherenBedrijf beherenBedrijfPagina = new BeherenBedrijf();
     @Inject
     protected LijstBedrijven lijstBedrijvenPagina = new LijstBedrijven();
+    protected ZoekScherm zoekScherm = new ZoekScherm();
 
     protected BeherenRelatieTest beherenRelatieTest = new BeherenRelatieTest(beherenBedrijfPagina, lijstBedrijvenPagina);
     protected BeherenPolisTest beherenPolisTest = new BeherenPolisTest(beherenBedrijfPagina, lijstBedrijvenPagina);
@@ -130,9 +132,9 @@ public abstract class AbstractTest {
             WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
         } else {
-            //            WebDriverRunner.setWebDriver(new ChromeDriver());
-            WebDriverRunner.setWebDriver(new PhantomJSDriver());
-            WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+            WebDriverRunner.setWebDriver(new ChromeDriver());
+            //            WebDriverRunner.setWebDriver(new PhantomJSDriver());
+            //            WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             basisUrl = "http://192.168.91.215:8080/";
         }
         if (uitvoeren) {

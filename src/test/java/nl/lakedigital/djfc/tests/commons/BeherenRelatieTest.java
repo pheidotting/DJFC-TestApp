@@ -29,7 +29,8 @@ import static com.google.common.collect.Iterables.getFirst;
 import static com.google.common.collect.Lists.newArrayList;
 import static nl.lakedigital.djfc.TestCase.Case.Case1;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 
 public class BeherenRelatieTest extends AbstractPaginaTest {
     public BeherenRelatieTest(BeherenBedrijf beherenBedrijf, LijstBedrijven lijstBedrijven) {
@@ -85,29 +86,30 @@ public class BeherenRelatieTest extends AbstractPaginaTest {
     }
 
     public void testTabbladRelatieGegevens(Logger LOGGER, String voornamen) {
+        zoekScherm.klikNieuweRelatie();
         //        dashboard.klikNaarParticulier(LOGGER);
 
-        lijstRelaties.isZoekTermAanwezig(LOGGER);
-        assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
-        lijstRelaties.klikToevoegenNieuweRelatie(LOGGER);
+        //        lijstRelaties.isZoekTermAanwezig(LOGGER);
+        //        assertNull(lijstRelaties.zoekGebruiker(LOGGER, voornamen, false));
+        //        lijstRelaties.klikToevoegenNieuweRelatie(LOGGER);
 
-        beherenRelatie.testTakenNietZichtbaar(LOGGER);
-
-        testFoutmeldingBijNietsIngevuld(LOGGER, beherenRelatie);
-        testFoutmeldingAllesIngevuldBehalveDeVerplichteVelden(LOGGER, beherenRelatie);
-
-        testFoutmeldingBijOnjuistMailAdres(LOGGER);
-        testFoutmeldingBijOnjuisteGeboorteDatum(LOGGER);
+        //        beherenRelatie.testTakenNietZichtbaar(LOGGER);
+        //
+        //        testFoutmeldingBijNietsIngevuld(LOGGER, beherenRelatie);
+        //        testFoutmeldingAllesIngevuldBehalveDeVerplichteVelden(LOGGER, beherenRelatie);
+        //
+        //        testFoutmeldingBijOnjuistMailAdres(LOGGER);
+        //        testFoutmeldingBijOnjuisteGeboorteDatum(LOGGER);
 
         relatie = maakRelatie(voornamen);
 
         beherenRelatie.vulPagina(LOGGER, relatie);
         beherenRelatie.controleerPagina(LOGGER, relatie, adressen, rekeningNummers, telefoonnummers);
 
-        voegAdresToe(LOGGER);
-        voegRekeningnummerToe(LOGGER);
-        voegTelefoonnummerToe(LOGGER);
-        voegOpmerkingToeBijRelatie(LOGGER);
+        //        voegAdresToe(LOGGER);
+        //        voegRekeningnummerToe(LOGGER);
+        //        voegTelefoonnummerToe(LOGGER);
+        //        voegOpmerkingToeBijRelatie(LOGGER);
 
         beherenRelatie.klikOpslaan(LOGGER, true);
     }

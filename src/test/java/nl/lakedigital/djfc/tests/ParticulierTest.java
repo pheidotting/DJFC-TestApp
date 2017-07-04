@@ -1,6 +1,5 @@
 package nl.lakedigital.djfc.tests;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -12,7 +11,6 @@ import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
 
-@Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")
 public class ParticulierTest extends AbstractTest {
@@ -34,21 +32,23 @@ public class ParticulierTest extends AbstractTest {
         if (uitvoeren) {
             voornamen = voornaam();
 
+            zoekScherm.klikNieuweRelatie();
+
             beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
-            beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);
-
-            //        beherenRelatieTest.voegBijlageToeBijRelatie(LOGGER, voornamen, lijstRelaties, dashboard);
-
-            beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 1);
-            beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 5);
-
-            beherenRelatieTest.controleerOpmerkingenBijRelatie(LOGGER, voornamen);
-
-            beherenPolisTest.
-                    testInvoerenNieuwePolissen(LOGGER, voornamen, null);
-
-            beherenSchadeTest.
-                    testInvoerenSchades(LOGGER, voornamen, null);
+            //            beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);
+            //
+            //            //        beherenRelatieTest.voegBijlageToeBijRelatie(LOGGER, voornamen, lijstRelaties, dashboard);
+            //
+            //            beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 1);
+            //            beherenRelatieTest.voegExtraOpmerkingToeBijRelatie(LOGGER, voornamen, 5);
+            //
+            //            beherenRelatieTest.controleerOpmerkingenBijRelatie(LOGGER, voornamen);
+            //
+            //            beherenPolisTest.
+            //                    testInvoerenNieuwePolissen(LOGGER, voornamen, null);
+            //
+            //            beherenSchadeTest.
+            //                    testInvoerenSchades(LOGGER, voornamen, null);
 
             //MIJN GEGEVENS, NIET BESCHIKBAAR
             //            dashboard.getNaarBeheer().waitUntil(Condition.disappears, timeOut);
