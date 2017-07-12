@@ -208,8 +208,8 @@ public class BeherenRelatie extends AbstractPagina {
         setTussenvoegsel(LOGGER, tussenvoegsel);
         setAchternaam(LOGGER, achternaam);
         setBsn(LOGGER, bsn);
-        setGeboorteDatum(LOGGER, geboorteDatum);
-        setOverlijdensdatum(LOGGER, overlijdensdatum);
+        //        setGeboorteDatum(LOGGER, geboorteDatum);
+        //        setOverlijdensdatum(LOGGER, overlijdensdatum);
         setGeslacht(LOGGER, geslacht);
         setBurgerlijkeStaat(LOGGER, burgerlijkeStaat);
         setEmailadres(LOGGER, emailadres);

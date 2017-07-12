@@ -32,7 +32,7 @@ public class ParticulierTest extends AbstractTest {
         if (uitvoeren) {
             voornamen = voornaam();
 
-            zoekScherm.klikNieuweRelatie();
+            //            zoekScherm.klikNieuweRelatie();
 
             beherenRelatieTest.testTabbladRelatieGegevens(LOGGER, voornamen);
             //            beherenRelatieTest.controleerIngevuldeRelatie(LOGGER);

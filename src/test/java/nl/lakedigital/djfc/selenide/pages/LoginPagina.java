@@ -23,9 +23,7 @@ public class LoginPagina extends AbstractPagina {
     private SelenideElement foutmeldingOnjuistWachtwoord = $(By.id("foutmeldingOnjuistWachtwoord"));
 
     public void setIdentificatie(Logger LOGGER, String identificatie) {
-        LOGGER.debug("A");
         logInvullen(LOGGER, this.identificatie, identificatie);
-        LOGGER.debug("B");
         setVeld(this.identificatie, identificatie);
     }
 

@@ -113,7 +113,7 @@ public abstract class AbstractTest {
         System.setProperty("phantomjs.binary.path", "src/test/resources/phantomjs" + os);
 
 
-        List<String> teRunnenTags = newArrayList();//"inlogscherm");
+        List<String> teRunnenTags = newArrayList("particulier");
         if (teRunnenTags.isEmpty()) {
             uitvoeren = true;
         } else {
@@ -128,13 +128,13 @@ public abstract class AbstractTest {
             uitvoeren = true;
             opServer = true;
             basisUrl = "http://192.168.91.215:8080/";
+            setupPhantomJSDriver();
             WebDriverRunner.setWebDriver(new PhantomJSDriver());
             WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
             timeOut = 30000L;
         } else {
-            WebDriverRunner.setWebDriver(new ChromeDriver());
-            //            WebDriverRunner.setWebDriver(new PhantomJSDriver());
-            //            WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+            setupPhantomJSDriver();
+            //            setupChromeDriver();
             basisUrl = "http://192.168.91.215:8080/";
         }
         if (uitvoeren) {
@@ -251,5 +251,15 @@ public abstract class AbstractTest {
         }
 
         return sb.toString().trim();
+    }
+
+    private void setupPhantomJSDriver() {
+        WebDriverRunner.setWebDriver(new PhantomJSDriver());
+        WebDriverRunner.getWebDriver().manage().window().setSize(new Dimension(1920, 1080));
+    }
+
+    private void setupChromeDriver() {
+        WebDriverRunner.setWebDriver(new ChromeDriver());
+
     }
 }
